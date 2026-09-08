@@ -41,11 +41,12 @@ del cual una página no está terminada.
   constante `CASOS`, no de un texto: cambiar una cifra la cambia en los tres
   idiomas a la vez.
 
-## Antes de publicarlo
+## Las dos constantes que se tocan
 
-1. **`var CORREO = ""`** en la cabecera del script. Está vacío a propósito:
-   prefiere un hueco visible a una dirección inventada. Mientras siga vacío, la
-   página de contacto dice «pendiente de configurar» en los tres idiomas.
+1. **`var CORREO`** en la cabecera del script: `pagos.euros73@gmail.com`, la
+   misma dirección del hilo con el cliente. Si se deja vacía, la página de
+   contacto dice «pendiente de configurar» en los tres idiomas en lugar de
+   inventarse una.
 2. **`HANMA`** es el nombre comercial. Se cambia en el `<title>`, en el logotipo
    y en las claves `t*` de los tres diccionarios.
 
