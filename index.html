@@ -1,0 +1,1719 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HANMA — Sitios corporativos trilingües</title>
+<meta name="description" id="metaDesc" content="Sitios corporativos en español, inglés y árabe con RTL real. Un archivo, sin framework, sin dependencias que caduquen.">
+<link rel="canonical" id="canon" href="https://2troll.github.io/estudio-web/">
+<meta property="og:type" content="website">
+<meta property="og:title" id="ogT" content="HANMA — Sitios corporativos trilingües">
+<meta property="og:description" id="ogD" content="Sitios corporativos en español, inglés y árabe con RTL real.">
+<meta property="og:url" id="ogU" content="https://2troll.github.io/estudio-web/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e10" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0e10'/%3E%3Cpath d='M8 24V8h3v6.5h10V8h3v16h-3v-6.5H11V24z' fill='%23faf8f5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@300;400;500;600;700&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   HANMA — hoja de estilo única.
+   El cromo es deliberadamente distinto al de los tres sitios de
+   muestra: aquí no hay tarjetas con sombra, ni hero a dos columnas,
+   ni barra de utilidades. Un estudio se presenta con reglas finas,
+   numeración y tipografía grande; el trabajo va primero.
+   Todo en propiedades lógicas para que el árabe funcione sin
+   una segunda hoja.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --papel:#faf8f5; --tinta:#141416; --tinta2:#4a4a52; --tinta3:#77777f;
+  --linea:#dcd7cf; --linea2:#c3bcb1; --acento:#1a4fa0; --acento-t:#0f3a7d;
+  --marca:#0e0e10; --sobre:#f2eee8;
+  --s1:#1a6fb0; --s2:#c8641a; --s3:#0f8f7a; --s4:#8c4bab;
+  --disp:"Newsreader",Georgia,serif;
+  --cuerpo:"Inter",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --ancho:74rem; --texto:44rem;
+}
+html[lang="ar"]{ --disp:"Cairo",sans-serif; --cuerpo:"Cairo",sans-serif; --mono:"Cairo",sans-serif; }
+@media (prefers-color-scheme: dark){
+  :root{
+    --papel:#0e0e10; --tinta:#f2f0ec; --tinta2:#b6b4b0; --tinta3:#88868a;
+    --linea:#2a2a2e; --linea2:#3d3d43; --acento:#7aa9ec; --acento-t:#9dc0f5;
+    --marca:#f2f0ec; --sobre:#17171a;
+    --s1:#3f88c4; --s2:#c47f32; --s3:#20a086; --s4:#9d6bbd;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--papel); color:var(--tinta);
+  font-family:var(--cuerpo); font-size:17px; line-height:1.65;
+  overflow-x:hidden;
+}
+html[lang="ar"] body{ font-size:18px; line-height:1.9; letter-spacing:0; }
+html[lang="ar"] *{ letter-spacing:0 !important; } /* espaciar letras rompe las ligaduras */
+img{max-width:100%; height:auto; display:block}
+a{color:var(--acento); text-underline-offset:.18em; text-decoration-thickness:1px}
+a:hover{color:var(--acento-t)}
+:focus-visible{outline:2px solid var(--acento); outline-offset:3px; border-radius:2px}
+h1,h2,h3{font-family:var(--disp); font-weight:400; line-height:1.15; margin:0}
+h1{font-size:clamp(2.3rem,6vw,4.1rem); letter-spacing:-.02em}
+h2{font-size:clamp(1.55rem,3.4vw,2.3rem); letter-spacing:-.015em}
+h3{font-size:1.16rem; font-family:var(--cuerpo); font-weight:600; letter-spacing:-.005em}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{letter-spacing:0}
+p{margin:0 0 1.05em}
+.env{max-width:var(--ancho); margin-inline:auto; padding-inline:clamp(1.1rem,4vw,3rem)}
+.txt{max-width:var(--texto)}
+.mono{font-family:var(--mono); font-size:.79rem; letter-spacing:.06em; text-transform:uppercase}
+html[lang="ar"] .mono{text-transform:none; letter-spacing:0; font-size:.85rem}
+.apagado{color:var(--tinta2)}
+.tenue{color:var(--tinta3)}
+
+/* ── Cabecera: una sola fila, sin adornos ───────────────────── */
+header.top{
+  position:sticky; top:0; z-index:60; background:color-mix(in srgb,var(--papel) 90%,transparent);
+  backdrop-filter:saturate(1.6) blur(10px); border-block-end:1px solid var(--linea);
+}
+.top-in{display:flex; align-items:center; gap:1.4rem; height:60px; max-width:var(--ancho); margin-inline:auto; padding-inline:clamp(1.1rem,4vw,3rem)}
+.logo{display:flex; align-items:baseline; gap:.55rem; text-decoration:none; color:var(--marca); font-family:var(--disp); font-size:1.32rem; letter-spacing:.01em; white-space:nowrap}
+.logo b{font-weight:500}
+.logo span{font-family:var(--mono); font-size:.66rem; letter-spacing:.14em; color:var(--tinta3); text-transform:uppercase}
+html[lang="ar"] .logo span{text-transform:none; letter-spacing:0}
+nav.n{display:flex; gap:1.25rem; margin-inline-start:auto; align-items:center}
+nav.n a{
+  color:var(--tinta2); text-decoration:none; font-size:.9rem; padding:.3rem 0;
+  border-block-end:1px solid transparent;
+}
+nav.n a:hover{color:var(--tinta)}
+nav.n a[aria-current="page"]{color:var(--tinta); border-block-end-color:var(--tinta)}
+.idiomas{display:flex; gap:.1rem; margin-inline-start:.6rem; border:1px solid var(--linea2); border-radius:3px; overflow:hidden}
+.idiomas button{
+  font:inherit; font-size:.72rem; font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase;
+  background:none; border:0; color:var(--tinta2); padding:.32rem .5rem; cursor:pointer;
+}
+.idiomas button[aria-pressed="true"]{background:var(--tinta); color:var(--papel)}
+html[lang="ar"] .idiomas button{text-transform:none; letter-spacing:0}
+.hamb{display:none; margin-inline-start:auto; background:none; border:1px solid var(--linea2); border-radius:3px; padding:.4rem .55rem; cursor:pointer; color:var(--tinta)}
+.hamb svg{display:block}
+.panel{position:fixed; inset-block:0; inset-inline-end:0; width:min(86vw,20rem); background:var(--papel); border-inline-start:1px solid var(--linea); transform:translateX(100%); transition:transform .22s ease; z-index:80; padding:1.4rem; overflow-y:auto}
+html[dir="rtl"] .panel{transform:translateX(-100%)}
+.panel.on{transform:none}
+.velo{position:fixed; inset:0; background:rgba(0,0,0,.42); opacity:0; pointer-events:none; transition:opacity .22s; z-index:70}
+.velo.on{opacity:1; pointer-events:auto}
+.panel a{display:block; padding:.7rem 0; border-block-end:1px solid var(--linea); color:var(--tinta); text-decoration:none; font-size:1.02rem}
+@media (max-width:900px){ nav.n, .idiomas{display:none} .hamb{display:block} }
+
+/* ── Rutas ──────────────────────────────────────────────────── */
+[data-ruta]{display:none}
+[data-ruta].on{display:block}
+main{min-height:60vh}
+section.bloque{padding-block:clamp(3rem,7vw,5.4rem); border-block-end:1px solid var(--linea)}
+section.bloque.primero{padding-block-start:clamp(2.4rem,6vw,4.2rem)}
+.rotulo{font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--tinta3); margin-block-end:1.5rem; display:block}
+html[lang="ar"] .rotulo{text-transform:none; letter-spacing:0; font-size:.82rem}
+
+/* ── Portada ────────────────────────────────────────────────── */
+.hero{padding-block:clamp(3.4rem,10vw,7rem) clamp(2.6rem,6vw,4rem)}
+.hero h1{max-width:22ch}
+.hero .sub{font-size:clamp(1.05rem,2vw,1.28rem); color:var(--tinta2); max-width:52ch; margin-block-start:1.6rem}
+.hero .pie{display:flex; flex-wrap:wrap; gap:.5rem 1.6rem; margin-block-start:2.4rem; align-items:center}
+.btn{
+  display:inline-block; background:var(--tinta); color:var(--papel); text-decoration:none;
+  padding:.72rem 1.4rem; border-radius:3px; font-size:.94rem; font-weight:500; border:1px solid var(--tinta);
+}
+.btn:hover{color:var(--papel); opacity:.86}
+.btn.sec{background:none; color:var(--tinta); border-color:var(--linea2)}
+.btn.sec:hover{border-color:var(--tinta); color:var(--tinta); opacity:1}
+
+/* ── Índice de la página (raíl superior, no lateral) ─────────── */
+.indice{display:flex; flex-wrap:wrap; gap:.3rem 1.4rem; padding-block:.9rem; border-block:1px solid var(--linea); margin-block-end:2.6rem}
+.indice a{font-size:.86rem; color:var(--tinta2); text-decoration:none}
+.indice a:hover{color:var(--tinta); text-decoration:underline}
+.indice .num{font-family:var(--mono); font-size:.7rem; color:var(--tinta3); margin-inline-end:.35rem}
+
+/* ── Filas de caso: la pieza que define este sitio ───────────── */
+.caso{display:grid; grid-template-columns:4.5rem 1fr minmax(0,17rem); gap:1.2rem 2rem; padding-block:2.1rem; border-block-start:1px solid var(--linea); align-items:start}
+.caso:last-of-type{border-block-end:1px solid var(--linea)}
+.caso .idx{font-family:var(--mono); font-size:.78rem; color:var(--tinta3); padding-block-start:.42rem}
+.caso h3{font-family:var(--disp); font-weight:400; font-size:1.75rem; margin-block-end:.35rem}
+.caso .sector{font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta3); display:block; margin-block-end:.7rem}
+html[lang="ar"] .caso .sector{text-transform:none; letter-spacing:0; font-size:.8rem}
+.caso p{margin-block-end:.7rem; color:var(--tinta2); max-width:46ch}
+.caso .cifras{display:flex; flex-direction:column; gap:.55rem; border-inline-start:1px solid var(--linea); padding-inline-start:1.3rem; min-width:0}
+.caso .cifra b{display:block; font-family:var(--disp); font-size:1.5rem; font-weight:400; line-height:1.1}
+.caso .cifra span{font-size:.78rem; color:var(--tinta3)}
+@media (max-width:820px){
+  .caso{grid-template-columns:2.6rem 1fr}
+  .caso .cifras{grid-column:1/-1; flex-direction:row; flex-wrap:wrap; gap:1.4rem; border-inline-start:0; padding-inline-start:0; border-block-start:1px solid var(--linea); padding-block-start:.9rem}
+}
+
+/* Caso largo: la prosa a un lado y la ficha medida al otro, para que
+   la columna de texto no deje media pantalla en blanco. */
+.casoL{display:grid; grid-template-columns:minmax(0,1fr) 15rem; gap:2.4rem;
+  border-block-start:1px solid var(--linea); padding-block:2.2rem; align-items:start}
+.casoL .ficha{display:grid; grid-template-columns:1fr auto; gap:.55rem 1rem; margin:2.6rem 0 0;
+  border-inline-start:1px solid var(--linea); padding-inline-start:1.4rem; font-size:.86rem}
+.casoL .ficha dt{color:var(--tinta3)}
+.casoL .ficha dd{margin:0; font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+html[lang="ar"] .casoL .ficha dd{font-family:"Cairo",sans-serif}
+@media (max-width:860px){
+  .casoL{grid-template-columns:1fr; gap:1.4rem}
+  .casoL .ficha{margin:0; border-inline-start:0; padding-inline-start:0;
+    border-block-start:1px solid var(--linea); padding-block-start:1rem}
+}
+
+/* ── Rejillas de contenido ──────────────────────────────────── */
+.rej{display:grid; gap:1.8rem 2.4rem; grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.rej.dos{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.rej > div{min-width:0}
+.tema{border-block-start:2px solid var(--tinta); padding-block-start:.9rem}
+.tema h3{margin-block-end:.5rem}
+.tema p{color:var(--tinta2); font-size:.95rem; margin-block-end:.55rem}
+
+/* ── Tablas ─────────────────────────────────────────────────── */
+.tablaenv{overflow-x:auto; margin-block:1.4rem 1.8rem; border-block:1px solid var(--linea)}
+table{border-collapse:collapse; width:100%; font-size:.92rem; min-width:34rem}
+th,td{text-align:start; padding:.72rem .9rem; border-block-end:1px solid var(--linea); vertical-align:top}
+thead th{font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tinta3); font-weight:400; border-block-end:1px solid var(--linea2)}
+html[lang="ar"] thead th{text-transform:none; letter-spacing:0; font-size:.82rem}
+tbody tr:last-child td{border-block-end:0}
+td.num{font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+html[lang="ar"] td.num{font-family:"Cairo",sans-serif}
+
+/* ── Listas de sí / no ──────────────────────────────────────── */
+ul.marca{list-style:none; padding:0; margin:0 0 1.2rem}
+ul.marca li{padding-inline-start:1.7rem; position:relative; margin-block-end:.55rem; color:var(--tinta2)}
+ul.marca li::before{position:absolute; inset-inline-start:0; font-family:var(--mono); font-size:.9rem}
+ul.marca.si li::before{content:"+"; color:var(--s3)}
+ul.marca.no li::before{content:"−"; color:var(--s2)}
+
+/* ── Configurador de alcance ────────────────────────────────── */
+.conf{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:2.4rem; align-items:start}
+@media (max-width:860px){ .conf{grid-template-columns:1fr} }
+fieldset{border:0; padding:0; margin:0 0 1.7rem}
+legend{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--tinta3); padding:0; margin-block-end:.8rem}
+html[lang="ar"] legend{text-transform:none; letter-spacing:0; font-size:.82rem}
+.opcs{display:flex; flex-wrap:wrap; gap:.5rem}
+.opc{position:relative}
+.opc input{position:absolute; opacity:0; inset:0; width:100%; height:100%; margin:0; cursor:pointer}
+.opc span{display:block; border:1px solid var(--linea2); border-radius:3px; padding:.5rem .85rem; font-size:.9rem; color:var(--tinta2)}
+.opc input:checked + span{border-color:var(--tinta); background:var(--tinta); color:var(--papel)}
+.opc input:focus-visible + span{outline:2px solid var(--acento); outline-offset:2px}
+.rango{display:flex; align-items:center; gap:1rem}
+.rango input[type=range]{flex:1; accent-color:var(--acento); min-width:0}
+.rango output{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.05rem; min-width:2.5rem; text-align:end}
+.ticket{border:1px solid var(--linea2); border-radius:4px; padding:1.5rem; background:var(--sobre); position:sticky; top:78px}
+.ticket .total{font-family:var(--disp); font-size:2.6rem; line-height:1.05; margin-block:.2rem .1rem}
+.ticket .plazo{color:var(--tinta2); font-size:.95rem; margin-block-end:1.2rem}
+.ticket dl{display:grid; grid-template-columns:1fr auto; gap:.42rem 1rem; margin:0 0 1.2rem; font-size:.88rem}
+.ticket dt{color:var(--tinta2); min-width:0}
+.ticket dd{margin:0; font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+.ticket .aviso{font-size:.8rem; color:var(--tinta3); border-block-start:1px solid var(--linea); padding-block-start:.9rem}
+
+/* ── Barras medidas ─────────────────────────────────────────── */
+.barras{display:flex; flex-direction:column; gap:1rem; margin-block:1.5rem}
+.barra .eti{display:flex; justify-content:space-between; gap:1rem; font-size:.88rem; margin-block-end:.3rem}
+.barra .eti b{font-weight:500}
+.barra .eti span{font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--tinta2); font-size:.82rem}
+.barra .pista{height:9px; background:var(--linea); border-radius:2px; overflow:hidden}
+.barra .relleno{height:100%; border-radius:2px}
+
+/* ── Nota de maqueta y pie ──────────────────────────────────── */
+.nota{border-inline-start:3px solid var(--s2); padding-inline-start:1.1rem; color:var(--tinta2); font-size:.92rem; margin-block:1.6rem}
+footer.pie{padding-block:3rem 2.4rem; background:var(--sobre); border-block-start:1px solid var(--linea)}
+.pie-rej{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr)); gap:2rem}
+.pie-rej h4{font-family:var(--mono); font-size:.7rem; letter-spacing:.13em; text-transform:uppercase; color:var(--tinta3); font-weight:400; margin:0 0 .8rem}
+html[lang="ar"] .pie-rej h4{text-transform:none; letter-spacing:0; font-size:.8rem}
+.pie-rej ul{list-style:none; margin:0; padding:0}
+.pie-rej li{margin-block-end:.42rem}
+.pie-rej a{color:var(--tinta2); text-decoration:none; font-size:.9rem}
+.pie-rej a:hover{color:var(--tinta); text-decoration:underline}
+.pie-fin{margin-block-start:2.4rem; padding-block-start:1.4rem; border-block-start:1px solid var(--linea); display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; font-size:.82rem; color:var(--tinta3)}
+.migas{font-size:.8rem; color:var(--tinta3); padding-block:.9rem}
+.migas ol{list-style:none; display:flex; flex-wrap:wrap; gap:.4rem; margin:0; padding:0}
+.migas li::after{content:"/"; margin-inline-start:.4rem; color:var(--linea2)}
+.migas li:last-child::after{content:""}
+.migas a{color:var(--tinta3); text-decoration:none}
+.migas a:hover{color:var(--tinta)}
+.saltar{position:absolute; inset-inline-start:-9999px}
+.saltar:focus{position:static; display:inline-block; margin:.6rem; padding:.5rem .9rem; background:var(--tinta); color:var(--papel)}
+@media print{ header.top,footer.pie,.indice,.hamb{display:none!important} body{font-size:11pt} }
+</style>
+</head>
+<body>
+<a class="saltar" href="#principal" data-t="saltar">Saltar al contenido</a>
+
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#/inicio"><b>HANMA</b><span data-t="logoSub">Estudio web</span></a>
+    <nav class="n" id="navPral" aria-label="Principal"></nav>
+    <div class="idiomas" id="idiomas" role="group"></div>
+    <button class="hamb" id="hamb" aria-expanded="false" aria-controls="panel" data-ta="menuAria">
+      <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+  </div>
+</header>
+<div class="velo" id="velo"></div>
+<aside class="panel" id="panel" aria-hidden="true"><nav id="navPanel" aria-label="Principal"></nav><div class="idiomas" id="idiomas2" role="group" style="margin-block-start:1.4rem"></div></aside>
+
+<div class="env migas" id="migas" aria-label="Migas"></div>
+
+<main id="principal">
+
+<!-- ══════════════ INICIO ══════════════ -->
+<section class="hero" data-ruta="inicio" id="ap-portada">
+  <div class="env">
+    <h1 data-t="hTitulo">Sitios corporativos en tres idiomas que siguen funcionando dentro de cinco años.</h1>
+    <p class="sub" data-t="hSub"></p>
+    <div class="pie">
+      <a class="btn" href="#/trabajos" data-t="hCta1">Ver los tres sitios</a>
+      <a class="btn sec" href="#/precios" data-t="hCta2">Cuánto cuesta</a>
+      <span class="tenue" style="font-size:.86rem" data-t="hPie"></span>
+    </div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="inicio" id="ap-prueba">
+  <div class="env">
+    <span class="rotulo" data-t="rPrueba">La prueba</span>
+    <h2 data-t="pruebaH"></h2>
+    <p class="txt apagado" data-t="pruebaP" style="margin-block-start:1rem"></p>
+    <div id="casosPortada" style="margin-block-start:2.2rem"></div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="inicio" id="ap-porque">
+  <div class="env">
+    <span class="rotulo" data-t="rPorque">Por qué así</span>
+    <h2 data-t="porqueH"></h2>
+    <div class="rej" style="margin-block-start:2rem" id="porqueRej"></div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="inicio" id="ap-arabe">
+  <div class="env">
+    <span class="rotulo" data-t="rArabe">El árabe</span>
+    <div class="conf" style="align-items:start">
+      <div><h2 data-t="arabeH"></h2><div class="txt" data-doc="arabeDoc" style="margin-block-start:1.2rem"></div></div>
+      <div><div class="tema" style="border-color:var(--s3)"><h3 data-t="arabeCajaH"></h3><ul class="marca si" id="arabeLista"></ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TRABAJOS ══════════════ -->
+<section class="bloque primero" data-ruta="trabajos" id="ap-trabajos">
+  <div class="env">
+    <span class="rotulo" data-t="rTrabajos">Trabajos</span>
+    <h2 data-t="trH"></h2>
+    <p class="txt apagado" data-t="trP" style="margin-block-start:1rem"></p>
+    <div id="casosLargos" style="margin-block-start:2.4rem"></div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="trabajos" id="ap-comun">
+  <div class="env">
+    <span class="rotulo" data-t="rComun">Lo que comparten</span>
+    <h2 data-t="comunH"></h2>
+    <div class="txt" data-doc="comunDoc" style="margin-block-start:1.2rem"></div>
+    <div class="tablaenv"><table id="tablaComun"><thead><tr><th data-t="tcSitio">Sitio</th><th data-t="tcForma">Forma</th><th data-t="tcPieza">La pieza que la define</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+
+<!-- ══════════════ MÉTODO ══════════════ -->
+<section class="bloque primero" data-ruta="metodo" id="ap-metodo">
+  <div class="env">
+    <span class="rotulo" data-t="rMetodo">Método</span>
+    <h2 data-t="meH"></h2>
+    <p class="txt apagado" data-t="meP" style="margin-block-start:1rem"></p>
+    <div class="tablaenv"><table id="tablaFases"><thead><tr><th data-t="tfFase">Fase</th><th data-t="tfSemanas">Semanas</th><th data-t="tfEntrega">Lo que recibe</th><th data-t="tfUsted">Lo que hace falta de usted</th></tr></thead><tbody></tbody></table></div>
+    <div class="txt" data-doc="metodoDoc"></div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="metodo" id="ap-riesgos">
+  <div class="env">
+    <span class="rotulo" data-t="rRiesgos">Lo que suele salir mal</span>
+    <h2 data-t="riH"></h2>
+    <div class="rej dos" style="margin-block-start:2rem" id="riesgosRej"></div>
+  </div>
+</section>
+
+<!-- ══════════════ PRECIOS ══════════════ -->
+<section class="bloque primero" data-ruta="precios" id="ap-configurador">
+  <div class="env">
+    <span class="rotulo" data-t="rPrecios">Precio</span>
+    <h2 data-t="prH"></h2>
+    <p class="txt apagado" data-t="prP" style="margin-block-start:1rem; margin-block-end:2.4rem"></p>
+    <form class="conf" id="conf" novalidate>
+      <div>
+        <fieldset>
+          <legend data-t="cfIdiomas">Idiomas</legend>
+          <div class="opcs" id="cfIdiomasOpcs"></div>
+        </fieldset>
+        <fieldset>
+          <legend data-t="cfPaginas">Páginas largas</legend>
+          <div class="rango">
+            <input type="range" id="cfPag" min="3" max="12" step="1" value="6" data-ta="cfPagAria">
+            <output id="cfPagOut" for="cfPag">6</output>
+          </div>
+          <p class="tenue" style="font-size:.85rem; margin-block-start:.6rem" data-t="cfPagNota"></p>
+        </fieldset>
+        <fieldset>
+          <legend data-t="cfPiezas">Piezas a medida</legend>
+          <div class="opcs" id="cfPiezasOpcs"></div>
+          <p class="tenue" style="font-size:.85rem; margin-block-start:.8rem" data-t="cfPiezasNota"></p>
+        </fieldset>
+        <fieldset>
+          <legend data-t="cfMant">Mantenimiento</legend>
+          <div class="opcs" id="cfMantOpcs"></div>
+        </fieldset>
+      </div>
+      <aside class="ticket" aria-live="polite">
+        <span class="rotulo" style="margin-block-end:.4rem" data-t="tkEti">Estimación</span>
+        <div class="total" id="tkTotal">2.400 €</div>
+        <div class="plazo" id="tkPlazo"></div>
+        <dl id="tkDesglose"></dl>
+        <div class="aviso" data-t="tkAviso"></div>
+      </aside>
+    </form>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="precios" id="ap-incluye">
+  <div class="env">
+    <span class="rotulo" data-t="rIncluye">Qué entra y qué no</span>
+    <div class="rej dos" style="margin-block-start:1.4rem">
+      <div><h3 data-t="incSiH"></h3><ul class="marca si" id="incSi"></ul></div>
+      <div><h3 data-t="incNoH"></h3><ul class="marca no" id="incNo"></ul></div>
+    </div>
+    <div class="txt" data-doc="pagoDoc" style="margin-block-start:1.8rem"></div>
+  </div>
+</section>
+
+
+<section class="bloque" data-ruta="precios" id="ap-comparar">
+  <div class="env">
+    <span class="rotulo" data-t="rComparar">Comparado con la alternativa</span>
+    <h2 data-t="cmH"></h2>
+    <div class="txt" data-doc="cmDoc" style="margin-block-start:1.2rem"></div>
+  </div>
+</section>
+
+<!-- ══════════════ TÉCNICA ══════════════ -->
+<section class="bloque primero" data-ruta="tecnica" id="ap-tecnica">
+  <div class="env">
+    <span class="rotulo" data-t="rTecnica">Cómo está hecho</span>
+    <h2 data-t="teH"></h2>
+    <div class="txt" data-doc="tecnicaDoc" style="margin-block-start:1.2rem"></div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="tecnica" id="ap-medidas">
+  <div class="env">
+    <span class="rotulo" data-t="rMedidas">Medido, no prometido</span>
+    <h2 data-t="mdH"></h2>
+    <p class="txt apagado" data-t="mdP" style="margin-block-start:1rem"></p>
+    <div class="barras" id="barrasPeso"></div>
+    <p class="tenue" style="font-size:.84rem" data-t="mdPie"></p>
+    <div class="tablaenv"><table id="tablaMedidas"><thead><tr><th data-t="tmSitio">Sitio</th><th data-t="tmApart">Apartados</th><th data-t="tmRutas">Páginas</th><th data-t="tmClaves">Claves × 3</th><th data-t="tmGz">Transferido</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+
+<section class="bloque" data-ruta="tecnica" id="ap-accesibilidad">
+  <div class="env">
+    <span class="rotulo" data-t="rAcc">Accesibilidad</span>
+    <h2 data-t="acH"></h2>
+    <div class="txt" data-doc="accDoc" style="margin-block-start:1.2rem"></div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACTO ══════════════ -->
+<section class="bloque primero" data-ruta="contacto" id="ap-contacto">
+  <div class="env">
+    <span class="rotulo" data-t="rContacto">Contacto</span>
+    <h2 data-t="coH"></h2>
+    <div class="conf" style="margin-block-start:1.6rem">
+      <div class="txt" data-doc="contactoDoc"></div>
+      <div>
+        <div class="tema"><h3 data-t="coDatosH"></h3><div id="coDatos"></div></div>
+        <div class="tema" style="margin-block-start:1.8rem; border-color:var(--s1)"><h3 data-t="coIdiomasH"></h3><p class="apagado" style="font-size:.95rem" data-t="coIdiomasP"></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bloque" data-ruta="contacto" id="ap-faq">
+  <div class="env">
+    <span class="rotulo" data-t="rFaq">Preguntas</span>
+    <h2 data-t="faqH"></h2>
+    <div class="rej dos" style="margin-block-start:2rem" id="faqRej"></div>
+  </div>
+</section>
+
+<!-- ══════════════ LEGAL ══════════════ -->
+<section class="bloque primero" data-ruta="legal" id="ap-legal">
+  <div class="env">
+    <span class="rotulo" data-t="rLegal">Legal</span>
+    <div class="indice" id="indiceLegal"></div>
+    <div class="txt" id="legalCuerpo"></div>
+  </div>
+</section>
+
+<!-- ══════════════ MAPA ══════════════ -->
+<section class="bloque primero" data-ruta="mapa" id="ap-mapa">
+  <div class="env">
+    <span class="rotulo" data-t="rMapa">Mapa del sitio</span>
+    <h2 data-t="maH"></h2>
+    <div class="rej" style="margin-block-start:2rem" id="mapaRej"></div>
+  </div>
+</section>
+
+<!-- ══════════════ 404 ══════════════ -->
+<section class="bloque primero" data-ruta="err" id="ap-err">
+  <div class="env">
+    <span class="rotulo" data-t="rErr">Error 404</span>
+    <h2 data-t="erH"></h2>
+    <p class="txt apagado" style="margin-block-start:1rem"><span data-t="erP"></span> <code class="mono" id="erRuta" style="text-transform:none"></code></p>
+    <div class="pie" style="display:flex; gap:.8rem; flex-wrap:wrap; margin-block-start:1.6rem">
+      <a class="btn" href="#/inicio" data-t="erCta1">Ir a la portada</a>
+      <a class="btn sec" href="#/mapa" data-t="erCta2">Ver el mapa del sitio</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="env">
+    <div class="pie-rej" id="pieRej"></div>
+    <div class="pie-fin">
+      <span data-t="pieCopia"></span>
+      <span data-t="pieMaqueta"></span>
+      <a href="https://github.com/2troll" rel="noopener">github.com/2troll</a>
+    </div>
+  </div>
+</footer>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   Estructura y números viven FUERA de los diccionarios de idioma.
+   Así las tres versiones no pueden divergir por construcción:
+   si mañana cambia un precio, cambia en los tres idiomas a la vez.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Correo profesional. Vacío a propósito: prefiero un hueco visible a
+   publicar una dirección inventada. Se rellena aquí y aparece en los
+   tres idiomas. */
+var CORREO = "";
+
+/* Medido el 8 de septiembre de 2026 sobre los repositorios públicos:
+   wc -c index.html · gzip -c index.html | wc -c · grep -c '<section data-ruta='
+   Cualquiera puede repetir la medición. */
+var CASOS = [
+  { id:"nahar", url:"https://2troll.github.io/nahar-solar/", repo:"2troll/nahar-solar",
+    nombre:"NAHAR", apartados:23, rutas:9, claves:377, bytes:396662, gz:121902, color:"var(--s1)" },
+  { id:"bunn", url:"https://2troll.github.io/bunn-cafe/", repo:"2troll/bunn-cafe",
+    nombre:"BUNN", apartados:20, rutas:9, claves:317, bytes:307812, gz:98439, color:"var(--s2)" },
+  { id:"atlas", url:"https://2troll.github.io/atlas-fisio/", repo:"2troll/atlas-fisio",
+    nombre:"ATLAS", apartados:20, rutas:9, claves:277, bytes:292779, gz:92138, color:"var(--s3)" }
+];
+
+/* Tarifa de referencia. La base es la que ya está cerrada por escrito
+   con un cliente real: sitio trilingüe de seis páginas largas. */
+var PRECIO = {
+  base:2400, pagsBase:6, porPagina:250, mantenimiento:90,
+  piezas:{ calc:400, catalogo:600, reserva:500, mapa:350 },
+  idiomas:{ 1:0.65, 2:0.82, 3:1 },
+  semanasBase:[5,7], semanaPorPagina:0.4, semanaPorPieza:0.7,
+  pagos:[40,30,30]
+};
+
+var FASES = [ {sem:"1"}, {sem:"1–2"}, {sem:"2–4"}, {sem:"4–6"}, {sem:"6–7"} ];
+
+var RUTAS  = ["inicio","trabajos","metodo","precios","tecnica","contacto","legal","mapa","err"];
+var TITULOS= {inicio:"tInicio",trabajos:"tTrabajos",metodo:"tMetodo",precios:"tPrecios",
+              tecnica:"tTecnica",contacto:"tContacto",legal:"tLegal",mapa:"tMapa",err:"tErr"};
+var NAVS   = ["inicio","trabajos","metodo","precios","tecnica","contacto"];
+
+/* El índice manda: de aquí salen el índice de página, las migas, el mapa
+   del sitio y las columnas del pie. Tres listas a mano se desincronizan. */
+var INDICE = {
+  inicio:   [["ap-portada","hTitulo"],["ap-prueba","pruebaH"],["ap-porque","porqueH"],["ap-arabe","arabeH"]],
+  trabajos: [["ap-trabajos","trH"],["ap-comun","comunH"]],
+  metodo:   [["ap-metodo","meH"],["ap-riesgos","riH"]],
+  precios:  [["ap-configurador","prH"],["ap-incluye","incSiH"],["ap-comparar","cmH"]],
+  tecnica:  [["ap-tecnica","teH"],["ap-medidas","mdH"],["ap-accesibilidad","acH"]],
+  contacto: [["ap-contacto","coH"],["ap-faq","faqH"]],
+  mapa:     [["ap-mapa","maH"]],
+  legal:    []
+};
+
+var T = {
+
+es:{
+ _dir:"ltr", _lang:"es", _loc:"es-ES",
+ saltar:"Saltar al contenido", logoSub:"Estudio web", menuAria:"Abrir el menú",
+ idiomaAria:"Idioma del sitio", migasAria:"Está usted aquí",
+
+ tInicio:"HANMA — Sitios corporativos trilingües",
+ tTrabajos:"Trabajos — HANMA",
+ tMetodo:"Método — HANMA",
+ tPrecios:"Precio — HANMA",
+ tTecnica:"Cómo está hecho — HANMA",
+ tContacto:"Contacto — HANMA",
+ tLegal:"Aviso legal — HANMA",
+ tMapa:"Mapa del sitio — HANMA",
+ tErr:"Página no encontrada — HANMA",
+
+ nInicio:"Inicio", nTrabajos:"Trabajos", nMetodo:"Método", nPrecios:"Precio",
+ nTecnica:"Cómo está hecho", nContacto:"Contacto", nLegal:"Legal", nMapa:"Mapa", nErr:"404",
+
+ /* ── Portada ── */
+ hTitulo:"Sitios corporativos en tres idiomas que seguirán funcionando dentro de cinco años.",
+ hSub:"Español, inglés y árabe con maquetación reflejada de verdad, en un solo archivo HTML. Sin framework, sin panel de administración, sin plugins que caduquen. Tres sitios completos, publicados y medibles — no capturas de pantalla.",
+ hCta1:"Ver los tres sitios", hCta2:"Cuánto cuesta",
+ hPie:"Osaka, Japón · se trabaja en español, inglés y árabe",
+
+ rPrueba:"La prueba",
+ pruebaH:"Tres sitios enteros que puede abrir ahora mismo",
+ pruebaP:"No son maquetas de una pantalla ni un carrusel de imágenes. Cada uno tiene nueve páginas largas, versión en árabe con el diseño reflejado, textos legales escritos y una pieza interactiva que hace un cálculo real. Están publicados en GitHub Pages con el código a la vista: puede leer cada línea antes de confiarme nada.",
+ casoVer:"Abrir el sitio", casoCod:"Ver el código",
+ cifApart:"apartados", cifClaves:"claves × 3 idiomas", cifPeso:"transferido",
+
+ casos:[
+  { sector:"Ingeniería · autoconsumo solar industrial",
+    resumen:"Un portal técnico para vender a un director de planta: calculadora de amortización a 25 años con degradación del panel, curva horaria de consumo contra producción y comparador de tres presupuestos que avisa cuando el más barato no trae garantía." },
+  { sector:"Tostador de café de especialidad",
+    resumen:"Una tienda: rejilla de producto con precio y existencias, filtros por origen y cuerpo, cesta que sobrevive a la recarga, recetas de preparación y condiciones de mayorista escritas sin letra pequeña." },
+  { sector:"Clínica de fisioterapia y readaptación",
+    resumen:"Una agenda: reserva en tres pasos —zona, día y hora— donde los huecos ocupados se derivan de la fecha y no de un número aleatorio que cambia al recargar la página." }
+ ],
+
+ rPorque:"Por qué así",
+ porqueH:"Cuatro decisiones que no son de gusto, sino de coste a cinco años",
+ porque:[
+  { h:"Un archivo, no una plataforma",
+    p:"El sitio entero es un index.html. No hay gestor de contenidos que actualizar, ni plugin que alguien abandone, ni versión del lenguaje del servidor que caduque y le obligue a migrar. Se copia a cualquier alojamiento estático, incluido uno gratuito, y funciona. Ese es el motivo real: dentro de cinco años se abrirá exactamente igual que hoy." },
+  { h:"El árabe, desde el primer día",
+    p:"Traducir al final obliga a rehacer la maquetación entera, porque el árabe se lee de derecha a izquierda y arrastra consigo márgenes, iconos, gráficas y formularios. Aquí las tres versiones se construyen sobre la misma estructura desde el principio, con propiedades lógicas de CSS, y ninguna es la versión pobre de otra." },
+  { h:"Los números viven fuera del texto",
+    p:"Precios, tablas, fases y facetas están en constantes compartidas por los tres idiomas, no dentro de cada traducción. Cambiar una cifra la cambia en español, en inglés y en árabe a la vez. Es la única manera de que las tres versiones no acaben contradiciéndose sin que nadie se dé cuenta." },
+  { h:"Se entrega el código, no un alquiler",
+    p:"Al terminar, el repositorio, el dominio y el alojamiento quedan a su nombre. Si mañana quiere cambiar de proveedor, se lleva un archivo de texto que cualquier programador entiende. No hay nada que exportar ni licencia que renovar, y esa es exactamente la dependencia que este planteamiento evita." }
+ ],
+
+ rArabe:"El árabe",
+ arabeH:"Lo que se rompe cuando un sitio pasa al árabe",
+ arabeDoc:[
+  { p:"Casi todos los sitios «en árabe» que se ven por ahí son la versión occidental con el texto sustituido. Se nota enseguida: el menú sigue empezando por la izquierda, la flecha del desplegable apunta al lado contrario, la gráfica tiene la leyenda pegada al borde equivocado y los números aparecen en dígitos latinos dentro de un párrafo árabe." },
+  { p:"El origen del problema es que la maquetación se escribió con «izquierda» y «derecha» literales. La solución no es una segunda hoja de estilo espejada —que se desincroniza al primer cambio— sino escribir la primera con propiedades lógicas: inicio y fin en lugar de izquierda y derecha. Entonces reflejar el sitio entero es cambiar un atributo, y no hay dos diseños que mantener." },
+  { p:"El resto son detalles que sólo aparecen cuando alguien lee la página de verdad. El espaciado entre letras rompe las ligaduras del árabe y hay que ponerlo a cero. Los dígitos árabe-índicos hay que pedirlos de forma explícita, porque el código de idioma a secas devuelve dígitos latinos. Y los créditos de una fotografía no se traducen nunca: traducir el título de una obra rompe la atribución de su licencia." }
+ ],
+ arabeCajaH:"Lo que se comprueba en cada entrega",
+ arabeLista:[
+  "Paridad exacta de claves entre los tres idiomas: ninguna cadena se queda sin traducir.",
+  "Las estructuras son listas paralelas de la misma longitud en los tres idiomas.",
+  "Cero fugas: se recorre cada página en cada idioma buscando texto del idioma equivocado.",
+  "Dígitos árabe-índicos donde tocan, y nunca dentro de un precio que deba leerse igual en los tres.",
+  "Espaciado de letras a cero en árabe, para no romper las ligaduras.",
+  "Formularios, gráficas y flechas reflejados, no sólo el texto."
+ ],
+
+ /* ── Trabajos ── */
+ rTrabajos:"Trabajos",
+ trH:"Tres sectores, tres formas de página distintas",
+ trP:"Compartir la arquitectura interna está bien; compartir la forma de la página, no. Un cliente reconoce una plantilla en dos segundos: misma cabecera, mismo bloque de portada a dos columnas, mismas tarjetas. Estos tres sitios copian la estructura real que usa su sector, y por eso no se parecen entre sí aunque por dentro compartan el mismo motor.",
+ casosL:[
+  { h:"Portal técnico para una ingeniería solar",
+    ps:["Quien compra una instalación de autoconsumo no busca fotos bonitas: busca saber en cuántos años la recupera y qué pasa si el consumo de su nave cambia. La página está construida alrededor de esa pregunta.",
+        "La calculadora de amortización mueve dos variables —potencia instalada y autoconsumo directo— y redibuja el flujo de caja acumulado a veinticinco años con una degradación del panel del 0,5 % anual. La línea cruza el cero en el año de retorno, que aparece marcado. La curva horaria enfrenta el consumo de la planta con la producción solar y sombrea el solape: eso es lo que de verdad se aprovecha.",
+        "El comparador de ofertas es el que más incomoda: se meten tres presupuestos y calcula el coste por kilovatio-hora producido a veinticinco años. Cuando el más barato no incluye garantía de producción, lo dice."],
+  },
+  { h:"Tienda para un tostador de café",
+    ps:["Un tostador vende dos cosas a la vez, y son incompatibles: bolsas de doscientos cincuenta gramos a particulares y sacos a hostelería. Un mismo catálogo que no distinga las dos cosas confunde a ambos.",
+        "La rejilla de producto lleva precio, existencias y dos ejes —cuerpo y acidez— por los que se puede filtrar; la cesta guarda su contenido y sigue ahí al recargar la página. Las fichas de preparación no son adorno: cada método trae su proporción, su molienda y su tiempo.",
+        "El apartado de mayoristas dice el pedido mínimo, que se paga a treinta días y no a sesenta, y que no se cede máquina a cambio de una compra mínima. Decir que no por escrito ahorra tres correos por cliente."],
+  },
+  { h:"Agenda para una clínica de fisioterapia",
+    ps:["El paciente no llega buscando «fisioterapia»: llega con una zona del cuerpo que le duele. La entrada al sitio está organizada por dolencia, no por el nombre técnico del tratamiento.",
+        "La reserva es de tres pasos —zona, día y hora— y muestra los huecos ya ocupados. Ese detalle es el que separa una maqueta creíble de una falsa: los huecos se derivan de la fecha y del índice de la hora, así que se mantienen al recargar. Si cambiaran cada vez, cualquiera notaría que es de mentira.",
+        "El resto de la clínica está en la misma línea: precios visibles sin pedir el teléfono, qué incluye una primera sesión, y en qué casos la respuesta correcta es derivar al paciente a un médico en lugar de venderle un bono."],
+  }
+ ],
+
+ rComun:"Lo que comparten",
+ comunH:"El motor es el mismo; la fachada, no",
+ comunDoc:[
+  { p:"Por dentro los tres sitios funcionan igual: enrutado por el fragmento de la dirección, un diccionario por idioma con exactamente las mismas claves, y una única función que traduce el documento entero de una pasada —incluidas las páginas que en ese momento están ocultas— y vuelve a pintar las gráficas en el idioma nuevo. Eso es lo que hace barato añadir un cuarto idioma." },
+  { p:"Por fuera se parecen lo justo. Cada sector tiene su propia forma, copiada de cómo se comportan de verdad las webs de ese ramo, y una pieza interactiva que sólo tiene sentido en él:" }
+ ],
+ tcSitio:"Sitio", tcForma:"Forma", tcPieza:"La pieza que la define",
+ comunFilas:[
+  ["NAHAR","Portal técnico B2B","Raíl con el sumario y barra inferior con el resultado del simulador"],
+  ["BUNN","Tienda en línea","Rejilla de producto con existencias, filtros y cesta que sobrevive a la recarga"],
+  ["ATLAS","Agenda clínica","Reserva de tres pasos con los huecos ocupados derivados de la fecha"]
+ ],
+
+ /* ── Método ── */
+ rMetodo:"Método",
+ meH:"Cómo va un encargo, semana a semana",
+ meP:"Un sitio trilingüe de seis páginas largas son entre cinco y siete semanas. No es un número redondo elegido para que suene bien: la construcción en un idioma ocupa la mitad del calendario y las otras dos versiones, con su revisión, ocupan la otra mitad. Estas son las cinco fases y lo que hace falta de usted en cada una.",
+ tfFase:"Fase", tfSemanas:"Semanas", tfEntrega:"Lo que recibe", tfUsted:"Lo que hace falta de usted",
+ fases:[
+  { n:"Plan de sitio", entrega:"El árbol de páginas apartado por apartado, y la lista exacta de textos, fotos y datos que hay que reunir.", usted:"Una conversación de una hora y los materiales que ya tenga, aunque estén a medias." },
+  { n:"Dirección visual", entrega:"Dos propuestas de diseño montadas sobre su contenido real, no sobre texto de relleno.", usted:"Elegir una y decir con franqueza qué le chirría." },
+  { n:"Construcción", entrega:"El sitio completo en un idioma, publicado en una dirección privada que puede visitar cada día para verlo crecer.", usted:"Revisar y corregir los textos mientras se construye, no al final." },
+  { n:"Inglés y árabe", entrega:"Las dos versiones restantes, con la maquetación reflejada, los dígitos correctos y las gráficas repintadas.", usted:"Un revisor nativo si lo desea; si no lo hay, la revisión la hago yo y se lo digo." },
+  { n:"Entrega", entrega:"El repositorio, el dominio apuntando al sitio y una sesión grabada para que sepa cambiar los textos usted mismo.", usted:"El dominio y el alojamiento a su nombre, nunca al mío." }
+ ],
+ metodoDoc:[
+  { h:"Qué pasa si el material no llega", p:"Es lo que más retrasa un sitio, y con diferencia. La fase tres no puede empezar sin textos: si no están, se construye con texto provisional marcado en rojo que no se puede publicar por error. El calendario se congela y se lo digo el mismo día, en vez de llegar a la fecha de entrega con una sorpresa." },
+  { h:"Qué pasa si el alcance crece", p:"Una página larga de más son doscientos cincuenta euros y unos tres días. Se dice antes de hacerla, por escrito, y usted decide. Lo que no hago es meterla en silencio y presentar la factura al final: eso es lo que envenena un encargo." },
+  { h:"Qué pasa después de entregar", p:"El sitio es suyo y funciona sin mí. Si quiere que yo siga encima, el mantenimiento son noventa euros al mes e incluye copias, cambios pequeños de texto y responder cuando algo se rompe. Si no lo quiere, no pasa nada: no hay ninguna pieza que caduque si nadie la toca." }
+ ],
+
+ rRiesgos:"Lo que suele salir mal",
+ riH:"Cuatro cosas que hunden un proyecto web, dichas antes de empezar",
+ riesgos:[
+  { h:"El contenido nunca está listo", p:"Ningún sitio se retrasa por el código; se retrasan por los textos. Por eso el plan de sitio es la primera fase y no la última: sale de ahí una lista concreta de qué falta y quién lo escribe, con fecha." },
+  { h:"El árabe se revisa el último día", p:"Si la revisión del árabe llega cuando ya está todo montado, cualquier corrección obliga a repasar la maquetación entera. Se revisa en la fase cuatro, con tiempo, y con el sitio ya navegable en ese idioma." },
+  { h:"El dominio está a nombre de otro", p:"Muchas empresas descubren tarde que su dominio lo registró un antiguo proveedor. Se comprueba en la primera semana, porque recuperarlo puede llevar más que construir el sitio." },
+  { h:"Nadie sabe cambiar un texto", p:"Un sitio que sólo puede tocar quien lo hizo acaba congelado. En la entrega queda una sesión grabada enseñando a cambiar textos y precios, y los textos están todos en un único bloque del archivo, señalizado." }
+ ],
+
+ /* ── Precio ── */
+ rPrecios:"Precio",
+ prH:"Calcule el suyo",
+ prP:"La base no es un número inventado para esta página: es la tarifa que ya está cerrada por escrito con un cliente real para un sitio trilingüe de seis páginas largas. Todo lo demás se suma sobre ella con la misma regla que aplicaría en un correo. Lo que salga aquí es lo que le contestaría.",
+ cfIdiomas:"Idiomas", cfIdiomasOps:["Un idioma","Dos idiomas","Tres (ES/EN/AR)"],
+ cfPaginas:"Páginas largas", cfPagAria:"Número de páginas largas",
+ cfPagNota:"Una página larga agrupa varios apartados con su índice arriba. Seis páginas largas leen mejor que dieciocho cortas: un menú de dieciocho entradas donde cada una lleva a cuatro párrafos parece una revista, no una empresa.",
+ cfPiezas:"Piezas a medida", cfPiezasOps:["Calculadora o simulador","Catálogo con filtros y cesta","Reserva de cita","Mapa o gráfica con datos"],
+ cfPiezasNota:"Son las piezas que hacen un cálculo de verdad, con sus supuestos escritos en la propia página. Cada una añade alrededor de una semana.",
+ cfMant:"Mantenimiento", cfMantOps:["Sin mantenimiento","Mantenimiento mensual"],
+ tkEti:"Estimación",
+ tkPlazoTpl:"{a} a {b} semanas · entrega en {mes}",
+ dgBase:"Base, {n} páginas", dgPaginas:"{n} páginas adicionales", dgIdiomas:"Ajuste por idiomas",
+ dgPiezas:"Piezas a medida ({n})", dgMant:"Mantenimiento", dgMantVal:"{n} €/mes",
+ dgPagos:"Pagos", dgPagosVal:"{a} · {b} · {c}",
+ tkAviso:"Estimación, no presupuesto. El presupuesto se cierra por escrito después del plan de sitio, cuando ya se sabe cuántas páginas hay de verdad. El precio va en euros; si la factura sale en otra divisa, se convierte al cambio del día de emisión y así consta en la propia factura.",
+
+ rIncluye:"Qué entra y qué no",
+ incSiH:"Incluido en el precio",
+ incSi:[
+  "Las tres versiones de idioma completas, no una principal y dos resúmenes.",
+  "Maquetación reflejada de verdad para el árabe, formularios y gráficas incluidos.",
+  "Textos legales redactados: aviso, privacidad, condiciones y accesibilidad.",
+  "Página de error real, mapa del sitio generado del propio índice y datos estructurados.",
+  "Fotografías con licencia limpia, descargadas al repositorio y acreditadas.",
+  "Comprobación de accesibilidad: teclado, foco visible y contraste medido.",
+  "El repositorio con todo el código y el historial de cambios.",
+  "Una sesión grabada enseñando a cambiar textos y precios."
+ ],
+ incNoH:"No incluido",
+ incNo:[
+  "El dominio y el alojamiento: se contratan a su nombre, y le ayudo a hacerlo.",
+  "Redacción de los textos comerciales desde cero, más allá de ordenar los suyos.",
+  "Fotografía y vídeo propios; se puede subcontratar aparte.",
+  "Traducción jurada, si el sector la exige para algún documento.",
+  "Tienda con cobro en línea y pasarela de pago: eso ya no es un sitio estático.",
+  "Campañas de publicidad o posicionamiento de pago."
+ ],
+ pagoDoc:[
+  { h:"Cómo se paga", p:"En tres tramos: cuarenta por ciento para empezar, treinta al aprobar la dirección visual y treinta al entregar. No se empieza sin el primer tramo, por una razón sencilla: es lo que separa a un cliente decidido de una conversación que se apaga sola en la fase dos." },
+  { h:"Facturación", p:"Facturo como persona física desde Japón. Para una empresa de fuera de Japón se trata de una exportación de servicios, así que la factura no lleva impuesto japonés al consumo. Si su contabilidad necesita una divisa concreta, se indica en la factura junto al cambio aplicado ese día." }
+ ],
+
+ /* ── Técnica ── */
+ rTecnica:"Cómo está hecho",
+ teH:"Un archivo, cero librerías",
+ tecnicaDoc:[
+  { p:"El sitio entero cabe en un index.html: estilos, textos de los tres idiomas, gráficas y lógica. No hay proceso de compilación, ni carpeta de dependencias, ni fichero de bloqueo de versiones que dentro de dos años nadie sepa regenerar. Se edita con cualquier editor de texto y se publica copiando un archivo." },
+  { p:"La navegación va por el fragmento de la dirección, de modo que cada página tiene su propio enlace compartible y el botón de atrás del navegador funciona. Las páginas que no se están viendo siguen en el documento, ocultas: por eso el cambio de idioma traduce el sitio completo de una vez y no deja rincones a medias." },
+  { p:"La única petición a un tercero es la hoja de tipografías. Las fotografías se descargan al repositorio en lugar de enlazarse a un servidor ajeno: si mañana desaparecen de origen, el sitio sigue igual. Las gráficas son dibujo vectorial generado con trigonometría, así que se redibujan al cambiar de tema y no se pixelan en una pantalla grande." },
+  { p:"Los datos estructurados que leen los buscadores se generan de los mismos datos que pinta la página. Cambia un precio y cambia el marcado solo, porque no hay una copia paralela que se quede vieja. Es el mismo principio que rige todo lo demás: un dato, un sitio donde vive." }
+ ],
+ rMedidas:"Medido, no prometido",
+ mdH:"Lo que pesa de verdad",
+ mdP:"Un sitio corporativo medio ronda los dos megabytes de transferencia antes de que se lea una sola palabra. Estos son los tres sitios de arriba, medidos hoy sobre sus repositorios públicos. La cifra incluye el sitio entero: los tres idiomas, las nueve páginas, los textos legales y las gráficas.",
+ mdPie:"Medido el 8 de septiembre de 2026 con «gzip -c index.html | wc -c», que es lo que viaja por la red. Las fotografías se cargan aparte y sólo cuando se ven. Puede repetir la medición usted mismo sobre el repositorio.",
+ tmSitio:"Sitio", tmApart:"Apartados", tmRutas:"Páginas", tmClaves:"Claves × 3", tmGz:"Transferido",
+ rAcc:"Accesibilidad",
+ acH:"Lo que se comprueba antes de decir que está terminado",
+ accDoc:[
+  { p:"La accesibilidad no es una página que promete cosas; es una lista que se recorre. Un sitio que declara cumplir una norma y no la cumple está peor que uno que no dice nada, porque además engaña." },
+  { p:"Se recorre el sitio entero sólo con el teclado, comprobando que el foco se ve siempre y que no queda ningún control al que no se llegue. Se mide el contraste real de cada color de texto sobre su fondo, con el número delante, y se sube el que no llega. Las imágenes llevan texto alternativo traducido a los tres idiomas, no una descripción en español dentro de la versión árabe. Y si el sistema del visitante pide menos movimiento, las animaciones se apagan de verdad, no se atenúan." },
+  { p:"Todo eso se comprueba en cada entrega y se le enseña el resultado. Si algo no cumple, lo dice el informe: es la única forma de que la palabra signifique algo." }
+ ],
+
+ /* ── Contacto ── */
+ rContacto:"Contacto",
+ coH:"Cómo empezar",
+ contactoDoc:[
+  { p:"El primer correo no necesita un pliego de condiciones. Con cuatro cosas basta para contestarle con un número y un calendario en lugar de con una pregunta:" },
+  { l:["A qué se dedica su empresa y a quién le vende.",
+       "Si ya tiene sitio, la dirección; y si no, la de dos competidores que le gusten.",
+       "Qué idiomas necesita de verdad, y cuál es el importante.",
+       "Para cuándo lo necesita y si hay una fecha que no se puede mover."] },
+  { p:"La respuesta será una de estas tres: una estimación con fases y precio, una pregunta concreta si falta algo, o un «esto no es para mí» con el motivo y, si se me ocurre, a quién preguntar. Esa tercera pasa: un sitio con cobro en línea, una aplicación móvil o una intranet no son lo que hago, y decirlo el primer día es más barato para los dos." },
+  { p:"Se puede trabajar en español, en inglés o en árabe, y las reuniones se pueden hacer en cualquiera de los tres. La diferencia horaria con Japón se resuelve fijando la llamada por la mañana de allí, que es la tarde de Europa y del Golfo." }
+ ],
+ coDatosH:"Datos",
+ coDatos:[ {k:"Lugar", v:"Osaka, Japón"}, {k:"Idiomas", v:"Español · Inglés · Árabe"}, {k:"Código", v:"github.com/2troll"} ],
+ coCorreoEti:"Correo", coCorreoPend:"pendiente de configurar",
+ coIdiomasH:"Sobre el árabe",
+ coIdiomasP:"El árabe que hablo y escribo es clásico y levantino. Para un texto comercial dirigido al Golfo lo digo antes de empezar y, si hace falta, la revisión final la hace un nativo de allí. Prefiero avisar que sorprender.",
+
+ /* ── Legal ── */
+ rLegal:"Legal",
+ legal:[
+  { t:"1. Titularidad", p:["Este sitio es el escaparate profesional de un servicio de desarrollo web prestado a título personal desde Osaka, Japón. HANMA es el nombre comercial con el que se presenta ese servicio; no es una sociedad mercantil registrada, y por eso no figura aquí ningún número de registro que no exista.",
+    "Para cualquier asunto relacionado con este sitio, el canal es el que aparece en la página de contacto."] },
+  { t:"2. Naturaleza de los ejemplos", p:["Las tres empresas que aparecen en la sección de trabajos —NAHAR, BUNN y ATLAS— son ficticias. Se crearon para poder enseñar un sitio completo sin exponer material de un cliente.",
+    "Las cifras que manejan sus calculadoras son de modelo, y cada una lleva escritos sus supuestos en la propia página. Las gráficas y los cálculos sí son reales: no hay imágenes de resultados, hay resultados."] },
+  { t:"3. Privacidad", p:["Este sitio no usa cookies, no lleva medición de audiencia, no carga guiones de terceros y no envía sus datos a ninguna parte. No hay formulario que recoja información personal.",
+    "Lo único que se guarda en su navegador es el idioma que ha elegido, en el almacenamiento local del propio sitio, para no volver a preguntárselo. Esa información no sale de su equipo y se borra al borrar los datos del sitio.",
+    "La única petición a un servidor ajeno es la de las tipografías, alojadas en el servicio de fuentes de Google; su navegador le pide el archivo de letra y, como cualquier petición web, ese servicio ve la dirección desde la que se pide."] },
+  { t:"4. Propiedad intelectual", p:["Los textos y el diseño de este sitio son míos. El código de los tres sitios de ejemplo está publicado en repositorios abiertos y puede leerlo, aprender de él y adaptarlo citando el origen.",
+    "En un encargo real, el código que se escribe para usted es suyo desde la entrega, sin licencia que renovar. Lo que me reservo es el derecho a contar que lo hice y a enseñar una captura, salvo que acordemos lo contrario por escrito."] },
+  { t:"5. Enlaces a otros sitios", p:["Los enlaces salientes llevan a los tres sitios de ejemplo y a los repositorios de código. No hay enlaces patrocinados ni afiliación de ningún tipo: si algún día los hubiera, estarían marcados como tales."] },
+  { t:"6. Accesibilidad", p:["Este sitio se construye buscando cumplir las pautas WCAG 2.2 en nivel AA: navegación completa con teclado, foco siempre visible, contraste medido y texto alternativo en los tres idiomas.",
+    "Si encuentra una barrera —un contraste bajo, un control que no alcanza con el teclado, un lector de pantalla que se atasca— dígamelo describiendo qué pasó y con qué navegador. Se corrige y se le contesta con qué se cambió."] },
+  { t:"7. Ley aplicable", p:["El servicio se presta desde Japón. En un encargo, la ley aplicable y el foro se acuerdan por escrito en el propio presupuesto antes de empezar, y un cliente consumidor conserva siempre el derecho a acudir a los tribunales de su domicilio.",
+    "Antes de llegar ahí prefiero hablarlo. Escríbame describiendo qué ha pasado y contesto por escrito en un plazo de una semana."] }
+ ],
+
+ /* ── Mapa y 404 ── */
+ rComparar:"Comparado con la alternativa",
+ cmH:"Tres maneras de tener un sitio, y lo que cuesta cada una a tres años",
+ cmDoc:[
+  { p:"El precio de un sitio no se juzga el día que se paga, sino tres años después. Estas son las tres rutas reales que tiene delante una empresa mediana, con lo que cada una acaba costando de verdad." },
+  { h:"Una plantilla comprada y montada por dentro de casa", p:"Es la más barata el primer día y la que más cuesta el tercero. La plantilla trae un gestor de contenidos y veinte extensiones que hay que actualizar; cuando una deja de mantenerse, el sitio se rompe en un momento que nadie eligió. Y en el momento en que hace falta el árabe, casi siempre no hay nada que hacer: la plantilla se escribió para leerse de izquierda a derecha y reflejarla es rehacerla. La factura no llega en forma de factura, llega en forma de tardes perdidas." },
+  { h:"Una agencia con gestor de contenidos y cuota mensual", p:"Se compra tranquilidad, y a veces compensa. Lo que hay que mirar es a nombre de quién quedan el dominio y el código, y qué pasa el día que se quiere cambiar de proveedor. Si la respuesta es «lo exportamos», conviene pedir que lo exporten ahora, no entonces. La cuota mensual también paga la infraestructura que hace falta para que el gestor siga en pie, que es un coste que un sitio estático sencillamente no tiene." },
+  { h:"Esto", p:"Se paga una vez y no hay nada que renovar. El sitio son archivos de texto: se alojan gratis, se copian a mano y se leen dentro de diez años. El mantenimiento existe, pero es opcional de verdad — si un mes no se toca nada, no se rompe nada. A cambio hay un límite honesto: si mañana necesita cobrar en línea, un catálogo de dos mil referencias o que veinte personas editen a la vez, esto se le queda pequeño y se lo diré antes de empezar, no después." }
+ ],
+ rFaq:"Preguntas",
+ faqH:"Lo que me preguntan siempre, contestado antes de que lo pregunte",
+ faq:[
+  { h:"¿Puedo cambiar los textos yo mismo?", p:"Sí, y es parte de la entrega. Todos los textos de los tres idiomas están en un único bloque del archivo, señalizado y ordenado por página. Se cambian con cualquier editor y se publican subiendo el archivo. En la entrega queda una sesión grabada haciéndolo." },
+  { h:"¿Y si dentro de un año quiero añadir una página?", p:"Se añade. Una página larga son doscientos cincuenta euros y unos tres días, presupuestados antes. Si prefiere hacerlo usted, la estructura está pensada para eso: se copia un apartado existente y se cambian sus textos en los tres idiomas." },
+  { h:"¿Por qué no WordPress?", p:"Porque para un sitio corporativo de seis páginas que cambia cuatro veces al año, un gestor de contenidos es una central eléctrica para encender una bombilla: hay que actualizarlo, protegerlo y pagar el servidor donde vive. Si su caso fuera un blog con tres redactores publicando a diario, le diría lo contrario." },
+  { h:"¿El sitio saldrá en Google?", p:"Sale indexado y con los datos estructurados correctos, que es lo que depende de mí. Lo que no puedo prometerle es una posición: eso depende de la competencia de su sector y del contenido que publique después. Quien se lo prometa por escrito, desconfíe." },
+  { h:"¿Necesito tener listos los textos antes de empezar?", p:"No para empezar, sí para la fase tres. La primera fase existe precisamente para sacar la lista de qué falta. Lo que no funciona es empezar a construir con la idea de que los textos «ya irán llegando»: ahí es donde mueren los proyectos." },
+  { h:"¿Trabaja con clientes fuera de Europa?", p:"Sí. Facturo desde Japón y trabajo habitualmente con la diferencia horaria de Europa y del Golfo. Las llamadas se fijan en la mañana japonesa, que es la tarde en ambos sitios." }
+ ],
+ rMapa:"Mapa del sitio",
+ maH:"Todas las páginas y todos sus apartados",
+ rErr:"Error 404",
+ erH:"Esta página no existe",
+ erP:"Ha pedido la dirección",
+ erCta1:"Ir a la portada", erCta2:"Ver el mapa del sitio",
+
+ pieCopia:"© 2026 HANMA",
+ pieMaqueta:"Las empresas de los tres ejemplos son ficticias; sus cifras son de modelo."
+},
+
+en:{
+ _dir:"ltr", _lang:"en", _loc:"en-GB",
+ saltar:"Skip to content", logoSub:"Web studio", menuAria:"Open the menu",
+ idiomaAria:"Site language", migasAria:"You are here",
+
+ tInicio:"HANMA — Trilingual corporate websites",
+ tTrabajos:"Work — HANMA",
+ tMetodo:"Method — HANMA",
+ tPrecios:"Price — HANMA",
+ tTecnica:"How it is built — HANMA",
+ tContacto:"Contact — HANMA",
+ tLegal:"Legal notice — HANMA",
+ tMapa:"Site map — HANMA",
+ tErr:"Page not found — HANMA",
+
+ nInicio:"Home", nTrabajos:"Work", nMetodo:"Method", nPrecios:"Price",
+ nTecnica:"How it is built", nContacto:"Contact", nLegal:"Legal", nMapa:"Site map", nErr:"404",
+
+ hTitulo:"Corporate websites in three languages that will still work five years from now.",
+ hSub:"Spanish, English and Arabic with genuinely mirrored layout, in a single HTML file. No framework, no admin panel, no plugins to expire. Three complete sites, published and measurable — not screenshots.",
+ hCta1:"See the three sites", hCta2:"What it costs",
+ hPie:"Osaka, Japan · working in Spanish, English and Arabic",
+
+ rPrueba:"The evidence",
+ pruebaH:"Three complete sites you can open right now",
+ pruebaP:"These are not one-screen mock-ups or a carousel of images. Each has nine long pages, an Arabic version with mirrored layout, real legal texts, and an interactive piece that performs an actual calculation. They are published on GitHub Pages with the source in the open: you can read every line before trusting me with anything.",
+ casoVer:"Open the site", casoCod:"Read the code",
+ cifApart:"sections", cifClaves:"strings × 3 languages", cifPeso:"transferred",
+
+ casos:[
+  { sector:"Engineering · industrial solar self-consumption",
+    resumen:"A technical portal built to convince a plant manager: a 25-year payback calculator with panel degradation, an hourly curve of consumption against production, and a quote comparator that speaks up when the cheapest bid carries no production guarantee." },
+  { sector:"Specialty coffee roaster",
+    resumen:"A shop: product grid with price and stock, filters by origin and body, a basket that survives a page reload, brewing recipes, and wholesale terms written without small print." },
+  { sector:"Physiotherapy and return-to-sport clinic",
+    resumen:"A calendar: booking in three steps — area, day and time — where the taken slots are derived from the date rather than from a random number that changes on every reload." }
+ ],
+
+ rPorque:"Why this way",
+ porqueH:"Four decisions that are not about taste, but about the five-year bill",
+ porque:[
+  { h:"One file, not a platform",
+    p:"The whole site is a single index.html. There is no content manager to update, no plugin someone will abandon, no server language version that expires and forces a migration. Copy it to any static host, including a free one, and it works. That is the real reason: five years from now it will open exactly as it does today." },
+  { h:"Arabic from day one",
+    p:"Translating at the end forces a rebuild of the entire layout, because Arabic reads right to left and drags margins, icons, charts and form controls with it. Here the three versions are built on the same structure from the start, using CSS logical properties, and none of them is the poor relation of another." },
+  { h:"Numbers live outside the text",
+    p:"Prices, tables, phases and facets sit in constants shared by all three languages, not inside each translation. Change a figure once and it changes in Spanish, English and Arabic at the same time. It is the only way to stop the three versions from quietly contradicting each other." },
+  { h:"You get the code, not a rental",
+    p:"When the job ends, the repository, the domain and the hosting are in your name. If you want a different supplier tomorrow, you take away a text file any developer can read. There is nothing to export and no licence to renew, and that is exactly the dependency this approach avoids." }
+ ],
+
+ rArabe:"Arabic",
+ arabeH:"What breaks when a site goes into Arabic",
+ arabeDoc:[
+  { p:"Almost every site out there that claims to be in Arabic is the Western version with the words swapped. It shows immediately: the menu still starts on the left, the dropdown arrow points the wrong way, the chart legend hugs the wrong edge, and the numbers appear in Latin digits inside an Arabic paragraph." },
+  { p:"The root of it is a layout written with literal left and right. The fix is not a second, mirrored stylesheet — that falls out of step with the first change — but writing the original one with logical properties: start and end instead of left and right. Mirroring the entire site then becomes a single attribute, and there are never two designs to maintain." },
+  { p:"The rest are details that only surface when somebody actually reads the page. Letter spacing breaks Arabic ligatures and has to be set to zero. Arabic-Indic digits must be requested explicitly, because the bare language code returns Latin ones. And a photograph credit is never translated: translating the title of a work breaks the attribution its licence requires." }
+ ],
+ arabeCajaH:"Checked on every delivery",
+ arabeLista:[
+  "Exact key parity across the three languages: not one string left untranslated.",
+  "Structures are parallel lists of the same length in all three languages.",
+  "Zero leaks: every page is walked in every language looking for text in the wrong one.",
+  "Arabic-Indic digits where they belong, and never inside a price that must read the same in all three.",
+  "Letter spacing at zero in Arabic, so the ligatures survive.",
+  "Forms, charts and arrows mirrored, not just the text."
+ ],
+
+ rTrabajos:"Work",
+ trH:"Three sectors, three different page shapes",
+ trP:"Sharing the internal architecture is fine; sharing the shape of the page is not. A client recognises a template in two seconds: same header, same two-column hero, same cards. These three sites copy the structure their sector actually uses, which is why they look nothing like each other even though the same engine runs underneath.",
+ casosL:[
+  { h:"A technical portal for a solar engineering firm",
+    ps:["Nobody buying a self-consumption plant is looking for pretty photographs: they want to know how many years it takes to pay for itself, and what happens if their factory's consumption changes. The site is built around that question.",
+        "The payback calculator moves two variables — installed capacity and direct self-consumption — and redraws twenty-five years of cumulative cash flow with a 0.5 % annual panel degradation. The line crosses zero at the payback year, which is marked. The hourly curve sets the plant's consumption against solar production and shades the overlap: that shaded area is what is genuinely used.",
+        "The quote comparator is the uncomfortable one: you enter three bids and it works out the cost per kilowatt-hour produced over twenty-five years. When the cheapest one carries no production guarantee, it says so."],
+  },
+  { h:"A shop for a coffee roaster",
+    ps:["A roaster sells two incompatible things at once: 250-gram bags to individuals and sacks to the hospitality trade. A single catalogue that fails to separate them confuses both.",
+        "The product grid carries price, stock and two axes — body and acidity — you can filter by; the basket keeps its contents and is still there after a reload. The brewing cards are not decoration: each method comes with its ratio, its grind and its time.",
+        "The wholesale section states the minimum order, that invoices are paid at thirty days and not sixty, and that no machine is loaned in exchange for a minimum purchase. Saying no in writing saves three emails per customer."],
+  },
+  { h:"A booking system for a physiotherapy clinic",
+    ps:["Patients do not arrive looking for physiotherapy: they arrive with a part of the body that hurts. The way into the site is organised by complaint, not by the technical name of the treatment.",
+        "Booking takes three steps — area, day and time — and shows which slots are already taken. That detail is what separates a believable prototype from a fake one: the taken slots are derived from the date and the hour index, so they hold steady on reload. If they changed every time, anyone would notice.",
+        "The rest of the clinic follows the same line: prices visible without handing over a phone number, what a first session includes, and the cases where the right answer is to refer the patient to a doctor rather than sell them a package."],
+  }
+ ],
+
+ rComun:"What they share",
+ comunH:"The engine is the same; the façade is not",
+ comunDoc:[
+  { p:"Underneath, the three sites work identically: routing through the address fragment, one dictionary per language with exactly the same keys, and a single function that translates the whole document in one pass — including the pages hidden at that moment — and repaints the charts in the new language. That is what makes adding a fourth language cheap." },
+  { p:"On the surface they resemble each other as little as possible. Each sector has its own shape, copied from how sites in that trade actually behave, and one interactive piece that only makes sense there:" }
+ ],
+ tcSitio:"Site", tcForma:"Shape", tcPieza:"The piece that defines it",
+ comunFilas:[
+  ["NAHAR","B2B technical portal","Fixed rail with the page summary and a bottom bar carrying the simulator result"],
+  ["BUNN","Online shop","Product grid with stock, filters, and a basket that survives a reload"],
+  ["ATLAS","Clinical calendar","Three-step booking with taken slots derived from the date"]
+ ],
+
+ rMetodo:"Method",
+ meH:"How a job runs, week by week",
+ meP:"A trilingual site of six long pages takes between five and seven weeks. That is not a round number chosen because it sounds good: building in one language takes half the calendar, and the other two versions, review included, take the other half. These are the five phases and what is needed from you in each one.",
+ tfFase:"Phase", tfSemanas:"Weeks", tfEntrega:"What you receive", tfUsted:"What is needed from you",
+ fases:[
+  { n:"Site plan", entrega:"The page tree section by section, and the exact list of texts, photographs and figures that must be gathered.", usted:"An hour of conversation and whatever material you already have, even if it is half finished." },
+  { n:"Visual direction", entrega:"Two design proposals built on your real content, not on filler text.", usted:"Pick one and say plainly what grates." },
+  { n:"Build", entrega:"The complete site in one language, published at a private address you can visit daily to watch it grow.", usted:"Review and correct the texts while it is being built, not at the end." },
+  { n:"English and Arabic", entrega:"The two remaining versions, with mirrored layout, the right digits and the charts repainted.", usted:"A native reviewer if you want one; if there is none, I review it and I tell you so." },
+  { n:"Handover", entrega:"The repository, the domain pointing at the site, and a recorded session so you can change the texts yourself.", usted:"The domain and hosting in your name, never in mine." }
+ ],
+ metodoDoc:[
+  { h:"What happens if the material does not arrive", p:"This is what delays a site, by a wide margin. Phase three cannot start without texts: if they are missing, the build uses provisional text flagged in red that cannot be published by accident. The calendar freezes and I tell you the same day, instead of arriving at the deadline with a surprise." },
+  { h:"What happens if the scope grows", p:"One extra long page is two hundred and fifty euros and about three days. It is said before it is built, in writing, and you decide. What I do not do is slip it in quietly and present the bill at the end: that is what poisons a project." },
+  { h:"What happens after handover", p:"The site is yours and runs without me. If you want me to keep an eye on it, maintenance is ninety euros a month and covers backups, small text changes and answering when something breaks. If you would rather not, nothing happens: no part of it expires just because nobody touches it." }
+ ],
+
+ rRiesgos:"What usually goes wrong",
+ riH:"Four things that sink a web project, said before we start",
+ riesgos:[
+  { h:"The content is never ready", p:"No site is ever late because of code; they are late because of words. That is why the site plan is the first phase and not the last: it produces a concrete list of what is missing and who writes it, with a date." },
+  { h:"Arabic gets reviewed on the last day", p:"If the Arabic review lands once everything is assembled, any correction means going back over the whole layout. It is reviewed in phase four, with time to spare, and with the site already navigable in that language." },
+  { h:"The domain is in someone else's name", p:"Plenty of companies find out too late that their domain was registered by a former supplier. It gets checked in the first week, because recovering it can take longer than building the site." },
+  { h:"Nobody knows how to change a line of text", p:"A site only its author can touch ends up frozen. Handover includes a recorded session showing how to change texts and prices, and every text sits in one clearly marked block of the file." }
+ ],
+
+ rPrecios:"Price",
+ prH:"Work out yours",
+ prP:"The base figure was not invented for this page: it is the rate already agreed in writing with a real client for a trilingual site of six long pages. Everything else is added on top using the same rule I would apply in an email. What comes out here is what I would answer.",
+ cfIdiomas:"Languages", cfIdiomasOps:["One language","Two languages","Three (ES/EN/AR)"],
+ cfPaginas:"Long pages", cfPagAria:"Number of long pages",
+ cfPagNota:"A long page groups several sections with its own index at the top. Six long pages read far better than eighteen short ones: a menu of eighteen entries where each leads to four paragraphs looks like a magazine, not a company.",
+ cfPiezas:"Bespoke pieces", cfPiezasOps:["Calculator or simulator","Catalogue with filters and basket","Appointment booking","Map or data chart"],
+ cfPiezasNota:"These are the pieces that perform a real calculation, with their assumptions written on the page itself. Each one adds roughly a week.",
+ cfMant:"Maintenance", cfMantOps:["No maintenance","Monthly maintenance"],
+ tkEti:"Estimate",
+ tkPlazoTpl:"{a} to {b} weeks · delivery in {mes}",
+ dgBase:"Base, {n} pages", dgPaginas:"{n} additional pages", dgIdiomas:"Language adjustment",
+ dgPiezas:"Bespoke pieces ({n})", dgMant:"Maintenance", dgMantVal:"{n} €/month",
+ dgPagos:"Payments", dgPagosVal:"{a} · {b} · {c}",
+ tkAviso:"An estimate, not a quotation. The quotation is agreed in writing after the site plan, once the real number of pages is known. The price is in euros; if the invoice is issued in another currency it is converted at that day's rate, and the rate is stated on the invoice itself.",
+
+ rIncluye:"What is in and what is out",
+ incSiH:"Included in the price",
+ incSi:[
+  "All three language versions complete — not one main version and two summaries.",
+  "Genuinely mirrored layout for Arabic, forms and charts included.",
+  "Legal texts written: notice, privacy, terms and accessibility.",
+  "A real error page, a site map generated from the index itself, and structured data.",
+  "Photographs with clean licences, downloaded into the repository and credited.",
+  "An accessibility pass: keyboard, visible focus and measured contrast.",
+  "The repository with all the code and the history of changes.",
+  "A recorded session showing how to change texts and prices."
+ ],
+ incNoH:"Not included",
+ incNo:[
+  "Domain and hosting: contracted in your name, and I help you do it.",
+  "Writing commercial copy from scratch, beyond putting yours in order.",
+  "Original photography and video; it can be subcontracted separately.",
+  "Sworn translation, if your sector requires it for a document.",
+  "A shop with online payment and a payment gateway: that is no longer a static site.",
+  "Advertising campaigns or paid search placement."
+ ],
+ pagoDoc:[
+  { h:"How it is paid", p:"In three instalments: forty per cent to start, thirty on approving the visual direction and thirty on delivery. Work does not begin without the first instalment, for a simple reason: it is what separates a client who has decided from a conversation that quietly fades out in phase two." },
+  { h:"Invoicing", p:"I invoice as an individual from Japan. For a company outside Japan this is an export of services, so the invoice carries no Japanese consumption tax. If your accounts need a particular currency, it is stated on the invoice together with the rate applied that day." }
+ ],
+
+ rTecnica:"How it is built",
+ teH:"One file, zero libraries",
+ tecnicaDoc:[
+  { p:"The entire site fits in one index.html: styles, the text of all three languages, charts and logic. There is no build step, no dependency folder, no lock file that nobody will know how to regenerate in two years. It is edited in any text editor and published by copying a single file." },
+  { p:"Navigation runs through the address fragment, so every page has its own shareable link and the browser's back button behaves. Pages that are not on screen stay in the document, hidden: that is why switching language translates the whole site at once and leaves no half-done corners." },
+  { p:"The only request to a third party is the typeface stylesheet. Photographs are downloaded into the repository instead of linked from someone else's server: if they vanish at source tomorrow, the site is unaffected. The charts are vector drawings generated with trigonometry, so they redraw when the theme changes and never pixelate on a large screen." },
+  { p:"The structured data search engines read is generated from the same figures the page paints. Change a price and the markup changes by itself, because there is no parallel copy left to go stale. It is the same principle as everything else here: one fact, one place where it lives." }
+ ],
+ rMedidas:"Measured, not promised",
+ mdH:"What it actually weighs",
+ mdP:"An average corporate site runs to around two megabytes of transfer before a single word is read. These are the three sites above, measured today against their public repositories. The figure covers the whole site: all three languages, the nine pages, the legal texts and the charts.",
+ mdPie:"Measured on 8 September 2026 with «gzip -c index.html | wc -c», which is what travels over the network. Photographs load separately and only when seen. You can repeat the measurement yourself against the repository.",
+ tmSitio:"Site", tmApart:"Sections", tmRutas:"Pages", tmClaves:"Strings × 3", tmGz:"Transferred",
+ rAcc:"Accessibility",
+ acH:"What is checked before calling it finished",
+ accDoc:[
+  { p:"Accessibility is not a page that promises things; it is a list you walk through. A site that claims to meet a standard and does not is worse off than one that says nothing, because it also misleads." },
+  { p:"The whole site is walked using the keyboard alone, checking that focus is always visible and that no control is out of reach. The real contrast of every text colour against its background is measured, with the number stated, and anything short of the mark is raised. Images carry alternative text translated into all three languages, not a Spanish description sitting inside the Arabic version. And if the visitor's system asks for less motion, the animations genuinely stop rather than soften." },
+  { p:"All of it is checked on every delivery and the result is shown to you. If something falls short, the report says so: it is the only way for the word to mean anything." }
+ ],
+
+ rContacto:"Contact",
+ coH:"How to start",
+ contactoDoc:[
+  { p:"The first email does not need a specification document. Four things are enough for me to answer with a number and a calendar instead of a question:" },
+  { l:["What your company does and who it sells to.",
+       "If you already have a site, its address; if not, two competitors you like.",
+       "Which languages you genuinely need, and which one matters most.",
+       "When you need it, and whether there is a date that cannot move."] },
+  { p:"The reply will be one of three things: an estimate with phases and a price, a specific question if something is missing, or a «this is not for me» with the reason and, if I can think of one, who to ask instead. That third one does happen: a shop with online payment, a mobile app or an intranet are not what I do, and saying so on day one is cheaper for both of us." },
+  { p:"Work can run in Spanish, English or Arabic, and meetings can be held in any of the three. The time difference with Japan is solved by putting the call in the Japanese morning, which is the afternoon in Europe and the Gulf." }
+ ],
+ coDatosH:"Details",
+ coDatos:[ {k:"Based in", v:"Osaka, Japan"}, {k:"Languages", v:"Spanish · English · Arabic"}, {k:"Code", v:"github.com/2troll"} ],
+ coCorreoEti:"Email", coCorreoPend:"not configured yet",
+ coIdiomasH:"About the Arabic",
+ coIdiomasP:"The Arabic I speak and write is Classical and Levantine. For commercial copy aimed at the Gulf I say so before we start and, where it matters, the final review is done by a native speaker from there. I would rather warn you than surprise you.",
+
+ rLegal:"Legal",
+ legal:[
+  { t:"1. Ownership", p:["This site is the professional shop window of a web development service provided in a personal capacity from Osaka, Japan. HANMA is the trading name under which that service is presented; it is not a registered company, which is why no registration number that does not exist appears here.",
+    "For anything concerning this site, the channel is the one given on the contact page."] },
+  { t:"2. The nature of the examples", p:["The three companies in the work section — NAHAR, BUNN and ATLAS — are fictitious. They were created so that a complete site could be shown without exposing a client's material.",
+    "The figures their calculators handle are model figures, and each one has its assumptions written on the page itself. The charts and the calculations, however, are real: there are no pictures of results here, there are results."] },
+  { t:"3. Privacy", p:["This site uses no cookies, carries no audience measurement, loads no third-party scripts and sends your data nowhere. There is no form collecting personal information.",
+    "The only thing stored in your browser is the language you chose, in this site's own local storage, so that you are not asked twice. That information never leaves your machine and disappears when you clear the site's data.",
+    "The single request to someone else's server is for the typefaces, hosted on Google's font service; your browser asks it for the letterforms and, as with any web request, that service sees the address the request comes from."] },
+  { t:"4. Intellectual property", p:["The texts and the design of this site are mine. The code of the three example sites is published in open repositories: you may read it, learn from it and adapt it with attribution.",
+    "On a real job, the code written for you is yours from delivery, with no licence to renew. What I keep is the right to say I built it and to show a screenshot, unless we agree otherwise in writing."] },
+  { t:"5. Links to other sites", p:["Outbound links go to the three example sites and to the code repositories. There are no sponsored links and no affiliate arrangements of any kind: were there ever any, they would be marked as such."] },
+  { t:"6. Accessibility", p:["This site is built aiming to meet the WCAG 2.2 guidelines at level AA: full keyboard navigation, focus always visible, measured contrast and alternative text in all three languages.",
+    "If you hit a barrier — low contrast, a control the keyboard cannot reach, a screen reader that stalls — tell me what happened and in which browser. It gets fixed, and you get an answer saying what changed."] },
+  { t:"7. Governing law", p:["The service is provided from Japan. On a job, the governing law and forum are agreed in writing in the quotation itself before work starts, and a consumer client always keeps the right to go to the courts of their own domicile.",
+    "Before it comes to that, I would rather talk. Write describing what happened and I answer in writing within a week."] }
+ ],
+
+ rComparar:"Compared with the alternative",
+ cmH:"Three ways to have a website, and what each one costs over three years",
+ cmDoc:[
+  { p:"The price of a website is not judged on the day it is paid, but three years later. These are the three real routes open to a mid-sized company, and what each actually ends up costing." },
+  { h:"A bought template, assembled in-house", p:"Cheapest on day one and dearest by year three. The template brings a content manager and twenty extensions that all need updating; when one stops being maintained, the site breaks at a moment nobody chose. And the day Arabic is needed there is usually nothing to be done: the template was written to read left to right, and mirroring it means rebuilding it. The bill does not arrive as a bill, it arrives as lost afternoons." },
+  { h:"An agency with a content manager and a monthly fee", p:"You are buying peace of mind, and sometimes that pays. What to check is whose name the domain and the code are in, and what happens the day you want a different supplier. If the answer is «we will export it for you», it is worth asking them to export it now rather than then. The monthly fee also pays for the infrastructure that keeps the content manager standing, which is a cost a static site simply does not have." },
+  { h:"This", p:"Paid once, with nothing to renew. The site is text files: hosted free, copied by hand, and readable ten years from now. Maintenance exists but is genuinely optional — if nothing is touched for a month, nothing breaks. In exchange there is an honest limit: if you need online payment tomorrow, a catalogue of two thousand items, or twenty people editing at once, this is too small for you, and I will say so before we start rather than after." }
+ ],
+ rFaq:"Questions",
+ faqH:"What I am always asked, answered before you ask it",
+ faq:[
+  { h:"Can I change the texts myself?", p:"Yes, and it is part of the handover. Every text in all three languages sits in one clearly marked block of the file, ordered by page. You edit them in any text editor and publish by uploading the file. The handover includes a recorded session doing exactly that." },
+  { h:"What if I want to add a page a year from now?", p:"You add it. One long page is two hundred and fifty euros and about three days, quoted beforehand. If you would rather do it yourself, the structure is built for that: copy an existing section and change its texts in the three languages." },
+  { h:"Why not WordPress?", p:"Because for a six-page corporate site that changes four times a year, a content manager is a power station to light one bulb: it has to be updated, protected, and given a server to live on. If your case were a blog with three writers publishing daily, I would tell you the opposite." },
+  { h:"Will the site show up on Google?", p:"It is indexed and carries the right structured data, which is the part that depends on me. What I cannot promise is a position: that depends on your sector's competition and on the content you publish afterwards. Be wary of anyone who promises a ranking in writing." },
+  { h:"Do I need the texts ready before we start?", p:"Not to start, yes for phase three. The first phase exists precisely to produce the list of what is missing. What does not work is starting to build on the assumption that the texts «will turn up»: that is where projects die." },
+  { h:"Do you work with clients outside Europe?", p:"Yes. I invoice from Japan and work routinely across the European and Gulf time difference. Calls are set for the Japanese morning, which is the afternoon in both places." }
+ ],
+ rMapa:"Site map",
+ maH:"Every page and every section",
+ rErr:"Error 404",
+ erH:"This page does not exist",
+ erP:"You asked for the address",
+ erCta1:"Go to the home page", erCta2:"See the site map",
+
+ pieCopia:"© 2026 HANMA",
+ pieMaqueta:"The three example companies are fictitious; their figures are model figures."
+},
+
+ar:{
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ saltar:"تخطَّ إلى المحتوى", logoSub:"استوديو ويب", menuAria:"افتح القائمة",
+ idiomaAria:"لغة الموقع", migasAria:"موضعك الآن",
+
+ tInicio:"هانما — مواقع مؤسسية بثلاث لغات",
+ tTrabajos:"الأعمال — هانما",
+ tMetodo:"طريقة العمل — هانما",
+ tPrecios:"السعر — هانما",
+ tTecnica:"كيف بُني — هانما",
+ tContacto:"التواصل — هانما",
+ tLegal:"إشعار قانوني — هانما",
+ tMapa:"خريطة الموقع — هانما",
+ tErr:"الصفحة غير موجودة — هانما",
+
+ nInicio:"الرئيسية", nTrabajos:"الأعمال", nMetodo:"طريقة العمل", nPrecios:"السعر",
+ nTecnica:"كيف بُني", nContacto:"التواصل", nLegal:"قانوني", nMapa:"خريطة الموقع", nErr:"٤٠٤",
+
+ hTitulo:"مواقع مؤسسية بثلاث لغات، تظلّ تعمل بعد خمس سنوات كما تعمل اليوم.",
+ hSub:"الإسبانية والإنجليزية والعربية بتخطيط معكوس فعليًا، في ملف HTML واحد. بلا إطار عمل، وبلا لوحة تحكّم، وبلا إضافات تنتهي صلاحيتها. ثلاثة مواقع كاملة منشورة وقابلة للقياس — لا صور شاشة.",
+ hCta1:"شاهد المواقع الثلاثة", hCta2:"كم يكلّف",
+ hPie:"أوساكا، اليابان · العمل بالإسبانية والإنجليزية والعربية",
+
+ rPrueba:"الدليل",
+ pruebaH:"ثلاثة مواقع كاملة يمكنك فتحها الآن",
+ pruebaP:"ليست نماذج بشاشة واحدة ولا شريط صور. كلّ موقع فيه تسع صفحات طويلة، ونسخة عربية بتخطيط معكوس، ونصوص قانونية مكتوبة، وقطعة تفاعلية تُجري حسابًا حقيقيًا. كلّها منشورة على GitHub Pages والشيفرة مكشوفة: يمكنك قراءة كلّ سطر قبل أن تأتمنني على شيء.",
+ casoVer:"افتح الموقع", casoCod:"اقرأ الشيفرة",
+ cifApart:"أقسامًا", cifClaves:"مفتاحًا × ٣ لغات", cifPeso:"حجم النقل",
+
+ casos:[
+  { sector:"هندسة · الاستهلاك الذاتي الشمسي الصناعي",
+    resumen:"بوّابة تقنية مبنيّة لإقناع مدير مصنع: حاسبة استرداد على خمسة وعشرين عامًا مع تدهور الألواح، ومنحنى ساعيّ للاستهلاك مقابل الإنتاج، ومقارن عروض ينبّه حين يخلو الأرخص من ضمان الإنتاج." },
+  { sector:"محمصة قهوة مختصّة",
+    resumen:"متجر: شبكة منتجات بالسعر والمخزون، ومرشّحات حسب المنشأ والقوام، وسلّة تبقى بعد إعادة تحميل الصفحة، ووصفات تحضير، وشروط جملة مكتوبة بلا خطّ صغير." },
+  { sector:"عيادة علاج طبيعي وتأهيل رياضي",
+    resumen:"أجندة: حجز من ثلاث خطوات — المنطقة ثم اليوم ثم الساعة — والمواعيد المحجوزة مشتقّة من التاريخ لا من رقم عشوائيّ يتغيّر مع كل تحميل." }
+ ],
+
+ rPorque:"لماذا بهذه الطريقة",
+ porqueH:"أربعة قرارات ليست مسألة ذوق، بل مسألة كلفة بعد خمس سنوات",
+ porque:[
+  { h:"ملف واحد، لا منصّة",
+    p:"الموقع كلّه ملف index.html واحد. لا نظام إدارة محتوى يحتاج تحديثًا، ولا إضافة يتخلّى عنها صاحبها، ولا إصدار لغة خادم تنتهي صلاحيته فيجبرك على الترحيل. انسخه إلى أي استضافة ثابتة، ولو مجانية، فيعمل. هذا هو السبب الحقيقي: بعد خمس سنوات سيُفتح تمامًا كما يُفتح اليوم." },
+  { h:"العربية من اليوم الأول",
+    p:"الترجمة في النهاية تفرض إعادة بناء التخطيط كلّه، لأنّ العربية تُقرأ من اليمين إلى اليسار وتجرّ معها الهوامش والأيقونات والرسوم والنماذج. هنا تُبنى النسخ الثلاث على البنية نفسها منذ البداية، بخصائص CSS المنطقيّة، ولا تكون واحدة منها نسخة فقيرة من أخرى." },
+  { h:"الأرقام تعيش خارج النصّ",
+    p:"الأسعار والجداول والمراحل والخصائص كلّها في ثوابت مشتركة بين اللغات الثلاث، لا داخل كل ترجمة. تغيير رقم واحد يغيّره بالإسبانية والإنجليزية والعربية في آن. هذه هي الطريقة الوحيدة كي لا تتناقض النسخ الثلاث من دون أن ينتبه أحد." },
+  { h:"تستلم الشيفرة، لا إيجارًا",
+    p:"عند الانتهاء يصير المستودع والنطاق والاستضافة باسمك. وإن أردت مزوّدًا آخر غدًا، فأنت تحمل معك ملفًا نصيًّا يفهمه أي مبرمج. لا شيء يُصدَّر ولا رخصة تُجدَّد، وهذه بالضبط هي التبعيّة التي يتجنّبها هذا النهج." }
+ ],
+
+ rArabe:"العربية",
+ arabeH:"ما الذي ينكسر حين ينتقل موقع إلى العربية",
+ arabeDoc:[
+  { p:"معظم المواقع التي تدّعي أنّها «بالعربية» هي النسخة الغربية نفسها مع تبديل الكلمات. ويظهر ذلك فورًا: القائمة ما زالت تبدأ من اليسار، وسهم القائمة المنسدلة يشير إلى الجهة الخطأ، ووسيلة إيضاح الرسم ملتصقة بالحافة الخطأ، والأرقام تظهر بالخانات اللاتينية داخل فقرة عربية." },
+  { p:"أصل المشكلة تخطيط كُتب بكلمتَي «يسار» و«يمين» حرفيًّا. والحلّ ليس ورقة أنماط ثانية معكوسة — فهي تفقد التزامن مع أول تعديل — بل كتابة الأولى بخصائص منطقيّة: بداية ونهاية بدل يسار ويمين. عندها يصير عكس الموقع كلّه تغييرَ سمة واحدة، ولا يبقى تصميمان يحتاجان صيانة." },
+  { p:"وما تبقّى تفاصيل لا تظهر إلا حين يقرأ أحدهم الصفحة فعلًا. تباعد الحروف يكسر ليغاتورات العربية فيجب ضبطه على الصفر. والخانات العربية الهنديّة يجب طلبها صراحةً، لأنّ رمز اللغة وحده يعيد خانات لاتينية. وحقوق الصورة لا تُترجم أبدًا: ترجمة عنوان عمل تكسر النسبة التي تشترطها رخصته." }
+ ],
+ arabeCajaH:"ما يُفحص في كل تسليم",
+ arabeLista:[
+  "تطابق تامّ للمفاتيح بين اللغات الثلاث: لا سلسلة نصّية تبقى بلا ترجمة.",
+  "البنى قوائم متوازية بالطول نفسه في اللغات الثلاث.",
+  "صفر تسرّب: تُمشّط كل صفحة بكل لغة بحثًا عن نصّ باللغة الخطأ.",
+  "خانات عربية هنديّة في موضعها، ولا تدخل قطّ في سعر يجب أن يُقرأ نفسه في اللغات الثلاث.",
+  "تباعد الحروف عند الصفر في العربية، حفاظًا على الليغاتورات.",
+  "النماذج والرسوم والأسهم معكوسة، لا النصّ وحده."
+ ],
+
+ rTrabajos:"الأعمال",
+ trH:"ثلاثة قطاعات، وثلاثة أشكال صفحات مختلفة",
+ trP:"تقاسم البنية الداخلية أمر جيّد؛ أما تقاسم شكل الصفحة فلا. العميل يتعرّف على القالب في ثانيتين: الترويسة نفسها، والواجهة ذات العمودين نفسها، والبطاقات نفسها. هذه المواقع الثلاثة تنسخ البنية التي يستعملها قطاعها فعلًا، ولذلك لا يشبه أحدها الآخر رغم أنّ المحرّك تحتها واحد.",
+ casosL:[
+  { h:"بوّابة تقنية لشركة هندسة شمسية",
+    ps:["من يشتري منظومة استهلاك ذاتي لا يبحث عن صور جميلة: يريد أن يعرف في كم سنة يستردّ ماله، وماذا يحدث إن تغيّر استهلاك مصنعه. الصفحة مبنيّة حول هذا السؤال.",
+        "حاسبة الاسترداد تحرّك متغيّرين — القدرة المركّبة والاستهلاك الذاتي المباشر — وتعيد رسم التدفّق النقدي التراكمي على خمسة وعشرين عامًا مع تدهور للألواح بنسبة ٠٫٥٪ سنويًّا. يعبر الخطّ الصفرَ في سنة الاسترداد، وهي معلّمة. أما المنحنى الساعيّ فيضع استهلاك المصنع مقابل الإنتاج الشمسي ويظلّل التداخل: تلك المساحة المظلّلة هي ما يُستفاد منه فعلًا.",
+        "ومقارن العروض هو الأكثر إحراجًا: تُدخل ثلاثة عروض فيحسب كلفة الكيلوواط·ساعة المنتَجة على خمسة وعشرين عامًا. وحين يخلو الأرخص من ضمان الإنتاج، يقولها."],
+  },
+  { h:"متجر لمحمصة قهوة",
+    ps:["المحمصة تبيع شيئين متعارضين في وقت واحد: أكياسًا بمئتين وخمسين غرامًا للأفراد، وأجولةً لقطاع الضيافة. وكتالوج واحد لا يفصل بينهما يربك الطرفين.",
+        "شبكة المنتجات تحمل السعر والمخزون ومحورين — القوام والحموضة — يمكن الترشيح بهما؛ والسلّة تحتفظ بمحتواها وتبقى بعد إعادة التحميل. وبطاقات التحضير ليست زينة: لكل طريقة نسبتها ودرجة طحنها وزمنها.",
+        "وقسم الجملة يذكر الحدّ الأدنى للطلب، وأنّ السداد بعد ثلاثين يومًا لا ستّين، وأنّه لا تُعار آلة مقابل حدّ أدنى من الشراء. قول «لا» كتابةً يوفّر ثلاث رسائل مع كل عميل."],
+  },
+  { h:"نظام حجز لعيادة علاج طبيعي",
+    ps:["المريض لا يصل باحثًا عن «علاج طبيعي»: يصل ومعه موضع يؤلمه. لذلك مدخل الموقع منظّم حسب الشكوى، لا حسب الاسم التقني للعلاج.",
+        "الحجز من ثلاث خطوات — المنطقة ثم اليوم ثم الساعة — ويُظهر المواعيد المحجوزة. وهذه التفصيلة هي ما يفصل نموذجًا مقنعًا عن نموذج مزيّف: المواعيد المحجوزة مشتقّة من التاريخ ومن ترتيب الساعة، فتثبت عند إعادة التحميل. ولو تغيّرت في كل مرّة لانتبه أي أحد.",
+        "وبقيّة العيادة على المنوال نفسه: أسعار ظاهرة دون طلب رقم هاتف، وما تشمله الجلسة الأولى، والحالات التي يكون فيها الجواب الصحيح تحويلَ المريض إلى طبيب بدل بيعه اشتراكًا."],
+  }
+ ],
+
+ rComun:"ما تتقاسمه",
+ comunH:"المحرّك واحد؛ أما الواجهة فلا",
+ comunDoc:[
+  { p:"من الداخل تعمل المواقع الثلاثة بالطريقة ذاتها: توجيه عبر جزء العنوان، وقاموس لكل لغة بالمفاتيح نفسها تمامًا، ودالّة واحدة تترجم المستند كلّه في مرور واحد — بما فيه الصفحات المخفيّة في تلك اللحظة — وتعيد رسم الرسوم باللغة الجديدة. وهذا ما يجعل إضافة لغة رابعة رخيصة." },
+  { p:"أما من الخارج فتتشابه بأقل قدر ممكن. لكل قطاع شكله المنقول عن سلوك مواقع ذلك المجال فعلًا، وقطعة تفاعلية واحدة لا معنى لها إلا فيه:" }
+ ],
+ tcSitio:"الموقع", tcForma:"الشكل", tcPieza:"القطعة التي تعرّفه",
+ comunFilas:[
+  ["ناهار","بوّابة تقنية بين الشركات","شريط جانبي ثابت بملخّص الصفحة وشريط سفليّ يحمل نتيجة المحاكي"],
+  ["بنّ","متجر إلكتروني","شبكة منتجات بالمخزون ومرشّحات وسلّة تبقى بعد إعادة التحميل"],
+  ["أطلس","أجندة عيادة","حجز من ثلاث خطوات بمواعيد محجوزة مشتقّة من التاريخ"]
+ ],
+
+ rMetodo:"طريقة العمل",
+ meH:"كيف يسير المشروع، أسبوعًا بأسبوع",
+ meP:"موقع بثلاث لغات وستّ صفحات طويلة يستغرق بين خمسة وسبعة أسابيع. وليس رقمًا مستديرًا اختير لأنّه يبدو حسنًا: البناء بلغة واحدة يأخذ نصف الرزنامة، والنسختان الأخريان بمراجعتهما تأخذان النصف الآخر. هذه هي المراحل الخمس، وما يلزم منك في كلّ منها.",
+ tfFase:"المرحلة", tfSemanas:"الأسابيع", tfEntrega:"ما تستلمه", tfUsted:"ما يلزم منك",
+ fases:[
+  { n:"خطّة الموقع", entrega:"شجرة الصفحات قسمًا قسمًا، والقائمة الدقيقة للنصوص والصور والأرقام التي يجب جمعها.", usted:"محادثة من ساعة، وما لديك من مواد ولو كانت ناقصة." },
+  { n:"الاتجاه البصري", entrega:"مقترحا تصميم مبنيّان على محتواك الحقيقي، لا على نصّ حشو.", usted:"اختيار واحد منهما، وقول ما يزعجك بصراحة." },
+  { n:"البناء", entrega:"الموقع كاملًا بلغة واحدة، منشورًا على عنوان خاصّ يمكنك زيارته يوميًّا لتراه ينمو.", usted:"مراجعة النصوص وتصحيحها أثناء البناء، لا في النهاية." },
+  { n:"الإنجليزية والعربية", entrega:"النسختان الباقيتان، بتخطيط معكوس وخانات صحيحة ورسوم معادة الرسم.", usted:"مراجع من أهل اللغة إن أردت؛ وإن لم يوجد، أراجعها أنا وأخبرك بذلك." },
+  { n:"التسليم", entrega:"المستودع، والنطاق موجَّهًا إلى الموقع، وجلسة مسجَّلة كي تغيّر النصوص بنفسك.", usted:"النطاق والاستضافة باسمك أنت، لا باسمي." }
+ ],
+ metodoDoc:[
+  { h:"ماذا لو لم تصل المواد", p:"هذا أكثر ما يؤخّر المواقع، وبفارق كبير. المرحلة الثالثة لا تبدأ بلا نصوص: وإن غابت، يُبنى بنصّ مؤقّت معلَّم بالأحمر يستحيل نشره سهوًا. تتجمّد الرزنامة وأخبرك في اليوم نفسه، بدل الوصول إلى موعد التسليم ومعه مفاجأة." },
+  { h:"ماذا لو اتّسع النطاق", p:"صفحة طويلة إضافية تعني مئتين وخمسين يورو وثلاثة أيام تقريبًا. يُقال ذلك قبل تنفيذها، كتابةً، وأنت تقرّر. أما ما لا أفعله فهو إقحامها بصمت ثم تقديم الفاتورة في النهاية: هذا ما يسمّم أي مشروع." },
+  { h:"ماذا بعد التسليم", p:"الموقع لك ويعمل من دوني. وإن أردت أن أبقى متابعًا، فالصيانة تسعون يورو شهريًّا وتشمل النسخ الاحتياطي والتعديلات النصّية الصغيرة والاستجابة حين ينكسر شيء. وإن لم تردها فلا بأس: لا قطعة فيه تنتهي صلاحيتها لمجرّد أن أحدًا لم يلمسها." }
+ ],
+
+ rRiesgos:"ما يسوء عادةً",
+ riH:"أربعة أمور تُغرق مشروع ويب، تُقال قبل البدء",
+ riesgos:[
+  { h:"المحتوى لا يجهز أبدًا", p:"لا يتأخّر موقع بسبب الشيفرة؛ يتأخّر بسبب الكلمات. لذلك خطّة الموقع هي المرحلة الأولى لا الأخيرة: تخرج منها قائمة محدّدة بما ينقص ومن يكتبه، بتاريخ." },
+  { h:"مراجعة العربية في اليوم الأخير", p:"إن وصلت مراجعة العربية بعد اكتمال التركيب، فأي تصحيح يعني إعادة المرور على التخطيط كلّه. تُراجَع في المرحلة الرابعة، بوقت كافٍ، والموقع صار قابلًا للتصفّح بتلك اللغة." },
+  { h:"النطاق باسم شخص آخر", p:"شركات كثيرة تكتشف متأخّرةً أنّ نطاقها سجّله مزوّد سابق. يُتحقّق من ذلك في الأسبوع الأول، لأنّ استعادته قد تستغرق أكثر من بناء الموقع." },
+  { h:"لا أحد يعرف تغيير سطر", p:"الموقع الذي لا يلمسه إلا صانعه ينتهي مجمَّدًا. يتضمّن التسليم جلسة مسجَّلة تُري كيف تُغيَّر النصوص والأسعار، وكلّ النصوص في كتلة واحدة معلَّمة من الملف." }
+ ],
+
+ rPrecios:"السعر",
+ prH:"احسب سعرك",
+ prP:"الرقم الأساس لم يُخترع لهذه الصفحة: هو التعرفة المتّفق عليها كتابةً مع عميل حقيقي لموقع بثلاث لغات وستّ صفحات طويلة. وكلّ ما عداه يُضاف فوقه بالقاعدة نفسها التي كنت سأطبّقها في رسالة. وما يخرج هنا هو ما كنت سأجيبك به.",
+ cfIdiomas:"اللغات", cfIdiomasOps:["لغة واحدة","لغتان","ثلاث (إسبانية/إنجليزية/عربية)"],
+ cfPaginas:"الصفحات الطويلة", cfPagAria:"عدد الصفحات الطويلة",
+ cfPagNota:"الصفحة الطويلة تجمع عدّة أقسام مع فهرس خاصّ بها في الأعلى. ستّ صفحات طويلة تُقرأ أفضل بكثير من ثماني عشرة قصيرة: قائمة من ثمانية عشر مدخلًا يقود كلّ منها إلى أربع فقرات تبدو مجلّة، لا شركة.",
+ cfPiezas:"قطع مخصّصة", cfPiezasOps:["حاسبة أو محاكٍ","كتالوج بمرشّحات وسلّة","حجز مواعيد","خريطة أو رسم بيانات"],
+ cfPiezasNota:"هذه هي القطع التي تُجري حسابًا حقيقيًّا، وفرضيّاتها مكتوبة في الصفحة نفسها. كلّ واحدة تضيف أسبوعًا تقريبًا.",
+ cfMant:"الصيانة", cfMantOps:["بلا صيانة","صيانة شهرية"],
+ tkEti:"تقدير",
+ tkPlazoTpl:"من {a} إلى {b} أسابيع · التسليم في {mes}",
+ dgBase:"الأساس، {n} صفحات", dgPaginas:"{n} صفحات إضافية", dgIdiomas:"تعديل حسب اللغات",
+ dgPiezas:"قطع مخصّصة ({n})", dgMant:"الصيانة", dgMantVal:"{n} يورو/شهر",
+ dgPagos:"الدفعات", dgPagosVal:"{a} · {b} · {c}",
+ tkAviso:"هذا تقدير لا عرض سعر. يُغلق عرض السعر كتابةً بعد خطّة الموقع، حين يُعرف العدد الحقيقي للصفحات. السعر باليورو؛ وإن صدرت الفاتورة بعملة أخرى فيُحوَّل بسعر يوم الإصدار، ويُذكر السعر في الفاتورة ذاتها.",
+
+ rIncluye:"ما يدخل وما لا يدخل",
+ incSiH:"مشمول في السعر",
+ incSi:[
+  "النسخ اللغوية الثلاث كاملة — لا نسخة رئيسية وملخّصان.",
+  "تخطيط معكوس فعليًّا للعربية، بما في ذلك النماذج والرسوم.",
+  "نصوص قانونية مكتوبة: الإشعار والخصوصية والشروط وسهولة الوصول.",
+  "صفحة خطأ حقيقية، وخريطة موقع مولَّدة من الفهرس نفسه، وبيانات منظَّمة.",
+  "صور برُخص نظيفة، مُنزَّلة إلى المستودع ومنسوبة لأصحابها.",
+  "فحص سهولة الوصول: لوحة المفاتيح، وظهور التركيز، والتباين مقيسًا.",
+  "المستودع بكامل الشيفرة وسجلّ التعديلات.",
+  "جلسة مسجَّلة تُري كيف تُغيَّر النصوص والأسعار."
+ ],
+ incNoH:"غير مشمول",
+ incNo:[
+  "النطاق والاستضافة: يُتعاقَد عليهما باسمك، وأساعدك في ذلك.",
+  "كتابة النصوص التجارية من الصفر، أبعد من ترتيب نصوصك.",
+  "التصوير الفوتوغرافي والفيديو؛ يمكن التعاقد عليهما بشكل منفصل.",
+  "الترجمة المحلَّفة، إن طلبها قطاعك لمستند ما.",
+  "متجر بدفع إلكتروني وبوّابة سداد: هذا لم يعد موقعًا ثابتًا.",
+  "الحملات الإعلانية أو الظهور المدفوع في محرّكات البحث."
+ ],
+ pagoDoc:[
+  { h:"كيف يُدفع", p:"على ثلاث دفعات: أربعون بالمئة للبدء، وثلاثون عند اعتماد الاتجاه البصري، وثلاثون عند التسليم. ولا يبدأ العمل قبل الدفعة الأولى، لسبب بسيط: هي ما يفصل عميلًا حسم أمره عن محادثة تنطفئ وحدها في المرحلة الثانية." },
+  { h:"الفوترة", p:"أُصدر الفاتورة بصفتي شخصًا طبيعيًّا من اليابان. وبالنسبة إلى شركة خارج اليابان يُعدّ هذا تصديرَ خدمات، فلا تحمل الفاتورة ضريبة الاستهلاك اليابانية. وإن احتاجت محاسبتك عملة بعينها، تُذكر في الفاتورة مع سعر الصرف المطبَّق ذلك اليوم." }
+ ],
+
+ rTecnica:"كيف بُني",
+ teH:"ملف واحد، وصفر مكتبات",
+ tecnicaDoc:[
+  { p:"الموقع كلّه يتّسع في ملف index.html واحد: الأنماط، ونصوص اللغات الثلاث، والرسوم، والمنطق. لا خطوة بناء، ولا مجلّد اعتماديّات، ولا ملف قفل إصدارات لن يعرف أحد كيف يعيد توليده بعد عامين. يُحرَّر بأي محرّر نصوص ويُنشَر بنسخ ملف واحد." },
+  { p:"التنقّل يجري عبر جزء العنوان، فلكل صفحة رابطها القابل للمشاركة، وزرّ الرجوع في المتصفّح يعمل كما يجب. والصفحات غير المعروضة تبقى داخل المستند مخفيّة: لذلك يترجم تبديلُ اللغة الموقعَ كلّه دفعةً واحدة ولا يترك زوايا ناقصة." },
+  { p:"الطلب الوحيد إلى طرف ثالث هو ورقة الخطوط. أما الصور فتُنزَّل إلى المستودع بدل ربطها بخادم غيرنا: فإن اختفت من مصدرها غدًا بقي الموقع كما هو. والرسوم رسوم متجهيّة مولَّدة بحساب المثلّثات، فتُعاد رسمها عند تبديل السمة ولا تتحبّب على شاشة كبيرة." },
+  { p:"والبيانات المنظَّمة التي تقرأها محرّكات البحث مولَّدة من الأرقام نفسها التي ترسمها الصفحة. غيّر سعرًا فيتغيّر الترميز وحده، لأنّه لا توجد نسخة موازية تتقادم. وهو المبدأ ذاته الذي يحكم كلّ ما سبق: معلومة واحدة، ومكان واحد تعيش فيه." }
+ ],
+ rMedidas:"مقيس، لا موعود",
+ mdH:"كم يزن فعلًا",
+ mdP:"الموقع المؤسسي المتوسّط يقارب ميغابايتين من النقل قبل أن تُقرأ كلمة واحدة. وهذه هي المواقع الثلاثة أعلاه، مقيسةً اليوم على مستودعاتها العامّة. والرقم يشمل الموقع كلّه: اللغات الثلاث، والصفحات التسع، والنصوص القانونية، والرسوم.",
+ mdPie:"قيس في ٨ أيلول ٢٠٢٦ بالأمر «gzip -c index.html | wc -c»، وهو ما يعبر الشبكة فعلًا. أما الصور فتُحمّل على حدة وعند رؤيتها فقط. ويمكنك تكرار القياس بنفسك على المستودع.",
+ tmSitio:"الموقع", tmApart:"الأقسام", tmRutas:"الصفحات", tmClaves:"مفاتيح × ٣", tmGz:"حجم النقل",
+ rAcc:"سهولة الوصول",
+ acH:"ما يُفحص قبل القول إنّه انتهى",
+ accDoc:[
+  { p:"سهولة الوصول ليست صفحة تعِد بأشياء؛ إنّها قائمة تُمشَّط. والموقع الذي يعلن التزامه بمعيار ولا يلتزم به أسوأ حالًا من موقع لا يقول شيئًا، لأنّه يضلّل فوق ذلك." },
+  { p:"يُمشَّط الموقع كلّه بلوحة المفاتيح وحدها، مع التحقّق من أنّ التركيز مرئيّ دائمًا وأنّه لا يبقى عنصر لا يمكن بلوغه. ويُقاس التباين الحقيقي لكل لون نصّ على خلفيّته، بالرقم صراحةً، ويُرفع ما لا يبلغ الحدّ. وتحمل الصور نصًّا بديلًا مترجَمًا إلى اللغات الثلاث، لا وصفًا بالإسبانية داخل النسخة العربية. وإن طلب نظام الزائر حركةً أقلّ، تتوقّف الحركات فعلًا لا أن تخفّ." },
+  { p:"كلّ ذلك يُفحص في كل تسليم وتُعرض عليك نتيجته. وإن قصّر شيء، قاله التقرير: هذه هي الطريقة الوحيدة كي تعني الكلمة شيئًا." }
+ ],
+
+ rContacto:"التواصل",
+ coH:"كيف نبدأ",
+ contactoDoc:[
+  { p:"الرسالة الأولى لا تحتاج كرّاس شروط. أربعة أمور تكفي كي أجيبك برقم ورزنامة بدل أن أجيبك بسؤال:" },
+  { l:["ما الذي تعمله شركتك ولمن تبيع.",
+       "إن كان لديك موقع، فعنوانه؛ وإن لم يكن، فعنوانا منافسَين يعجبانك.",
+       "ما اللغات التي تحتاجها فعلًا، وأيّها الأهمّ.",
+       "متى تحتاجه، وهل ثمّة تاريخ لا يمكن تحريكه."] },
+  { p:"سيكون الجواب واحدًا من ثلاثة: تقدير بمراحل وسعر، أو سؤال محدّد إن نقص شيء، أو «هذا ليس من اختصاصي» مع السبب، ومع اقتراح جهة أخرى إن خطرت لي. وهذا الثالث يحدث فعلًا: متجر بدفع إلكتروني، أو تطبيق هاتف، أو شبكة داخلية، ليست ممّا أفعله، وقولها في اليوم الأول أرخص لكلينا." },
+  { p:"يمكن أن يجري العمل بالإسبانية أو الإنجليزية أو العربية، وأن تُعقد الاجتماعات بأيٍّ منها. أما فارق التوقيت مع اليابان فيُحلّ بجعل المكالمة صباحًا هناك، وهو عصر أوروبا والخليج." }
+ ],
+ coDatosH:"البيانات",
+ coDatos:[ {k:"المقرّ", v:"أوساكا، اليابان"}, {k:"اللغات", v:"إسبانية · إنجليزية · عربية"}, {k:"الشيفرة", v:"github.com/2troll"} ],
+ coCorreoEti:"البريد", coCorreoPend:"لم يُضبط بعد",
+ coIdiomasH:"عن العربية",
+ coIdiomasP:"العربية التي أتحدّثها وأكتبها فصحى وشاميّة. وللنصّ التجاري الموجَّه إلى الخليج أقول ذلك قبل البدء، وعند الحاجة تكون المراجعة الأخيرة على يد ابن المنطقة. أفضّل التنبيه على المفاجأة.",
+
+ rLegal:"قانوني",
+ legal:[
+  { t:"١. الملكية", p:["هذا الموقع واجهة مهنية لخدمة تطوير ويب تُقدَّم بصفة شخصية من أوساكا، اليابان. و«هانما» هو الاسم التجاري الذي تُقدَّم به هذه الخدمة؛ وليست شركة مسجَّلة، ولذلك لا يظهر هنا رقم سجلّ لا وجود له.",
+    "ولأي شأن يخصّ هذا الموقع، القناة هي المذكورة في صفحة التواصل."] },
+  { t:"٢. طبيعة الأمثلة", p:["الشركات الثلاث الواردة في قسم الأعمال — ناهار وبنّ وأطلس — شركات خيالية. أُنشئت كي يمكن عرض موقع كامل دون كشف مواد عميل.",
+    "والأرقام التي تتعامل معها حاسباتها أرقام نموذجية، ولكلّ منها فرضيّاتها مكتوبة في الصفحة نفسها. أما الرسوم والحسابات فحقيقية: لا توجد هنا صور لنتائج، بل نتائج."] },
+  { t:"٣. الخصوصية", p:["هذا الموقع لا يستعمل ملفات تعريف الارتباط، ولا يحمل قياس جمهور، ولا يحمّل نصوصًا برمجية لطرف ثالث، ولا يرسل بياناتك إلى أي جهة. ولا يوجد فيه نموذج يجمع معلومات شخصية.",
+    "الشيء الوحيد المحفوظ في متصفّحك هو اللغة التي اخترتها، في التخزين المحلّي الخاصّ بالموقع، كي لا يُسألك مرّتين. وهذه المعلومة لا تغادر جهازك وتزول بمسح بيانات الموقع.",
+    "والطلب الوحيد إلى خادم غيرنا هو طلب الخطوط، المستضافة على خدمة الخطوط من غوغل؛ يطلب متصفّحك ملفّ الحرف، وكأي طلب على الويب ترى تلك الخدمة العنوان الذي جاء منه الطلب."] },
+  { t:"٤. الملكية الفكرية", p:["نصوص هذا الموقع وتصميمه لي. أما شيفرة المواقع الثلاثة المعروضة كأمثلة فمنشورة في مستودعات مفتوحة: لك أن تقرأها وتتعلّم منها وتقتبسها مع ذكر المصدر.",
+    "وفي مشروع حقيقي، الشيفرة المكتوبة لك ملكك منذ التسليم، بلا رخصة تُجدَّد. وما أحتفظ به هو حقّ القول إنّي نفّذته وعرض صورة منه، ما لم نتّفق على غير ذلك كتابةً."] },
+  { t:"٥. الروابط الخارجية", p:["الروابط الخارجة تقود إلى المواقع الثلاثة المعروضة وإلى مستودعات الشيفرة. ولا توجد روابط مموّلة ولا أي ترتيب تسويق بالعمولة: ولو وُجدت يومًا لكانت معلَّمة بوضوح."] },
+  { t:"٦. سهولة الوصول", p:["بُني هذا الموقع سعيًا إلى استيفاء إرشادات WCAG 2.2 عند المستوى AA: تصفّح كامل بلوحة المفاتيح، وتركيز مرئيّ دائمًا، وتباين مقيس، ونصّ بديل باللغات الثلاث.",
+    "وإن صادفت عائقًا — تباينًا منخفضًا، أو عنصرًا لا يُبلَغ بلوحة المفاتيح، أو قارئ شاشة يتعثّر — فأخبرني بما حدث وبأي متصفّح. يُصلَح، ويصلك جواب بما تغيّر."] },
+  { t:"٧. القانون الواجب التطبيق", p:["تُقدَّم الخدمة من اليابان. وفي أي مشروع، يُتّفق على القانون الواجب التطبيق وجهة الاختصاص كتابةً في عرض السعر نفسه قبل البدء، ويحتفظ العميل المستهلك دائمًا بحقّ اللجوء إلى محاكم موطنه.",
+    "وقبل الوصول إلى ذلك أفضّل الحديث. اكتب لي واصفًا ما جرى، وأردّ كتابةً خلال أسبوع."] }
+ ],
+
+ rComparar:"مقارنةً بالبدائل",
+ cmH:"ثلاث طرق لامتلاك موقع، وما تكلّفه كلّ منها خلال ثلاث سنوات",
+ cmDoc:[
+  { p:"لا يُحكم على سعر الموقع يوم دفعه، بل بعد ثلاث سنوات. وهذه هي الطرق الثلاث الواقعية المتاحة أمام شركة متوسّطة، وما تنتهي كلّ منها إلى تكلفته فعلًا." },
+  { h:"قالب مشترى يُركّبه فريق الشركة", p:"الأرخص في اليوم الأول والأغلى في السنة الثالثة. القالب يجلب معه نظام إدارة محتوى وعشرين إضافة تحتاج كلّها تحديثًا؛ وحين تتوقّف صيانة إحداها ينكسر الموقع في لحظة لم يخترها أحد. ويوم تُطلب العربية لا يكون في اليد شيء غالبًا: القالب كُتب ليُقرأ من اليسار إلى اليمين، وعكسه يعني إعادة بنائه. والفاتورة لا تصل على هيئة فاتورة، بل على هيئة أمسيات ضائعة." },
+  { h:"وكالة مع نظام إدارة محتوى ورسم شهري", p:"أنت تشتري راحة بال، وقد يستحقّ ذلك أحيانًا. لكن ما يجب التحقّق منه هو باسم مَن يكون النطاق والشيفرة، وماذا يحدث يوم تريد مزوّدًا آخر. وإن كان الجواب «سنصدّرها لك»، فالأجدر أن تطلب التصدير الآن لا حينها. والرسم الشهري يدفع كذلك ثمن البنية التحتية التي تُبقي نظام إدارة المحتوى قائمًا، وهي كلفة لا وجود لها أصلًا في موقع ثابت." },
+  { h:"هذا الخيار", p:"يُدفع مرّة واحدة ولا شيء يُجدَّد. الموقع ملفات نصّية: تُستضاف مجانًا، وتُنسخ يدويًّا، وتُقرأ بعد عشر سنوات. والصيانة موجودة لكنّها اختيارية فعلًا — إن لم يُلمس شهرًا كاملًا لم ينكسر شيء. وفي المقابل ثمّة حدّ أعترف به: إن احتجت غدًا إلى دفع إلكتروني، أو كتالوج من ألفَي صنف، أو عشرين شخصًا يحرّرون في آن، فهذا الخيار أصغر من حاجتك، وسأقولها قبل البدء لا بعده." }
+ ],
+ rFaq:"أسئلة",
+ faqH:"ما يُسأل دائمًا، مُجابًا قبل أن تسأله",
+ faq:[
+  { h:"هل أستطيع تغيير النصوص بنفسي؟", p:"نعم، وهذا جزء من التسليم. كلّ نصوص اللغات الثلاث في كتلة واحدة معلَّمة من الملف، مرتّبة حسب الصفحة. تُحرَّر بأي محرّر نصوص وتُنشر برفع الملف. ويتضمّن التسليم جلسة مسجَّلة تفعل ذلك بالضبط." },
+  { h:"وإن أردت إضافة صفحة بعد سنة؟", p:"تُضاف. الصفحة الطويلة مئتان وخمسون يورو وثلاثة أيام تقريبًا، تُسعَّر قبل تنفيذها. وإن فضّلت أن تفعلها بنفسك فالبنية مصمّمة لذلك: تُنسخ قسمًا قائمًا وتُغيَّر نصوصه في اللغات الثلاث." },
+  { h:"لماذا لا ووردبريس؟", p:"لأنّ موقعًا مؤسسيًّا من ستّ صفحات يتغيّر أربع مرّات في السنة لا يحتاج نظام إدارة محتوى: تلك محطّة كهرباء لإنارة مصباح واحد؛ يجب تحديثها وحمايتها ودفع ثمن الخادم الذي تعيش فيه. ولو كانت حالتك مدوّنة بثلاثة محرّرين ينشرون يوميًّا لقلت لك العكس." },
+  { h:"هل سيظهر الموقع في غوغل؟", p:"يظهر مفهرسًا وبالبيانات المنظَّمة الصحيحة، وهذا هو الجزء الذي يتوقّف عليّ. أما ما لا أستطيع وعدك به فهو مرتبة بعينها: تلك تتوقّف على منافسة قطاعك وعلى المحتوى الذي تنشره بعدها. ومن يعدك بمرتبة كتابةً فاحذره." },
+  { h:"هل يجب أن تكون النصوص جاهزة قبل البدء؟", p:"ليس للبدء، بل للمرحلة الثالثة. والمرحلة الأولى موجودة تحديدًا لإخراج قائمة بما ينقص. أما ما لا ينجح فهو الشروع في البناء على أمل أنّ النصوص «ستأتي لاحقًا»: هناك تموت المشاريع." },
+  { h:"هل تعمل مع عملاء خارج أوروبا؟", p:"نعم. أُصدر الفواتير من اليابان وأعمل باستمرار مع فارق التوقيت الأوروبي والخليجي. وتُحدَّد المكالمات في الصباح الياباني، وهو عصر المكانين." }
+ ],
+ rMapa:"خريطة الموقع",
+ maH:"كلّ الصفحات وكلّ أقسامها",
+ rErr:"خطأ ٤٠٤",
+ erH:"هذه الصفحة غير موجودة",
+ erP:"لقد طلبت العنوان",
+ erCta1:"الذهاب إلى الرئيسية", erCta2:"عرض خريطة الموقع",
+
+ pieCopia:"© ٢٠٢٦ هانما",
+ pieMaqueta:"الشركات الثلاث في الأمثلة خيالية؛ وأرقامها نموذجية."
+}
+
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   Lógica. Un solo idioma activo; aplicar() traduce el documento
+   entero de una pasada, incluidas las rutas ocultas.
+   ═══════════════════════════════════════════════════════════════ */
+var idioma = "es";
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function tt(){ return T[idioma]; }
+
+/* Los recuentos siguen la numeración del idioma; los precios NO.
+   Un precio tiene que leerse igual en los tres para que nadie
+   compare dos cifras distintas creyendo que son la misma. */
+function num(n){ try{ return new Intl.NumberFormat(tt()._loc).format(n); }catch(e){ return String(n); } }
+function num2(n){ try{ return new Intl.NumberFormat(tt()._loc, {minimumIntegerDigits:2}).format(n); }catch(e){ return String(n); } }
+function eur(n){ return new Intl.NumberFormat("es-ES", {useGrouping:"always"}).format(Math.round(n)) + " €"; }
+/* Un importe dentro de un párrafo árabe se voltea a «€ 2.400» si no se
+   aísla: el algoritmo bidi trata el símbolo como parte del texto RTL. */
+function eurH(n){ return '<span dir="ltr">' + eur(n) + "</span>"; }
+function kb(bytes){ return num(Math.round(bytes/1024)) + " kB"; }
+function plantilla(s, o){ return String(s).replace(/\{(\w+)\}/g, function(_,k){ return o[k]; }); }
+
+/* Documentos: bloques {h?, p?, l?} escritos en el diccionario. */
+function pintarDoc(cont, bloques){
+  cont.innerHTML = bloques.map(function(b){
+    var h = b.h ? "<h3 style=\"margin-block:1.5rem .5rem\">" + esc(b.h) + "</h3>" : "";
+    if (b.l) return h + "<ul class=\"marca si\">" + b.l.map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("") + "</ul>";
+    return h + "<p>" + esc(b.p) + "</p>";
+  }).join("");
+}
+
+function pintarNav(){
+  var t = tt();
+  ["navPral","navPanel"].forEach(function(id){
+    $(id).innerHTML = NAVS.map(function(r){
+      return '<a href="#/'+r+'">'+esc(t["n"+r.charAt(0).toUpperCase()+r.slice(1)])+'</a>';
+    }).join("");
+  });
+  ["idiomas","idiomas2"].forEach(function(id){
+    var c = $(id);
+    c.setAttribute("aria-label", t.idiomaAria);
+    c.innerHTML = ["es","en","ar"].map(function(l){
+      return '<button type="button" data-idioma="'+l+'" aria-pressed="'+(l===idioma)+'" lang="'+l+'">'+
+        (l==="es"?"ES":l==="en"?"EN":"AR")+'</button>';
+    }).join("");
+  });
+}
+
+function pintarCasosPortada(){
+  var t = tt();
+  $("casosPortada").innerHTML = CASOS.map(function(c, i){
+    var x = t.casos[i];
+    return '<article class="caso">'+
+      '<div class="idx">'+num2(i+1)+'</div>'+
+      '<div><h3>'+esc(c.nombre)+'</h3><span class="sector">'+esc(x.sector)+'</span>'+
+        '<p>'+esc(x.resumen)+'</p>'+
+        '<a href="'+c.url+'" rel="noopener">'+esc(t.casoVer)+'</a> · '+
+        '<a href="https://github.com/'+c.repo+'" rel="noopener">'+esc(t.casoCod)+'</a></div>'+
+      '<div class="cifras">'+
+        '<div class="cifra"><b>'+num(c.apartados)+'</b><span>'+esc(t.cifApart)+'</span></div>'+
+        '<div class="cifra"><b>'+num(c.claves)+'</b><span>'+esc(t.cifClaves)+'</span></div>'+
+        '<div class="cifra"><b>'+kb(c.gz)+'</b><span>'+esc(t.cifPeso)+'</span></div>'+
+      '</div></article>';
+  }).join("");
+}
+
+function pintarRej(id, lista, borde){
+  $(id).innerHTML = lista.map(function(x, i){
+    var col = borde ? ["var(--s1)","var(--s2)","var(--s3)","var(--s4)"][i%4] : "var(--tinta)";
+    return '<div class="tema" style="border-color:'+col+'"><h3>'+esc(x.h)+'</h3><p>'+esc(x.p)+'</p></div>';
+  }).join("");
+}
+
+function pintarLista(id, lista){
+  $(id).innerHTML = lista.map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("");
+}
+
+function pintarCasosLargos(){
+  var t = tt();
+  $("casosLargos").innerHTML = CASOS.map(function(c, i){
+    var x = t.casosL[i];
+    var ficha = [[t.tmApart, num(c.apartados)], [t.tmRutas, num(c.rutas)],
+                 [t.tmClaves, num(c.claves)], [t.tmGz, kb(c.gz)]];
+    return '<article class="casoL">'+
+      '<div><span class="mono" style="color:'+c.color+'">'+esc(c.nombre)+'</span>'+
+        '<h3 style="font-family:var(--disp); font-weight:400; font-size:1.65rem; margin-block:.4rem 1rem; max-width:26ch">'+esc(x.h)+'</h3>'+
+        '<div class="txt">'+x.ps.map(function(p){ return "<p>"+esc(p)+"</p>"; }).join("")+'</div>'+
+        '<p><a href="'+c.url+'" rel="noopener">'+esc(t.casoVer)+' \u2197</a> \u00b7 '+
+          '<a href="https://github.com/'+c.repo+'" rel="noopener">'+esc(t.casoCod)+'</a></p></div>'+
+      '<dl class="ficha">'+ficha.map(function(f){
+          return "<dt>"+esc(f[0])+"</dt><dd>"+f[1]+"</dd>"; }).join("")+"</dl></article>";
+  }).join("");
+}
+
+function pintarTabla(id, filas){
+  $(id).querySelector("tbody").innerHTML = filas.map(function(f){
+    return "<tr>"+f.map(function(c,i){
+      return '<td'+(/^[\d٠-٩]/.test(String(c))&&i>0?' class="num"':'')+'>'+c+"</td>";
+    }).join("")+"</tr>";
+  }).join("");
+}
+
+function pintarFases(){
+  var t = tt();
+  pintarTabla("tablaFases", t.fases.map(function(f, i){
+    return ["<b>"+num(i+1)+". "+esc(f.n)+"</b>", '<span class="mono" style="text-transform:none">'+FASES[i].sem+"</span>",
+            esc(f.entrega), '<span class="apagado">'+esc(f.usted)+"</span>"];
+  }));
+}
+
+function pintarMedidas(){
+  var t = tt();
+  var max = Math.max.apply(null, CASOS.map(function(c){ return c.gz; }));
+  $("barrasPeso").innerHTML = CASOS.map(function(c){
+    var pc = (c.gz/max*100).toFixed(1);
+    return '<div class="barra"><div class="eti"><b>'+esc(c.nombre)+'</b><span>'+kb(c.gz)+" · "+kb(c.bytes)+' '+esc(t.tmSitio.toLowerCase())+'</span></div>'+
+      '<div class="pista"><div class="relleno" style="width:'+pc+'%; background:'+c.color+'"></div></div></div>';
+  }).join("");
+  pintarTabla("tablaMedidas", CASOS.map(function(c){
+    return ["<b>"+esc(c.nombre)+"</b>", num(c.apartados), num(c.rutas), num(c.claves), kb(c.gz)];
+  }));
+}
+
+function pintarContacto(){
+  var t = tt();
+  var filas = t.coDatos.slice();
+  filas.push({ k:t.coCorreoEti, v: CORREO ? '<a href="mailto:'+CORREO+'" dir="ltr">'+CORREO+"</a>"
+                                          : '<span class="tenue">'+esc(t.coCorreoPend)+"</span>" });
+  $("coDatos").innerHTML = '<dl style="display:grid; grid-template-columns:auto 1fr; gap:.4rem 1rem; margin:0; font-size:.93rem">'+
+    filas.map(function(f){
+      return '<dt class="tenue">'+esc(f.k)+'</dt><dd style="margin:0">'+(f.v.indexOf("<")===0?f.v:esc(f.v))+"</dd>";
+    }).join("")+"</dl>";
+}
+
+function pintarLegal(){
+  var t = tt();
+  $("indiceLegal").innerHTML = t.legal.map(function(b, i){
+    return '<a href="#ap-le'+i+'" data-ir="ap-le'+i+'"><span class="num">'+num(i+1)+'</span>'+esc(b.t.replace(/^[\d٠-٩]+\.\s*/,""))+"</a>";
+  }).join("");
+  $("legalCuerpo").innerHTML = t.legal.map(function(b, i){
+    return '<div id="ap-le'+i+'" style="padding-block-start:1.6rem"><h2 style="font-size:1.35rem">'+esc(b.t)+"</h2>"+
+      b.p.map(function(p){ return "<p>"+esc(p)+"</p>"; }).join("")+"</div>";
+  }).join("");
+  INDICE.legal = t.legal.map(function(b, i){ return ["ap-le"+i, null, b.t]; });
+}
+
+/* Mapa y pie salen del MISMO índice que las migas: tres listas
+   escritas a mano se desincronizan solas. */
+function etiquetaAp(par){
+  var t = tt();
+  return par[2] != null ? par[2] : esc(t[par[1]]);
+}
+function pintarMapa(){
+  var t = tt();
+  $("mapaRej").innerHTML = RUTAS.filter(function(r){ return r !== "err"; }).map(function(r){
+    var hijos = INDICE[r] || [];
+    return '<div class="tema"><h3><a href="#/'+r+'" style="text-decoration:none">'+esc(t[TITULOS[r]].split("—")[0].trim())+"</a></h3>"+
+      '<ul style="list-style:none; padding:0; margin:.6rem 0 0">'+
+      hijos.map(function(h){
+        return '<li style="margin-block-end:.35rem"><a href="#/'+r+'" data-ir="'+h[0]+'" style="font-size:.9rem; color:var(--tinta2)">'+etiquetaAp(h)+"</a></li>";
+      }).join("")+"</ul></div>";
+  }).join("");
+}
+function pintarPie(){
+  var t = tt();
+  var cols = [
+    { h:t.nTrabajos, l:CASOS.map(function(c){ return { txt:c.nombre + " ↗", url:c.url }; }) },
+    { h:t.nInicio,   l:["inicio","trabajos","metodo"].map(function(r){ return { txt:t["n"+r.charAt(0).toUpperCase()+r.slice(1)], url:"#/"+r }; }) },
+    { h:t.nPrecios,  l:["precios","tecnica","contacto"].map(function(r){ return { txt:t["n"+r.charAt(0).toUpperCase()+r.slice(1)], url:"#/"+r }; }) },
+    { h:t.nLegal,    l:[{txt:t.nLegal,url:"#/legal"},{txt:t.nMapa,url:"#/mapa"},{txt:"github.com/2troll",url:"https://github.com/2troll"}] }
+  ];
+  $("pieRej").innerHTML = cols.map(function(c){
+    return "<div><h4>"+esc(c.h)+"</h4><ul>"+c.l.map(function(x){
+      return '<li><a href="'+x.url+'">'+esc(x.txt)+"</a></li>"; }).join("")+"</ul></div>";
+  }).join("");
+}
+function pintarMigas(){
+  var t = tt(), r = ruta();
+  var m = $("migas");
+  m.setAttribute("aria-label", t.migasAria);
+  if (r === "inicio"){ m.innerHTML = ""; return; }
+  m.innerHTML = "<ol><li><a href=\"#/inicio\">"+esc(t.nInicio)+"</a></li><li>"+
+    esc(t[TITULOS[r]].split("—")[0].trim())+"</li></ol>";
+}
+
+/* ── Configurador de alcance ─────────────────────────────────── */
+var PIEZAS_ID = ["calc","catalogo","reserva","mapa"];
+var conf = { idiomas:3, paginas:6, piezas:[], mant:false };
+
+function pintarOpciones(){
+  var t = tt();
+  $("cfIdiomasOpcs").innerHTML = t.cfIdiomasOps.map(function(x, i){
+    var v = i+1;
+    return '<label class="opc"><input type="radio" name="cfIdi" value="'+v+'"'+(conf.idiomas===v?" checked":"")+
+      '><span>'+esc(x)+"</span></label>";
+  }).join("");
+  $("cfPiezasOpcs").innerHTML = t.cfPiezasOps.map(function(x, i){
+    var id = PIEZAS_ID[i];
+    return '<label class="opc"><input type="checkbox" name="cfPza" value="'+id+'"'+(conf.piezas.indexOf(id)>=0?" checked":"")+
+      '><span>'+esc(x)+"</span></label>";
+  }).join("");
+  $("cfMantOpcs").innerHTML = t.cfMantOps.map(function(x, i){
+    return '<label class="opc"><input type="radio" name="cfMant" value="'+i+'"'+((conf.mant?1:0)===i?" checked":"")+
+      '><span>'+esc(x)+"</span></label>";
+  }).join("");
+  $("cfPag").value = conf.paginas;
+  $("cfPagOut").textContent = num(conf.paginas);
+}
+
+function calcular(){
+  var extraPags = Math.max(0, conf.paginas - PRECIO.pagsBase);
+  var subPags = extraPags * PRECIO.porPagina;
+  var subPiezas = conf.piezas.reduce(function(s, id){ return s + PRECIO.piezas[id]; }, 0);
+  var bruto = PRECIO.base + subPags + subPiezas;
+  var factor = PRECIO.idiomas[conf.idiomas];
+  var total = Math.round(bruto * factor / 50) * 50;
+  var extraSem = extraPags * PRECIO.semanaPorPagina + conf.piezas.length * PRECIO.semanaPorPieza;
+  var a = (PRECIO.semanasBase[0] + extraSem) * factor;
+  var b = (PRECIO.semanasBase[1] + extraSem) * factor;
+  /* El ajuste se deriva del total ya redondeado, no al revés: si no,
+     el desglose suma una cifra y el titular enseña otra. */
+  return { total:total, bruto:bruto, subPags:subPags, subPiezas:subPiezas, extraPags:extraPags,
+           ajuste:total - bruto,
+           a:Math.max(2, Math.round(a*2)/2), b:Math.max(3, Math.round(b*2)/2) };
+}
+
+function pintarTicket(){
+  var t = tt(), c = calcular();
+  var f = new Date(); f.setDate(f.getDate() + Math.ceil(c.b*7));
+  var mes;
+  try{ mes = new Intl.DateTimeFormat(tt()._loc, {month:"long", year:"numeric"}).format(f); }
+  catch(e){ mes = String(f.getFullYear()); }
+
+  $("tkTotal").setAttribute("dir","ltr");
+  $("tkTotal").textContent = eur(c.total);
+  $("tkPlazo").textContent = plantilla(t.tkPlazoTpl, {a:num(c.a), b:num(c.b), mes:mes});
+
+  var filas = [[ plantilla(t.dgBase, {n:num(PRECIO.pagsBase)}), eurH(PRECIO.base) ]];
+  if (c.extraPags) filas.push([ plantilla(t.dgPaginas, {n:num(c.extraPags)}), '<span dir="ltr">+' + eur(c.subPags) + "</span>" ]);
+  if (c.subPiezas) filas.push([ plantilla(t.dgPiezas, {n:num(conf.piezas.length)}), '<span dir="ltr">+' + eur(c.subPiezas) + "</span>" ]);
+  if (c.ajuste)    filas.push([ t.dgIdiomas, '<span dir="ltr">−' + eur(Math.abs(c.ajuste)) + "</span>" ]);
+  var p = PRECIO.pagos.map(function(pc){ return eur(c.total*pc/100); });
+  filas.push([ t.dgPagos, '<span dir="ltr">'+plantilla(t.dgPagosVal, {a:p[0], b:p[1], c:p[2]})+"</span>" ]);
+  if (conf.mant) filas.push([ t.dgMant, plantilla(t.dgMantVal, {n:num(PRECIO.mantenimiento)}) ]);
+
+  $("tkDesglose").innerHTML = filas.map(function(f2){
+    return "<dt>"+f2[0]+"</dt><dd>"+f2[1]+"</dd>"; }).join("");
+}
+
+$("conf").addEventListener("change", function(e){
+  var n = e.target.name;
+  if (n === "cfIdi") conf.idiomas = +e.target.value;
+  else if (n === "cfPza"){
+    var v = e.target.value, i = conf.piezas.indexOf(v);
+    if (e.target.checked && i < 0) conf.piezas.push(v);
+    if (!e.target.checked && i >= 0) conf.piezas.splice(i,1);
+  }
+  else if (n === "cfMant") conf.mant = e.target.value === "1";
+  pintarTicket();
+});
+$("cfPag").addEventListener("input", function(e){
+  conf.paginas = +e.target.value;
+  $("cfPagOut").textContent = num(conf.paginas);
+  pintarTicket();
+});
+$("conf").addEventListener("submit", function(e){ e.preventDefault(); });
+
+/* ── Traducción ──────────────────────────────────────────────── */
+function aplicar(codigo){
+  if (!T[codigo]) codigo = "es";
+  idioma = codigo;
+  var t = tt();
+  var h = document.documentElement;
+  h.setAttribute("lang", t._lang);
+  h.setAttribute("dir", t._dir);
+
+  var i, e, k, n;
+  n = document.querySelectorAll("[data-t]");
+  for (i = 0; i < n.length; i++){ e = n[i]; k = e.getAttribute("data-t"); if (t[k] != null) e.textContent = t[k]; }
+  n = document.querySelectorAll("[data-ta]");
+  for (i = 0; i < n.length; i++){ e = n[i]; k = e.getAttribute("data-ta"); if (t[k] != null) e.setAttribute("aria-label", t[k]); }
+  n = document.querySelectorAll("[data-doc]");
+  for (i = 0; i < n.length; i++){ e = n[i]; k = e.getAttribute("data-doc"); if (t[k]) pintarDoc(e, t[k]); }
+
+  pintarNav();
+  pintarCasosPortada();
+  pintarRej("porqueRej", t.porque, true);
+  pintarLista("arabeLista", t.arabeLista);
+  pintarCasosLargos();
+  pintarTabla("tablaComun", t.comunFilas.map(function(f){ return f.map(esc); }));
+  pintarFases();
+  pintarRej("riesgosRej", t.riesgos, true);
+  pintarRej("faqRej", t.faq, false);
+  pintarOpciones();
+  pintarTicket();
+  pintarLista("incSi", t.incSi);
+  pintarLista("incNo", t.incNo);
+  pintarMedidas();
+  pintarContacto();
+  pintarLegal();
+  pintarMapa();
+  pintarPie();
+  pintarMigas();
+  pintarMeta();
+
+  try{ localStorage.setItem("hanma_lang", codigo); }catch(err){}
+}
+
+function pintarMeta(){
+  var t = tt(), r = ruta();
+  var titulo = t[TITULOS[r]] || t.tInicio;
+  document.title = titulo;
+  /* La descripción sale de la entradilla de la propia ruta: si cambia
+     el texto, cambia el metadato. Sin copia paralela que se quede vieja. */
+  var desc = { inicio:t.hSub, trabajos:t.trP, metodo:t.meP, precios:t.prP,
+               tecnica:t.mdP, contacto:t.coH, legal:t.legal[0].p[0], mapa:t.maH, err:t.erH }[r] || t.hSub;
+  desc = String(desc).slice(0, 300);
+  $("metaDesc").setAttribute("content", desc);
+  $("ogT").setAttribute("content", titulo);
+  $("ogD").setAttribute("content", desc);
+  var url = "https://2troll.github.io/estudio-web/#/" + r;
+  $("ogU").setAttribute("content", url);
+  $("canon").setAttribute("href", url);
+}
+
+/* ── Enrutado ────────────────────────────────────────────────── */
+function ruta(){
+  var h = (location.hash || "").replace(/^#\/?/, "").split("?")[0];
+  if (!h) return "inicio";
+  return RUTAS.indexOf(h) >= 0 ? h : "err";
+}
+function enrutar(){
+  var r = ruta(), s = document.querySelectorAll("[data-ruta]"), i;
+  for (i = 0; i < s.length; i++) s[i].classList.toggle("on", s[i].getAttribute("data-ruta") === r);
+  if (r === "err") $("erRuta").textContent = location.hash || "#/";
+  var en = document.querySelectorAll("nav a");
+  for (i = 0; i < en.length; i++){
+    if (en[i].getAttribute("href") === "#/"+r) en[i].setAttribute("aria-current","page");
+    else en[i].removeAttribute("aria-current");
+  }
+  pintarMigas(); pintarMeta();
+  window.scrollTo(0,0);
+  cerrarPanel();
+}
+window.addEventListener("hashchange", enrutar);
+
+/* Salto a un apartado. scrollIntoView({behavior:"smooth"}) se cancela
+   sin error en este Chrome: se calcula la posición a mano. */
+document.addEventListener("click", function(e){
+  var b = e.target.closest ? e.target.closest("[data-idioma]") : null;
+  if (b){ aplicar(b.getAttribute("data-idioma")); enrutar(); return; }
+  var a = e.target.closest ? e.target.closest("[data-ir]") : null;
+  if (!a) return;
+  var destino = a.getAttribute("data-ir");
+  setTimeout(function(){
+    var el = document.getElementById(destino);
+    if (!el) return;
+    var alto = document.querySelector("header.top").offsetHeight;
+    window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - alto - 12);
+  }, 30);
+});
+
+/* ── Menú lateral ────────────────────────────────────────────── */
+function abrirPanel(){
+  $("panel").classList.add("on"); $("velo").classList.add("on");
+  $("panel").setAttribute("aria-hidden","false"); $("hamb").setAttribute("aria-expanded","true");
+  var p = $("panel").querySelector("a"); if (p) p.focus();
+}
+function cerrarPanel(){
+  $("panel").classList.remove("on"); $("velo").classList.remove("on");
+  $("panel").setAttribute("aria-hidden","true"); $("hamb").setAttribute("aria-expanded","false");
+}
+$("hamb").addEventListener("click", function(){
+  if ($("panel").classList.contains("on")) cerrarPanel(); else abrirPanel();
+});
+$("velo").addEventListener("click", cerrarPanel);
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") cerrarPanel(); });
+window.addEventListener("resize", function(){ if (window.innerWidth > 900) cerrarPanel(); });
+
+/* ── Arranque ────────────────────────────────────────────────── */
+(function(){
+  var g = null;
+  try{ g = localStorage.getItem("hanma_lang"); }catch(e){}
+  if (!g || !T[g]){ var l = (navigator.language || "es").slice(0,2).toLowerCase(); g = T[l] ? l : "es"; }
+  aplicar(g); enrutar();
+})();
+</script>
+</body>
+</html>
