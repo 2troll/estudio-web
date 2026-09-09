@@ -165,6 +165,24 @@ html[lang="ar"] .casoL .ficha dd{font-family:"Cairo",sans-serif}
     border-block-start:1px solid var(--linea); padding-block-start:1rem}
 }
 
+/* Capturas: la prueba visual de lo que el texto afirma. El navegador falso
+   —barra de puntos y filete— existe para que se lea como pantalla y no como
+   una fotografía suelta pegada en la página. */
+.tomas{display:grid; gap:1rem; margin-block:1.6rem 0;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.toma{margin:0; border:1px solid var(--linea); border-radius:5px; overflow:hidden; background:var(--sobre)}
+.toma .barra{display:flex; gap:5px; padding:.5rem .7rem; border-block-end:1px solid var(--linea)}
+.toma .barra i{width:8px; height:8px; border-radius:50%; background:var(--linea2); display:block}
+.toma img{display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; object-position:top}
+.toma.alta img{aspect-ratio:5/8}
+.toma figcaption{font-size:.78rem; color:var(--tinta3); padding:.55rem .7rem; border-block-start:1px solid var(--linea)}
+/* Dentro de un caso: la captura de escritorio manda y ocupa el ancho; la
+   árabe y la de móvil comparten la fila de abajo. Apiladas las tres, la ficha
+   del caso quedaba a media pantalla de distancia de su propio texto. */
+.casoL .tomas{grid-template-columns:repeat(2,minmax(0,1fr))}
+.casoL .tomas .toma:first-child{grid-column:1 / -1}
+@media (max-width:620px){ .casoL .tomas{grid-template-columns:1fr} }
+
 /* ── Rejillas de contenido ──────────────────────────────────── */
 .rej{display:grid; gap:1.8rem 2.4rem; grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
 .rej.dos{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
@@ -512,12 +530,15 @@ var CORREO = "pagos.euros73@gmail.com";
 /* Medido el 8 de septiembre de 2026 sobre los repositorios públicos:
    wc -c index.html · gzip -c index.html | wc -c · grep -c '<section data-ruta='
    Cualquiera puede repetir la medición. */
+/* Las capturas se generan con herramientas/capturas.py sobre el propio
+   repositorio de cada sitio, así que no pueden quedarse viejas sin que alguien
+   lo note: si el sitio cambia, se vuelven a generar con una orden. */
 var CASOS = [
-  { id:"nahar", url:"https://2troll.github.io/nahar-solar/", repo:"2troll/nahar-solar",
+  { id:"nahar", tomas:["nahar-es.jpg","nahar-ar.jpg","nahar-movil.jpg"], url:"https://2troll.github.io/nahar-solar/", repo:"2troll/nahar-solar",
     nombre:"NAHAR", apartados:23, rutas:9, claves:377, bytes:396662, gz:121902, color:"var(--s1)" },
-  { id:"bunn", url:"https://2troll.github.io/bunn-cafe/", repo:"2troll/bunn-cafe",
+  { id:"bunn", tomas:["bunn-es.jpg","bunn-ar.jpg","bunn-movil.jpg"], url:"https://2troll.github.io/bunn-cafe/", repo:"2troll/bunn-cafe",
     nombre:"BUNN", apartados:20, rutas:9, claves:317, bytes:307812, gz:98439, color:"var(--s2)" },
-  { id:"atlas", url:"https://2troll.github.io/atlas-fisio/", repo:"2troll/atlas-fisio",
+  { id:"atlas", tomas:["atlas-es.jpg","atlas-ar.jpg","atlas-movil.jpg"], url:"https://2troll.github.io/atlas-fisio/", repo:"2troll/atlas-fisio",
     nombre:"ATLAS", apartados:20, rutas:9, claves:277, bytes:292779, gz:92138, color:"var(--s3)" }
 ];
 
@@ -623,6 +644,12 @@ es:{
  ],
 
  /* ── Trabajos ── */
+ tomasAlt:["Captura del sitio en español, en un ordenador",
+           "Captura del mismo sitio en árabe, con el diseño reflejado",
+           "Captura del sitio en un teléfono"],
+ tomasPie:["Español · escritorio",
+           "العربية · el mismo sitio, reflejado entero",
+           "Español · teléfono, 414 px"],
  rTrabajos:"Trabajos",
  trH:"Tres sectores, tres formas de página distintas",
  trP:"Compartir la arquitectura interna está bien; compartir la forma de la página, no. Un cliente reconoce una plantilla en dos segundos: misma cabecera, mismo bloque de portada a dos columnas, mismas tarjetas. Estos tres sitios copian la estructura real que usa su sector, y por eso no se parecen entre sí aunque por dentro compartan el mismo motor.",
@@ -884,6 +911,12 @@ en:{
   "Forms, charts and arrows mirrored, not just the text."
  ],
 
+ tomasAlt:["Screenshot of the site in Spanish, on a desktop",
+           "Screenshot of the same site in Arabic, with the layout mirrored",
+           "Screenshot of the site on a phone"],
+ tomasPie:["Spanish · desktop",
+           "العربية · the same site, mirrored throughout",
+           "Spanish · phone, 414 px"],
  rTrabajos:"Work",
  trH:"Three sectors, three different page shapes",
  trP:"Sharing the internal architecture is fine; sharing the shape of the page is not. A client recognises a template in two seconds: same header, same two-column hero, same cards. These three sites copy the structure their sector actually uses, which is why they look nothing like each other even though the same engine runs underneath.",
@@ -1139,6 +1172,12 @@ ar:{
   "النماذج والرسوم والأسهم معكوسة، لا النصّ وحده."
  ],
 
+ tomasAlt:["لقطة للموقع بالإسبانية على حاسوب مكتبي",
+           "لقطة للموقع نفسه بالعربية، بتخطيط معكوس",
+           "لقطة للموقع على هاتف"],
+ tomasPie:["الإسبانية · حاسوب مكتبي",
+           "العربية · الموقع نفسه، معكوسًا بالكامل",
+           "الإسبانية · هاتف، ٤١٤ بكسل"],
  rTrabajos:"الأعمال",
  trH:"ثلاثة قطاعات، وثلاثة أشكال صفحات مختلفة",
  trP:"تقاسم البنية الداخلية أمر جيّد؛ أما تقاسم شكل الصفحة فلا. العميل يتعرّف على القالب في ثانيتين: الترويسة نفسها، والواجهة ذات العمودين نفسها، والبطاقات نفسها. هذه المواقع الثلاثة تنسخ البنية التي يستعملها قطاعها فعلًا، ولذلك لا يشبه أحدها الآخر رغم أنّ المحرّك تحتها واحد.",
@@ -1411,12 +1450,19 @@ function pintarCasosLargos(){
     var x = t.casosL[i];
     var ficha = [[t.tmApart, num(c.apartados)], [t.tmRutas, num(c.rutas)],
                  [t.tmClaves, num(c.claves)], [t.tmGz, kb(c.gz)]];
+    var tomas = '<div class="tomas">' + c.tomas.map(function(f, j){
+      return '<figure class="toma'+(j === 2 ? " alta" : "")+'">'+
+        '<div class="barra"><i></i><i></i><i></i></div>'+
+        '<img src="img/'+f+'" loading="lazy" decoding="async" alt="'+esc(t.tomasAlt[j])+' — '+esc(c.nombre)+'">'+
+        '<figcaption>'+esc(t.tomasPie[j])+'</figcaption></figure>';
+    }).join("") + '</div>';
     return '<article class="casoL">'+
       '<div><span class="mono" style="color:'+c.color+'">'+esc(c.nombre)+'</span>'+
         '<h3 style="font-family:var(--disp); font-weight:400; font-size:1.65rem; margin-block:.4rem 1rem; max-width:26ch">'+esc(x.h)+'</h3>'+
         '<div class="txt">'+x.ps.map(function(p){ return "<p>"+esc(p)+"</p>"; }).join("")+'</div>'+
         '<p><a href="'+c.url+'" rel="noopener">'+esc(t.casoVer)+' \u2197</a> \u00b7 '+
-          '<a href="https://github.com/'+c.repo+'" rel="noopener">'+esc(t.casoCod)+'</a></p></div>'+
+          '<a href="https://github.com/'+c.repo+'" rel="noopener">'+esc(t.casoCod)+'</a></p>'+
+        tomas + '</div>'+
       '<dl class="ficha">'+ficha.map(function(f){
           return "<dt>"+esc(f[0])+"</dt><dd>"+f[1]+"</dd>"; }).join("")+"</dl></article>";
   }).join("");

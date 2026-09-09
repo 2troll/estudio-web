@@ -40,6 +40,23 @@ del cual una página no está terminada.
 - **Fichas de caso**. Apartados, rutas, claves y peso de cada sitio salen de la
   constante `CASOS`, no de un texto: cambiar una cifra la cambia en los tres
   idiomas a la vez.
+- **Nueve capturas de los propios sitios** (`#/trabajos`), generadas con
+  `herramientas/capturas.py` sobre los repositorios hermanos. Un portfolio que
+  enseña una foto de archivo de un portátil no enseña nada; éste enseña el
+  trabajo, incluida **la versión árabe con el diseño reflejado**, que es lo que
+  el texto afirma y hasta ahora había que creerse.
+
+```bash
+python3 herramientas/capturas.py          # las nueve
+python3 herramientas/capturas.py nahar    # solo las de un sitio
+```
+
+Se capturan las copias locales de los repos hermanos, no la versión publicada:
+así se puede forzar el idioma sin depender de `localStorage` y ocultar el aviso
+de cookies, que si no tapa el tercio inferior de todas. Si la sustitución del
+idioma falla, el script **aborta** en vez de capturar en español y aparentar que
+ha probado el árabe. Las imágenes van con `loading="lazy"`, así que no cuentan
+para la primera pantalla.
 
 ## Las dos constantes que se tocan
 
@@ -59,7 +76,7 @@ desborde horizontal       0 px a 380 y a 1280, en LTR y en RTL
 configurador              4 configuraciones: el desglose suma el total exacto
 dígitos                   árabe-índicos en recuentos y fechas; latinos en precios
 bidi                      importes aislados con dir="ltr" dentro del árabe
-peso transferido          46 kB comprimido, el sitio entero
+peso transferido          47 kB comprimido el HTML · 764 kB de capturas, en diferido
 ```
 
 ---
