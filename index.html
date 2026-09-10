@@ -423,13 +423,15 @@ html[dir="rtl"] .etq{letter-spacing:0;text-transform:none;font-size:.76rem;}
 /* Panel de portada: el titular manda, pero sigue siendo un panel del tablero
    y no una franja aparte a todo lo ancho. */
 .panel.horizonte{padding-block:0;}
-.panel-portada{background:var(--kit-hondo);color:var(--kit-hondo-texto);
+.panel.panel-portada{background:var(--kit-hondo);color:var(--kit-hondo-texto);
   border-color:var(--kit-hondo-linea);justify-content:center;}
-.panel-portada .rot{color:var(--kit-acento);}
-.panel-portada .entrada{color:var(--kit-hondo-texto);opacity:.85;}
-.panel-portada .panel-cuerpo{padding:clamp(1.2rem,2.6vw,2.2rem);}
-.panel-portada h1{font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.12;margin:.5rem 0 .8rem;}
-.panel-portada .entrada{color:var(--kit-texto-2);max-width:46ch;}
+.panel.panel-portada .rot,.panel.panel-portada .eti,.panel.panel-portada .epig,
+.panel.panel-portada .rubrica,.panel.panel-portada .rotulo{
+  color:color-mix(in srgb,var(--kit-acento) 55%,var(--kit-hondo-texto));}
+.panel.panel-portada .entrada{color:var(--kit-hondo-texto);opacity:.85;}
+.panel.panel-portada .panel-cuerpo{padding:clamp(1.2rem,2.6vw,2.2rem);}
+.panel.panel-portada h1{font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.12;margin:.5rem 0 .8rem;}
+.panel.panel-portada .entrada{max-width:46ch;}
 .panel-portada .acciones{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;}
 /* Los botones dentro del panel oscuro. No se puede dar por buena la clase de
    ningún sitio —uno los llama `.solido` y otro `.sol`—, así que el kit los
@@ -444,7 +446,7 @@ html[dir="rtl"] .etq{letter-spacing:0;text-transform:none;font-size:.76rem;}
 .panel-portada .btn.sol:hover,.panel-portada .btn.solido:hover,.panel-portada .acc a.sol:hover{
   background:transparent;color:var(--kit-hondo-texto);}
 /* Y el texto suelto: párrafos, listas y rótulos secundarios. */
-.panel-portada p,.panel-portada li,.panel-portada dd{color:var(--kit-hondo-texto);}
+.panel.panel-portada p,.panel.panel-portada li,.panel.panel-portada dd{color:var(--kit-hondo-texto);}
 .panel-portada .metodo,.panel-portada .dato-p{
   color:color-mix(in srgb,var(--kit-hondo-texto) 66%,transparent);}
 /* Rótulo suelto entre bloques del tablero: sin caja, sólo el letrero. */
