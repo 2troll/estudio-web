@@ -128,6 +128,33 @@ html[lang="ar"] .rotulo{text-transform:none; letter-spacing:0; font-size:.82rem}
 .btn.sec{background:none; color:var(--tinta); border-color:var(--linea2)}
 .btn.sec:hover{border-color:var(--tinta); color:var(--tinta); opacity:1}
 
+/* ══════════════════════════════════════════════════════════════════
+   El fallo del diseño anterior no era el color, era el RITMO: todo eran
+   bloques del mismo alto apilados. La portada pasa a ocupar pantalla y
+   detrás entra una banda invertida con tres cifras enormes. El salto de
+   escala es lo que hace que se lea como una publicación.
+   ══════════════════════════════════════════════════════════════════ */
+.hero{min-height:min(76vh,680px); display:flex; flex-direction:column; justify-content:center}
+.hero h1{font-size:clamp(2.5rem,6.4vw,4.8rem); line-height:1.02}
+html[lang="ar"] .hero h1{line-height:1.3}
+
+.banda-medida{background:var(--marca); color:var(--papel);
+  padding-block:clamp(3.2rem,7vw,5.4rem)}
+.banda-medida .rotulo{color:color-mix(in srgb,var(--papel) 55%,transparent)}
+.medidas{display:grid; gap:clamp(1.8rem,4vw,3.2rem); margin-block-start:2.4rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr))}
+.medida{border-block-start:2px solid color-mix(in srgb,var(--papel) 32%,transparent);
+  padding-block-start:1.1rem}
+.medida b{display:block; font-family:var(--disp); font-weight:400;
+  font-size:clamp(3.2rem,7.6vw,5.8rem); line-height:.92; letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+html[lang="ar"] .medida b{letter-spacing:0; font-size:clamp(2.8rem,6.4vw,5rem)}
+.medida b i{font-style:normal; font-size:.34em; margin-inline-start:.14em; opacity:.6}
+.medida span{display:block; margin-block-start:.8rem; font-size:.92rem; line-height:1.55;
+  max-width:28ch; color:color-mix(in srgb,var(--papel) 78%,transparent)}
+.bm-pie{margin-block-start:2.4rem; font-size:.8rem; max-width:60ch;
+  color:color-mix(in srgb,var(--papel) 52%,transparent)}
+
 /* ── Índice de la página (raíl superior, no lateral) ─────────── */
 .indice{display:flex; flex-wrap:wrap; gap:.3rem 1.4rem; padding-block:.9rem; border-block:1px solid var(--linea); margin-block-end:2.6rem}
 .indice a{font-size:.86rem; color:var(--tinta2); text-decoration:none}
@@ -291,6 +318,16 @@ html[lang="ar"] .pie-rej h4{text-transform:none; letter-spacing:0; font-size:.8r
       <a class="btn sec" href="#/precios" data-t="hCta2">Cuánto cuesta</a>
       <span class="tenue" style="font-size:.86rem" data-t="hPie"></span>
     </div>
+  </div>
+</section>
+
+<!-- Banda de medida: el argumento entero del estudio en tres números que se
+     leen desde el otro lado de la mesa. Salen de CASOS, no están escritos. -->
+<section class="banda-medida" data-ruta="inicio" id="ap-medida">
+  <div class="env">
+    <span class="rotulo" data-t="bmRot">Lo que eso significa medido</span>
+    <div class="medidas" id="bmCifras"></div>
+    <p class="bm-pie" data-t="bmPie"></p>
   </div>
 </section>
 
@@ -598,6 +635,11 @@ es:{
  hCta1:"Ver los tres sitios", hCta2:"Cuánto cuesta",
  hPie:"Osaka, Japón · se trabaja en español, inglés y árabe",
 
+ bmRot:"Lo que eso significa medido",
+ bm1:"cadenas de texto traducidas en los tres sitios, con paridad exacta comprobada. Es la parte que no se ve en una captura y la que más cuesta mantener",
+ bm2:"apartados con contenido propio, repartidos en nueve páginas largas por sitio. No dieciocho pestañas de cuatro párrafos",
+ bm3:"de media por sitio, comprimido y con los tres idiomas dentro. Un sitio corporativo medio ronda los dos mil",
+ bmPie:"Medido sobre los repositorios públicos con «gzip -c index.html | wc -c», que es lo que viaja por la red. Puede repetirlo usted mismo.",
  rPrueba:"La prueba",
  pruebaH:"Tres sitios enteros que puede abrir ahora mismo",
  pruebaP:"No son maquetas de una pantalla ni un carrusel de imágenes. Cada uno tiene nueve páginas largas, versión en árabe con el diseño reflejado, textos legales escritos y una pieza interactiva que hace un cálculo real. Están publicados en GitHub Pages con el código a la vista: puede leer cada línea antes de confiarme nada.",
@@ -866,6 +908,11 @@ en:{
  hCta1:"See the three sites", hCta2:"What it costs",
  hPie:"Osaka, Japan · working in Spanish, English and Arabic",
 
+ bmRot:"What that means, measured",
+ bm1:"strings translated across the three sites, with exact parity verified. It is the part a screenshot never shows and the part that costs most to maintain",
+ bm2:"sections with content of their own, spread across nine long pages per site. Not eighteen tabs of four paragraphs",
+ bm3:"on average per site, compressed and with all three languages inside. An average corporate site runs to around two thousand",
+ bmPie:"Measured against the public repositories with «gzip -c index.html | wc -c», which is what travels over the network. You can repeat it yourself.",
  rPrueba:"The evidence",
  pruebaH:"Three complete sites you can open right now",
  pruebaP:"These are not one-screen mock-ups or a carousel of images. Each has nine long pages, an Arabic version with mirrored layout, real legal texts, and an interactive piece that performs an actual calculation. They are published on GitHub Pages with the source in the open: you can read every line before trusting me with anything.",
@@ -1127,6 +1174,11 @@ ar:{
  hCta1:"شاهد المواقع الثلاثة", hCta2:"كم يكلّف",
  hPie:"أوساكا، اليابان · العمل بالإسبانية والإنجليزية والعربية",
 
+ bmRot:"وماذا يعني ذلك مقيسًا",
+ bm1:"سلسلة نصّية مترجمة في المواقع الثلاثة، بتطابق تامّ مُتحقَّق منه. وهو الجزء الذي لا تُظهره لقطة شاشة والأكثر كلفةً في الصيانة",
+ bm2:"قسمًا لكلٍّ محتواه، موزّعة على تسع صفحات طويلة لكل موقع. لا ثماني عشرة لسانًا من أربع فقرات",
+ bm3:"في المتوسّط لكل موقع، مضغوطًا وباللغات الثلاث بداخله. الموقع المؤسسي المتوسّط يقارب الألفين",
+ bmPie:"قيس على المستودعات العامّة بالأمر «gzip -c index.html | wc -c»، وهو ما يعبر الشبكة. ويمكنك تكرار القياس بنفسك.",
  rPrueba:"الدليل",
  pruebaH:"ثلاثة مواقع كاملة يمكنك فتحها الآن",
  pruebaP:"ليست نماذج بشاشة واحدة ولا شريط صور. كلّ موقع فيه تسع صفحات طويلة، ونسخة عربية بتخطيط معكوس، ونصوص قانونية مكتوبة، وقطعة تفاعلية تُجري حسابًا حقيقيًا. كلّها منشورة على GitHub Pages والشيفرة مكشوفة: يمكنك قراءة كلّ سطر قبل أن تأتمنني على شيء.",
@@ -1380,7 +1432,9 @@ function tt(){ return T[idioma]; }
 /* Los recuentos siguen la numeración del idioma; los precios NO.
    Un precio tiene que leerse igual en los tres para que nadie
    compare dos cifras distintas creyendo que son la misma. */
-function num(n){ try{ return new Intl.NumberFormat(tt()._loc).format(n); }catch(e){ return String(n); } }
+/* «always» a propósito: sin él, es-ES devuelve 2913 en vez de 2.913, porque el
+   agrupado por defecto empieza en cinco cifras. Ya pasó con los importes. */
+function num(n){ try{ return new Intl.NumberFormat(tt()._loc, {useGrouping:"always"}).format(n); }catch(e){ return String(n); } }
 function num2(n){ try{ return new Intl.NumberFormat(tt()._loc, {minimumIntegerDigits:2}).format(n); }catch(e){ return String(n); } }
 function eur(n){ return new Intl.NumberFormat("es-ES", {useGrouping:"always"}).format(Math.round(n)) + " €"; }
 /* Un importe dentro de un párrafo árabe se voltea a «€ 2.400» si no se
@@ -1413,6 +1467,27 @@ function pintarNav(){
         (l==="es"?"ES":l==="en"?"EN":"AR")+'</button>';
     }).join("");
   });
+}
+
+/* Las tres cifras de la banda salen de CASOS, no están escritas: si mañana un
+   sitio crece, la portada lo refleja al recargar. Cambiar un número a mano en
+   una portada es cómo empiezan las páginas que mienten. */
+function pintarBandaMedida(){
+  var caja = $("bmCifras");
+  if (!caja) return;
+  var t = tt();
+  var apartados = CASOS.reduce(function(a, c){ return a + c.apartados; }, 0);
+  var claves = CASOS.reduce(function(a, c){ return a + c.claves; }, 0);
+  var peso = Math.round(CASOS.reduce(function(a, c){ return a + c.gz; }, 0) / CASOS.length / 1024);
+  var filas = [
+    [num(claves * 3), "", t.bm1],
+    [num(apartados), "", t.bm2],
+    [num(peso), "kB", t.bm3]
+  ];
+  caja.innerHTML = filas.map(function(f){
+    return '<div class="medida"><b>' + f[0] + (f[1] ? "<i>" + f[1] + "</i>" : "") +
+           "</b><span>" + esc(f[2]) + "</span></div>";
+  }).join("");
 }
 
 function pintarCasosPortada(){
@@ -1660,6 +1735,7 @@ function aplicar(codigo){
 
   pintarNav();
   pintarCasosPortada();
+  pintarBandaMedida();
   pintarRej("porqueRej", t.porque, true);
   pintarLista("arabeLista", t.arabeLista);
   pintarCasosLargos();
