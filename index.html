@@ -97,13 +97,6 @@ nav.n a[aria-current="page"]{color:var(--tinta); border-block-end-color:var(--ti
 .idiomas button[aria-pressed="true"]{background:var(--tinta); color:var(--papel)}
 html[lang="ar"] .idiomas button{text-transform:none; letter-spacing:0}
 .hamb{display:none; margin-inline-start:auto; background:none; border:1px solid var(--linea2); border-radius:3px; padding:.4rem .55rem; cursor:pointer; color:var(--tinta)}
-.hamb svg{display:block}
-.panel{position:fixed; inset-block:0; inset-inline-end:0; width:min(86vw,20rem); background:var(--papel); border-inline-start:1px solid var(--linea); transform:translateX(100%); transition:transform .22s ease; z-index:80; padding:1.4rem; overflow-y:auto}
-html[dir="rtl"] .panel{transform:translateX(-100%)}
-.panel.on{transform:none}
-.velo{position:fixed; inset:0; background:rgba(0,0,0,.42); opacity:0; pointer-events:none; transition:opacity .22s; z-index:70}
-.velo.on{opacity:1; pointer-events:auto}
-.panel a{display:block; padding:.7rem 0; border-block-end:1px solid var(--linea); color:var(--tinta); text-decoration:none; font-size:1.02rem}
 @media (max-width:900px){ nav.n, .idiomas{display:none} .hamb{display:block} }
 
 /* ── Rutas ──────────────────────────────────────────────────── */
@@ -286,74 +279,299 @@ html[lang="ar"] .pie-rej h4{text-transform:none; letter-spacing:0; font-size:.8r
 .saltar{position:absolute; inset-inline-start:-9999px}
 .saltar:focus{position:static; display:inline-block; margin:.6rem; padding:.5rem .9rem; background:var(--tinta); color:var(--papel)}
 @media print{ header.top,footer.pie,.indice,.hamb{display:none!important} body{font-size:11pt} }
+/* ══ kit-tablero: principio ══ */
+/* ══════════════════════════════════════════════════════════════════
+   KIT TABLERO — armazón de aplicación, rejilla de doce y paneles
+   ------------------------------------------------------------------
+   Se copia entero dentro de la hoja de estilos del sitio, entre las dos
+   marcas `kit-tablero`. No trae colores propios: usa las variables que
+   ya define cada sitio, con alternativa por si alguna falta.
+
+     --fondo   fondo de la página        --texto    texto principal
+     --fondo-2 fondo de panel            --texto-2  texto secundario
+     --sup     superficie elevada        --texto-3  texto tenue
+     --linea   línea de separación       --acento   color de marca
+     --hondo / --hondo-texto / --hondo-linea   franja oscura
+
+   Todo el reflejo en árabe sale de propiedades lógicas. Las excepciones
+   van marcadas una a una.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Puente de variables ───────────────────────────────────────────
+   El kit no impone paleta: toma la del sitio, sea cual sea el nombre que
+   use, y sólo pone un último recurso para que nada quede sin color. */
+:root{
+  /* Tres vocabularios conviven en la carpeta: `--fondo/--texto` (MARSA),
+     `--fondo/--tinta` (NAHAR) y `--f/--t` (BUNN, ATLAS). Se prueban en ese
+     orden y sólo al final entra un color fijo, para que ningún sitio herede
+     una paleta que no es la suya. Si un sitio quiere mandar, redefine
+     cualquiera de estas variables después del kit. */
+  --kit-fondo:var(--fondo,var(--f,#eef0ef));
+  --kit-panel:var(--fondo-2,var(--f2,#e4e8e7));
+  --kit-sup:var(--sup,var(--kit-panel));
+  --kit-linea:var(--linea,var(--l,rgba(20,24,27,.14)));
+  --kit-texto:var(--texto,var(--tinta,var(--t,#14181b)));
+  --kit-texto-2:var(--texto-2,var(--tinta-2,var(--t2,#525a5e)));
+  --kit-texto-3:var(--texto-3,var(--tinta-3,var(--t3,#858c8f)));
+  --kit-acento:var(--acento,var(--ocre,var(--verde,#0f5f7a)));
+  --kit-hondo:var(--hondo,#101619);
+  --kit-hondo-texto:var(--hondo-texto,#e7ecec);
+  --kit-hondo-linea:var(--hondo-linea,rgba(231,236,236,.18));
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   ARMAZÓN DE APLICACIÓN
+   El menú deja de ser una fila de once enlaces apretados y pasa a un
+   raíl lateral fijo, agrupado por bloques. El contenido va AL LADO, no
+   debajo, y en rejilla de doce columnas: los paneles ocupan distinto
+   ancho y se ponen unos junto a otros. Todo en propiedades lógicas, así
+   que en árabe el raíl se va solo a la derecha.
+   ══════════════════════════════════════════════════════════════════ */
+/* Colocación EXPLÍCITA. Confiar en el orden de los hijos no funciona: el
+   velo y el botón salen del flujo y «main» acababa en una columna de ancho
+   cero, con la página entera invisible. Cada pieza dice dónde va. */
+body{display:grid;grid-template-columns:15.5rem minmax(0,1fr);
+  grid-template-rows:1fr auto;min-height:100vh;}
+.app-lateral{grid-column:1;grid-row:1 / -1;}
+.app-panel{grid-column:2;grid-row:1;}
+body > footer{grid-column:2;grid-row:2;}
+
+.app-lateral{
+  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+  width:15.5rem;padding:1.6rem 1.2rem 1.4rem;
+  background:var(--kit-panel);border-inline-end:1px solid var(--kit-linea);
+  display:flex;flex-direction:column;gap:.2rem;z-index:60;
+}
+.app-lateral .marca{display:block;margin-bottom:1.4rem;font-size:1.15rem;}
+.app-eti{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--kit-texto-3);margin:1.3rem 0 .45rem;}
+html[dir="rtl"] .app-eti{letter-spacing:0;text-transform:none;font-size:.78rem;}
+.app-nav{display:flex;flex-direction:column;gap:.1rem;}
+.app-nav a{display:block;padding:.42rem .6rem;text-align:start;margin:0;border-radius:4px;font-size:.87rem;
+  color:var(--kit-texto-2);text-decoration:none;border:0;
+  border-inline-start:2px solid transparent;}
+.app-nav a:hover{background:var(--kit-fondo);color:var(--kit-texto);}
+.app-nav a[aria-current="page"]{background:var(--kit-fondo);color:var(--kit-texto);
+  border-inline-start-color:var(--kit-acento);font-weight:500;}
+.app-lateral .idiomas{margin-top:auto;padding-top:1.4rem;display:flex;gap:.2rem;}
+
+.app-panel{min-width:0;}
+.app-abrir{display:none;position:fixed;top:.8rem;inset-inline-start:.8rem;z-index:80;
+  background:var(--kit-panel);color:var(--kit-texto);border:1px solid var(--kit-linea);
+  border-radius:5px;padding:.5rem .6rem;cursor:pointer;}
+.app-velo{display:none;}
+
+@media(max-width:900px){
+  body{grid-template-columns:minmax(0,1fr);}
+  .app-abrir{display:block;}
+  .app-lateral{position:fixed;inset-block:0;inset-inline-start:0;
+    width:min(80vw,15.5rem);transform:translateX(-100%);transition:transform .22s ease;}
+  .app-panel,body > footer{grid-column:1;}
+  html[dir="rtl"] .app-lateral{transform:translateX(100%);}
+  .app-lateral.abierto{transform:none;}
+  .app-velo{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);
+    opacity:0;pointer-events:none;transition:opacity .22s;z-index:55;}
+  .app-velo.abierto{opacity:1;pointer-events:auto;}
+  main.app-panel{padding-top:3.4rem;}
+}
+
+/* Rejilla de doce columnas: es lo que rompe la columna única. */
+.rej12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:clamp(.9rem,1.6vw,1.4rem);}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}
+.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}
+.c9{grid-column:span 9}.c12{grid-column:span 12}
+@media(max-width:1100px){.c3,.c4,.c5{grid-column:span 6}.c7,.c8,.c9{grid-column:span 12}}
+@media(max-width:640px){.rej12 > *{grid-column:span 12 !important}}
+
+/* Panel: la unidad de la interfaz. Caja de información, no adorno. */
+.panel{background:var(--kit-panel);border:1px solid var(--kit-linea);border-radius:6px;
+  overflow:hidden;display:flex;flex-direction:column;min-width:0;}
+.panel-cab{display:flex;align-items:center;gap:.6rem;justify-content:space-between;
+  padding:.7rem .9rem;border-block-end:1px solid var(--kit-linea);
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--kit-texto-3);}
+html[dir="rtl"] .panel-cab{letter-spacing:0;text-transform:none;font-size:.84rem;}
+.panel-cuerpo{padding:.9rem;flex:1;min-width:0;}
+/* La proporción va en la imagen y no en el marco: si la proporción se pone en
+   el marco, Chrome deja de estirarlo dentro de la fila de la rejilla y la
+   fotografía queda flotando arriba con un hueco gris debajo. */
+/* La proporción se fija con un relleno porcentual y no con `aspect-ratio`.
+   Motivo medido, no de estilo: en una celda de rejilla estirada la altura pasa
+   a ser definida, y entonces `aspect-ratio` calcula el ANCHO a partir de ella
+   y la fotografía se sale de su columna — 362 px en la portada a 1440. El
+   relleno porcentual siempre deriva del ancho, nunca al revés. */
+.panel-foto{padding:0;position:relative;overflow:hidden;}
+.panel-foto::before{content:"";display:block;padding-block-start:75%;}
+.panel-foto.alta::before{padding-block-start:133.33%;}
+.panel-foto.ancha::before{padding-block-start:56.25%;}
+.panel-foto img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;}
+.panel-foto figcaption{position:absolute;inset-inline:0;bottom:0;padding:.7rem .9rem;
+  background:linear-gradient(to top,rgba(6,12,16,.9),rgba(6,12,16,.55) 60%,transparent);
+  color:#f2efe9;font-size:.8rem;line-height:1.4;}
+.etq{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.15rem .45rem;border-radius:3px;background:var(--kit-acento);
+  color:var(--kit-fondo);white-space:nowrap;}
+html[dir="rtl"] .etq{letter-spacing:0;text-transform:none;font-size:.76rem;}
+.panel .dato-g{font-family:var(--display,var(--disp,inherit));font-size:clamp(1.8rem,3.4vw,2.6rem);
+  line-height:1;font-variant-numeric:tabular-nums;}
+.panel .dato-p{font-size:.82rem;color:var(--kit-texto-2);margin-top:.4rem;line-height:1.45;}
+.panel-cuerpo h3{font-size:1.1rem;margin:0 0 .5rem;line-height:1.2;}
+.panel-cuerpo h3 + p{color:var(--kit-texto-2);font-size:.9rem;margin:0;}
+
+/* Panel de portada: el titular manda, pero sigue siendo un panel del tablero
+   y no una franja aparte a todo lo ancho. */
+.panel.horizonte{padding-block:0;}
+.panel-portada{background:var(--kit-hondo);color:var(--kit-hondo-texto);
+  border-color:var(--kit-hondo-linea);justify-content:center;}
+.panel-portada .rot{color:var(--kit-acento);}
+.panel-portada .entrada{color:var(--kit-hondo-texto);opacity:.85;}
+.panel-portada .panel-cuerpo{padding:clamp(1.2rem,2.6vw,2.2rem);}
+.panel-portada h1{font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.12;margin:.5rem 0 .8rem;}
+.panel-portada .entrada{color:var(--kit-texto-2);max-width:46ch;}
+.panel-portada .acciones{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;}
+/* Los botones dentro del panel oscuro. No se puede dar por buena la clase de
+   ningún sitio —uno los llama `.solido` y otro `.sol`—, así que el kit los
+   repinta por su cuenta: sobre la franja oscura, cualquier botón se ve. */
+.panel-portada .btn,.panel-portada .acc a{
+  background:transparent;color:var(--kit-hondo-texto);
+  border:1px solid var(--kit-hondo-texto);}
+.panel-portada .btn.sol,.panel-portada .btn.solido,.panel-portada .acc a.sol{
+  background:var(--kit-hondo-texto);color:var(--kit-hondo);}
+.panel-portada .btn:hover,.panel-portada .acc a:hover{
+  background:var(--kit-hondo-texto);color:var(--kit-hondo);}
+.panel-portada .btn.sol:hover,.panel-portada .btn.solido:hover,.panel-portada .acc a.sol:hover{
+  background:transparent;color:var(--kit-hondo-texto);}
+/* Y el texto suelto: párrafos, listas y rótulos secundarios. */
+.panel-portada p,.panel-portada li,.panel-portada dd{color:var(--kit-hondo-texto);}
+.panel-portada .metodo,.panel-portada .dato-p{
+  color:color-mix(in srgb,var(--kit-hondo-texto) 66%,transparent);}
+/* Rótulo suelto entre bloques del tablero: sin caja, sólo el letrero. */
+.panel.sin-fondo{background:none;border:0;border-radius:0;}
+.panel.sin-fondo .rot{margin:.6rem 0 0;}
+.tablero{padding-block:clamp(1.2rem,2.4vw,2rem);}
+.tablero .cifras-fuente{font-size:.74rem;color:var(--kit-texto-3);line-height:1.5;margin:0;}
+/* Una tabla ancha no debe empujar la página: se desliza dentro de su panel. */
+.desliza{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.desliza table{min-width:34rem;}
+/* Formulario a dos columnas dentro de su panel: los campos cortos comparten
+   fila y sólo las fechas y el mensaje ocupan el ancho entero. */
+.rej-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem 1rem;}
+.rej-form .ancho2{grid-column:1 / -1;}
+@media(max-width:640px){.rej-form{grid-template-columns:1fr}}
+/* ══ kit-tablero: final ══ */
+/* Las capturas se encuadran por arriba y por el lado del texto: centrarlas
+   recorta justo el raíl y el titular, que es lo que hay que ver. */
+.panel-foto.captura img{object-position:left top;}
+html[dir="rtl"] .panel-foto.captura img{object-position:right top;}
+
+/* Dentro de la rejilla la banda ya no necesita el relleno de franja completa:
+   lo pone el panel. Y el borde del panel sobra sobre fondo oscuro. */
+.panel.banda-medida{padding-block:0;border:0;
+  background:var(--marca);color:var(--papel);}
+.panel.banda-medida .panel-cuerpo{padding:clamp(1.6rem,3.4vw,2.6rem);}
+
+
+/* La marca del raíl es de dos líneas: el nombre y lo que es. Sin esto salían
+   pegadas —«HANMAEstudio web»— porque el logotipo era horizontal en la barra. */
+.app-lateral .marca{display:block;line-height:1.2;text-decoration:none;}
+.app-lateral .marca b{display:block;font-size:1.05rem;letter-spacing:.12em;}
+.app-lateral .marca span{display:block;font-size:.72rem;color:var(--kit-texto-3);
+  letter-spacing:.1em;text-transform:uppercase;margin-top:.15rem;}
+html[dir="rtl"] .app-lateral .marca span{letter-spacing:0;text-transform:none;}
+/* Y los botones de idioma, sin la caja que traían de la barra superior. */
+.app-lateral .idiomas{border:0;padding-inline:0;}
+/* HANMA tiene su propia franja oscura. */
+:root{--kit-hondo:#14120f;--kit-hondo-texto:#f4f1ea;
+      --kit-hondo-linea:rgba(244,241,234,.16);}
+
 </style>
 </head>
 <body>
 <a class="saltar" href="#principal" data-t="saltar">Saltar al contenido</a>
 
-<header class="top">
-  <div class="top-in">
-    <a class="logo" href="#/inicio"><b>HANMA</b><span data-t="logoSub">Estudio web</span></a>
-    <nav class="n" id="navPral" aria-label="Principal"></nav>
-    <div class="idiomas" id="idiomas" role="group"></div>
-    <button class="hamb" id="hamb" aria-expanded="false" aria-controls="panel" data-ta="menuAria">
-      <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
-    </button>
-  </div>
-</header>
-<div class="velo" id="velo"></div>
-<aside class="panel" id="panel" aria-hidden="true"><nav id="navPanel" aria-label="Principal"></nav><div class="idiomas" id="idiomas2" role="group" style="margin-block-start:1.4rem"></div></aside>
+<!-- ══ kit-tablero: armazón ══ -->
+<button class="app-abrir" id="appAbrir" aria-expanded="false" aria-controls="appLateral"
+        data-ta="menuAria" aria-label="Menú"><span></span><span></span><span></span></button>
+<aside class="app-lateral" id="appLateral">
+  <a class="marca logo" href="#/inicio"><b>HANMA</b><span data-t="logoSub">Estudio web</span></a>
+  <p class="app-eti" data-t="nlEstudio">El estudio</p>
+  <nav class="app-nav" id="navPral" aria-label="Principal"></nav>
+  <p class="app-eti" data-t="nlMas">Más</p>
+  <nav class="app-nav" id="navPanel" aria-label="Secundario"></nav>
+  <div class="idiomas" id="idiomas" role="group"></div>
+</aside>
+<div class="app-velo" id="appVelo"></div>
+<!-- ══ kit-tablero: fin del armazón ══ -->
 
 <div class="env migas" id="migas" aria-label="Migas"></div>
 
-<main id="principal">
+<main id="principal" class="app-panel">
 
 <!-- ══════════════ INICIO ══════════════ -->
-<section class="hero" data-ruta="inicio" id="ap-portada">
+<section class="hero tablero" data-ruta="inicio" id="ap-portada">
   <div class="env">
-    <h1 data-t="hTitulo">Sitios corporativos en tres idiomas que siguen funcionando dentro de cinco años.</h1>
-    <p class="sub" data-t="hSub"></p>
-    <div class="pie">
-      <a class="btn" href="#/trabajos" data-t="hCta1">Ver los tres sitios</a>
-      <a class="btn sec" href="#/precios" data-t="hCta2">Cuánto cuesta</a>
-      <span class="tenue" style="font-size:.86rem" data-t="hPie"></span>
-    </div>
-  </div>
-</section>
+    <div class="rej12">
+      <div class="panel c7 panel-portada horizonte">
+        <div class="panel-cuerpo">
+          <h1 data-t="hTitulo">Sitios corporativos en tres idiomas que siguen funcionando dentro de cinco años.</h1>
+          <p class="sub" data-t="hSub"></p>
+          <div class="pie acciones">
+            <a class="btn" href="#/trabajos" data-t="hCta1">Ver los tres sitios</a>
+            <a class="btn sec" href="#/precios" data-t="hCta2">Cuánto cuesta</a>
+          </div>
+          <p class="tenue" style="font-size:.86rem;margin-top:1rem" data-t="hPie"></p>
+        </div>
+      </div>
+      <figure class="panel c5 panel-foto ancha captura">
+        <img src="img/nahar-es.jpg" loading="eager" decoding="async" data-t-attr="alt:capNahar" alt="Portada del sitio NAHAR">
+        <figcaption data-t="pieCapNahar"></figcaption>
+      </figure>
 
-<!-- Banda de medida: el argumento entero del estudio en tres números que se
-     leen desde el otro lado de la mesa. Salen de CASOS, no están escritos. -->
-<section class="banda-medida" data-ruta="inicio" id="ap-medida">
-  <div class="env">
-    <span class="rotulo" data-t="bmRot">Lo que eso significa medido</span>
-    <div class="medidas" id="bmCifras"></div>
-    <p class="bm-pie" data-t="bmPie"></p>
-  </div>
-</section>
+      <div class="c12 banda-medida panel">
+        <div class="panel-cuerpo">
+          <span class="rotulo" data-t="bmRot">Lo que eso significa medido</span>
+          <div class="medidas" id="bmCifras"></div>
+          <p class="bm-pie" data-t="bmPie"></p>
+        </div>
+      </div>
 
-<section class="bloque" data-ruta="inicio" id="ap-prueba">
-  <div class="env">
-    <span class="rotulo" data-t="rPrueba">La prueba</span>
-    <h2 data-t="pruebaH"></h2>
-    <p class="txt apagado" data-t="pruebaP" style="margin-block-start:1rem"></p>
-    <div id="casosPortada" style="margin-block-start:2.2rem"></div>
-  </div>
-</section>
+      <div class="panel c12" id="ap-prueba">
+        <div class="panel-cab"><span data-t="rPrueba">La prueba</span><span class="etq" data-t="etqTres">Tres sitios</span></div>
+        <div class="panel-cuerpo">
+          <h2 data-t="pruebaH"></h2>
+          <p class="txt apagado" data-t="pruebaP"></p>
+          <div id="casosPortada" style="margin-block-start:1.6rem"></div>
+        </div>
+      </div>
 
-<section class="bloque" data-ruta="inicio" id="ap-porque">
-  <div class="env">
-    <span class="rotulo" data-t="rPorque">Por qué así</span>
-    <h2 data-t="porqueH"></h2>
-    <div class="rej" style="margin-block-start:2rem" id="porqueRej"></div>
-  </div>
-</section>
+      <figure class="panel c4 panel-foto captura"><img src="img/bunn-ar.jpg" loading="lazy" decoding="async" data-t-attr="alt:capBunn" alt="Sitio BUNN en árabe">
+        <figcaption data-t="pieCapBunn"></figcaption></figure>
+      <figure class="panel c4 panel-foto captura"><img src="img/atlas-es.jpg" loading="lazy" decoding="async" data-t-attr="alt:capAtlas" alt="Sitio ATLAS en español">
+        <figcaption data-t="pieCapAtlas"></figcaption></figure>
+      <figure class="panel c4 panel-foto captura"><img src="img/nahar-ar.jpg" loading="lazy" decoding="async" data-t-attr="alt:capNaharAr" alt="Sitio NAHAR en árabe">
+        <figcaption data-t="pieCapNaharAr"></figcaption></figure>
 
-<section class="bloque" data-ruta="inicio" id="ap-arabe">
-  <div class="env">
-    <span class="rotulo" data-t="rArabe">El árabe</span>
-    <div class="conf" style="align-items:start">
-      <div><h2 data-t="arabeH"></h2><div class="txt" data-doc="arabeDoc" style="margin-block-start:1.2rem"></div></div>
-      <div><div class="tema" style="border-color:var(--s3)"><h3 data-t="arabeCajaH"></h3><ul class="marca si" id="arabeLista"></ul></div></div>
+      <div class="panel c12" id="ap-porque">
+        <div class="panel-cab"><span data-t="rPorque">Por qué así</span></div>
+        <div class="panel-cuerpo">
+          <h2 data-t="porqueH"></h2>
+          <div class="rej" style="margin-block-start:1.4rem" id="porqueRej"></div>
+        </div>
+      </div>
+
+      <div class="panel c7" id="ap-arabe">
+        <div class="panel-cab"><span data-t="rArabe">El árabe</span></div>
+        <div class="panel-cuerpo">
+          <h2 data-t="arabeH"></h2>
+          <div class="txt" data-doc="arabeDoc" style="margin-block-start:1.2rem"></div>
+        </div>
+      </div>
+      <div class="panel c5">
+        <div class="panel-cab"><span data-t="arabeCajaH"></span></div>
+        <div class="panel-cuerpo"><ul class="marca si" id="arabeLista"></ul></div>
+      </div>
     </div>
   </div>
 </section>
@@ -572,11 +790,11 @@ var CORREO = "pagos.euros73@gmail.com";
    lo note: si el sitio cambia, se vuelven a generar con una orden. */
 var CASOS = [
   { id:"nahar", tomas:["nahar-es.jpg","nahar-ar.jpg","nahar-movil.jpg"], url:"https://2troll.github.io/nahar-solar/", repo:"2troll/nahar-solar",
-    nombre:"NAHAR", apartados:23, rutas:9, claves:377, bytes:396662, gz:121902, color:"var(--s1)" },
+    nombre:"NAHAR", apartados:23, rutas:9, claves:391, bytes:414397, gz:125206, color:"var(--s1)" },
   { id:"bunn", tomas:["bunn-es.jpg","bunn-ar.jpg","bunn-movil.jpg"], url:"https://2troll.github.io/bunn-cafe/", repo:"2troll/bunn-cafe",
-    nombre:"BUNN", apartados:20, rutas:9, claves:317, bytes:307812, gz:98439, color:"var(--s2)" },
+    nombre:"BUNN", apartados:20, rutas:9, claves:329, bytes:325061, gz:102501, color:"var(--s2)" },
   { id:"atlas", tomas:["atlas-es.jpg","atlas-ar.jpg","atlas-movil.jpg"], url:"https://2troll.github.io/atlas-fisio/", repo:"2troll/atlas-fisio",
-    nombre:"ATLAS", apartados:20, rutas:9, claves:277, bytes:292779, gz:92138, color:"var(--s3)" }
+    nombre:"ATLAS", apartados:22, rutas:9, claves:298, bytes:310973, gz:96231, color:"var(--s3)" }
 ];
 
 /* Tarifa de referencia. La base es la que ya está cerrada por escrito
@@ -612,8 +830,18 @@ var INDICE = {
 var T = {
 
 es:{
+ capNahar:"Portada del sitio NAHAR en español",
+ capBunn:"El sitio BUNN en árabe, con la maquetación reflejada",
+ capAtlas:"La página de tratamientos de ATLAS en español",
+ capNaharAr:"La página de números de NAHAR en árabe",
+ pieCapNahar:"NAHAR — autoconsumo solar industrial. Nueve páginas, tres idiomas.",
+ pieCapBunn:"BUNN en árabe. El raíl se va solo a la derecha: no hay una segunda hoja de estilos.",
+ pieCapAtlas:"ATLAS — fisioterapia. Los plazos salen de un modelo, no de un texto.",
+ pieCapNaharAr:"NAHAR en árabe, con dígitos árabe-índicos en las gráficas.",
+ etqTres:"Tres sitios",
  _dir:"ltr", _lang:"es", _loc:"es-ES",
  saltar:"Saltar al contenido", logoSub:"Estudio web", menuAria:"Abrir el menú",
+ nlEstudio:"El estudio", nlMas:"Más",
  idiomaAria:"Idioma del sitio", migasAria:"Está usted aquí",
 
  tInicio:"HANMA — Sitios corporativos trilingües",
@@ -886,8 +1114,18 @@ es:{
 },
 
 en:{
+ capNahar:"Home page of the NAHAR site in Spanish",
+ capBunn:"The BUNN site in Arabic, with mirrored layout",
+ capAtlas:"The ATLAS treatments page in Spanish",
+ capNaharAr:"The NAHAR figures page in Arabic",
+ pieCapNahar:"NAHAR — industrial solar self-consumption. Nine pages, three languages.",
+ pieCapBunn:"BUNN in Arabic. The rail moves to the right on its own: there is no second stylesheet.",
+ pieCapAtlas:"ATLAS — physiotherapy. The timelines come from a model, not from a paragraph.",
+ pieCapNaharAr:"NAHAR in Arabic, with Arabic-Indic digits in the charts.",
+ etqTres:"Three sites",
  _dir:"ltr", _lang:"en", _loc:"en-GB",
  saltar:"Skip to content", logoSub:"Web studio", menuAria:"Open the menu",
+ nlEstudio:"The studio", nlMas:"More",
  idiomaAria:"Site language", migasAria:"You are here",
 
  tInicio:"HANMA — Trilingual corporate websites",
@@ -1152,8 +1390,18 @@ en:{
 },
 
 ar:{
+ capNahar:"الصفحة الرئيسية لموقع نهار بالإسبانية",
+ capBunn:"موقع بُنّ بالعربية بتخطيط معكوس",
+ capAtlas:"صفحة العلاجات في موقع أطلس بالإسبانية",
+ capNaharAr:"صفحة الأرقام في موقع نهار بالعربية",
+ pieCapNahar:"نهار — الاستهلاك الذاتي الشمسي الصناعي. تسع صفحات وثلاث لغات.",
+ pieCapBunn:"بُنّ بالعربية. ينتقل الشريط إلى اليمين وحده: لا توجد ورقة أنماط ثانية.",
+ pieCapAtlas:"أطلس — العلاج الطبيعي. المُدد مأخوذة من نموذج لا من فقرة.",
+ pieCapNaharAr:"نهار بالعربية، بأرقام هندية في الرسوم.",
+ etqTres:"ثلاثة مواقع",
  _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
  saltar:"تخطَّ إلى المحتوى", logoSub:"استوديو ويب", menuAria:"افتح القائمة",
+ nlEstudio:"الاستوديو", nlMas:"المزيد",
  idiomaAria:"لغة الموقع", migasAria:"موضعك الآن",
 
  tInicio:"هانما — مواقع مؤسسية بثلاث لغات",
@@ -1452,15 +1700,25 @@ function pintarDoc(cont, bloques){
   }).join("");
 }
 
+/* El raíl lleva dos navegaciones: las páginas del estudio arriba y las de
+   servicio abajo. Las dos listas salen de RUTAS, así que una ruta nueva
+   aparece sola en el bloque que le toque. */
+var NAVS_2 = ["legal", "mapa"];
+
 function pintarNav(){
   var t = tt();
-  ["navPral","navPanel"].forEach(function(id){
-    $(id).innerHTML = NAVS.map(function(r){
+  function enlaces(id, rutas){
+    var c = $(id);
+    if (!c) return;
+    c.innerHTML = rutas.map(function(r){
       return '<a href="#/'+r+'">'+esc(t["n"+r.charAt(0).toUpperCase()+r.slice(1)])+'</a>';
     }).join("");
-  });
+  }
+  enlaces("navPral", NAVS);
+  enlaces("navPanel", NAVS_2);
   ["idiomas","idiomas2"].forEach(function(id){
     var c = $(id);
+    if (!c) return;
     c.setAttribute("aria-label", t.idiomaAria);
     c.innerHTML = ["es","en","ar"].map(function(l){
       return '<button type="button" data-idioma="'+l+'" aria-pressed="'+(l===idioma)+'" lang="'+l+'">'+
@@ -1730,6 +1988,16 @@ function aplicar(codigo){
   for (i = 0; i < n.length; i++){ e = n[i]; k = e.getAttribute("data-t"); if (t[k] != null) e.textContent = t[k]; }
   n = document.querySelectorAll("[data-ta]");
   for (i = 0; i < n.length; i++){ e = n[i]; k = e.getAttribute("data-ta"); if (t[k] != null) e.setAttribute("aria-label", t[k]); }
+  /* Atributos traducibles cualesquiera, con la misma sintaxis que el resto de
+     la carpeta: pares «atributo:clave» separados por comas. */
+  n = document.querySelectorAll("[data-t-attr]");
+  for (i = 0; i < n.length; i++){
+    e = n[i];
+    e.getAttribute("data-t-attr").split(",").forEach(function(par){
+      var q = par.split(":"), at = q[0].trim(), cl = q[1].trim();
+      if (t[cl] != null) e.setAttribute(at, t[cl]);
+    });
+  }
   n = document.querySelectorAll("[data-doc]");
   for (i = 0; i < n.length; i++){ e = n[i]; k = e.getAttribute("data-doc"); if (t[k]) pintarDoc(e, t[k]); }
 
@@ -1812,22 +2080,28 @@ document.addEventListener("click", function(e){
   }, 30);
 });
 
-/* ── Menú lateral ────────────────────────────────────────────── */
-function abrirPanel(){
-  $("panel").classList.add("on"); $("velo").classList.add("on");
-  $("panel").setAttribute("aria-hidden","false"); $("hamb").setAttribute("aria-expanded","true");
-  var p = $("panel").querySelector("a"); if (p) p.focus();
-}
-function cerrarPanel(){
-  $("panel").classList.remove("on"); $("velo").classList.remove("on");
-  $("panel").setAttribute("aria-hidden","true"); $("hamb").setAttribute("aria-expanded","false");
-}
-$("hamb").addEventListener("click", function(){
-  if ($("panel").classList.contains("on")) cerrarPanel(); else abrirPanel();
-});
-$("velo").addEventListener("click", cerrarPanel);
-document.addEventListener("keydown", function(e){ if (e.key === "Escape") cerrarPanel(); });
-window.addEventListener("resize", function(){ if (window.innerWidth > 900) cerrarPanel(); });
+/* ── El raíl en pantallas estrechas ──────────────────────────── */
+(function(){
+  var bot = $("appAbrir"), lat = $("appLateral"), velo = $("appVelo");
+  if (!bot || !lat || !velo) return;
+  function poner(si){
+    lat.classList.toggle("abierto", si);
+    velo.classList.toggle("abierto", si);
+    bot.setAttribute("aria-expanded", si ? "true" : "false");
+    if (si){ var a = lat.querySelector("a"); if (a) a.focus(); }
+  }
+  bot.addEventListener("click", function(){
+    poner(bot.getAttribute("aria-expanded") !== "true");
+  });
+  velo.addEventListener("click", function(){ poner(false); });
+  /* Al navegar se cierra solo: en el móvil el raíl tapa justo lo que acabas
+     de pedir. */
+  lat.addEventListener("click", function(e){
+    if (e.target.closest("a[href^='#']")) poner(false);
+  });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") poner(false); });
+  window.addEventListener("resize", function(){ if (window.innerWidth > 900) poner(false); });
+})();
 
 /* ── Arranque ────────────────────────────────────────────────── */
 (function(){
